@@ -1,0 +1,204 @@
+('starting', 'build')
+
+**********************************************************************
+
+Test build
+build project using make
+
+**********************************************************************
+Trying to build project using make
+make
+gcc server.c udp.c -o server
+server.c: In function ‘main’:
+server.c:63:34: warning: implicit declaration of function ‘mfs_lookup’; did you mean ‘MFS_Lookup’? [-Wimplicit-function-declaration]
+   63 |                     message.rc = mfs_lookup(message.inum, message.name);
+      |                                  ^~~~~~~~~~
+      |                                  MFS_Lookup
+server.c:76:34: warning: implicit declaration of function ‘mfs_write’; did you mean ‘MFS_Write’? [-Wimplicit-function-declaration]
+   76 |                     message.rc = mfs_write(message.inum, message.buffer, message.offset, message.nbytes);
+      |                                  ^~~~~~~~~
+      |                                  MFS_Write
+server.c:82:34: warning: implicit declaration of function ‘mfs_read’; did you mean ‘MFS_Read’? [-Wimplicit-function-declaration]
+   82 |                     message.rc = mfs_read(message.inum,message.buffer,message.offset,message.nbytes);
+      |                                  ^~~~~~~~
+      |                                  MFS_Read
+server.c:87:34: warning: implicit declaration of function ‘mfs_creat’; did you mean ‘MFS_Creat’? [-Wimplicit-function-declaration]
+   87 |                     message.rc = mfs_creat(message.inum,message.type,message.name);
+      |                                  ^~~~~~~~~
+      |                                  MFS_Creat
+server.c:93:35: warning: implicit declaration of function ‘mfs_unlink’; did you mean ‘MFS_Unlink’? [-Wimplicit-function-declaration]
+   93 |                     message.rc  = mfs_unlink(message.inum,message.name);
+      |                                   ^~~~~~~~~~
+      |                                   MFS_Unlink
+server.c: In function ‘mfs_unlink’:
+server.c:338:79: warning: format ‘%d’ expects argument of type ‘int’, but argument 3 has type ‘long unsigned int’ [-Wformat=]
+  338 |                     fprintf(stderr,"Server mfs_unlink: inode is dir, max val %d\n", inode->size/sizeof(dir_ent_t));
+      |                                                                              ~^     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+      |                                                                               |                |
+      |                                                                               int              long unsigned int
+      |                                                                              %ld
+gcc -fPIC -g -c -Wall libmfs.c udp.c
+gcc -shared -Wl,-soname,libmfs.so -o libmfs.so libmfs.o udp.o -lc
+gcc client.c udp.c -o client -L. -lmfs
+gcc mkfs.c -o mkfs
+
+
+test build PASSED
+ (build project using make)
+
+('starting', 'sparse')
+
+**********************************************************************
+
+Test sparse
+write first and last block
+
+**********************************************************************
+total blocks        36
+  inodes            32 [size of each: 128]
+  data blocks       32
+layout details
+  inode bitmap address/len 1 [1]
+  data bitmap address/len  2 [1]
+Starting server on port 5160
+/tmp/tmpOXVqSK/p/server 5160 /home/cha/CS537/p4/test.img
+CREAT END
+MFS_Create method called: return 0
+MFS_Lookup method called: return 1
+
+
+test sparse PASSED
+ (write first and last block)
+
+('starting', 'stat2')
+
+**********************************************************************
+
+Test stat2
+stat a sparse file
+
+**********************************************************************
+total blocks        36
+  inodes            32 [size of each: 128]
+  data blocks       32
+layout details
+  inode bitmap address/len 1 [1]
+  data bitmap address/len  2 [1]
+Starting server on port 9066
+/tmp/tmpOXVqSK/p/server 9066 /home/cha/CS537/p4/test.img
+SERVER:: type: 1 size 16384
+MFS_Create method called: return 0
+MFS_Lookup method called: return 1
+STAT::: size 16384, type 1Failure: Stat gave wrong size
+
+
+test stat2 FAILED
+ (stat a sparse file)
+ Stat gave wrong size
+
+('starting', 'drop')
+
+**********************************************************************
+
+Test drop
+drop every other packet sent by client
+
+**********************************************************************
+total blocks        36
+  inodes            32 [size of each: 128]
+  data blocks       32
+layout details
+  inode bitmap address/len 1 [1]
+  data bitmap address/len  2 [1]
+Trying to clean project using make clean
+make clean
+rm -f client server client.o server.o
+Trying to build project using make
+make
+gcc server.c udp.c -o server
+server.c: In function ‘main’:
+server.c:63:34: warning: implicit declaration of function ‘mfs_lookup’; did you mean ‘MFS_Lookup’? [-Wimplicit-function-declaration]
+   63 |                     message.rc = mfs_lookup(message.inum, message.name);
+      |                                  ^~~~~~~~~~
+      |                                  MFS_Lookup
+server.c:76:34: warning: implicit declaration of function ‘mfs_write’; did you mean ‘MFS_Write’? [-Wimplicit-function-declaration]
+   76 |                     message.rc = mfs_write(message.inum, message.buffer, message.offset, message.nbytes);
+      |                                  ^~~~~~~~~
+      |                                  MFS_Write
+server.c:82:34: warning: implicit declaration of function ‘mfs_read’; did you mean ‘MFS_Read’? [-Wimplicit-function-declaration]
+   82 |                     message.rc = mfs_read(message.inum,message.buffer,message.offset,message.nbytes);
+      |                                  ^~~~~~~~
+      |                                  MFS_Read
+server.c:87:34: warning: implicit declaration of function ‘mfs_creat’; did you mean ‘MFS_Creat’? [-Wimplicit-function-declaration]
+   87 |                     message.rc = mfs_creat(message.inum,message.type,message.name);
+      |                                  ^~~~~~~~~
+      |                                  MFS_Creat
+server.c:93:35: warning: implicit declaration of function ‘mfs_unlink’; did you mean ‘MFS_Unlink’? [-Wimplicit-function-declaration]
+   93 |                     message.rc  = mfs_unlink(message.inum,message.name);
+      |                                   ^~~~~~~~~~
+      |                                   MFS_Unlink
+server.c: In function ‘mfs_unlink’:
+server.c:338:79: warning: format ‘%d’ expects argument of type ‘int’, but argument 3 has type ‘long unsigned int’ [-Wformat=]
+  338 |                     fprintf(stderr,"Server mfs_unlink: inode is dir, max val %d\n", inode->size/sizeof(dir_ent_t));
+      |                                                                              ~^     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+      |                                                                               |                |
+      |                                                                               int              long unsigned int
+      |                                                                              %ld
+gcc -fPIC -g -c -Wall libmfs.c udp.c
+gcc -shared -Wl,-soname,libmfs.so -o libmfs.so libmfs.o udp.o -lc
+gcc client.c udp.c -o client -L. -lmfs
+gcc mkfs.c -o mkfs
+Starting server on port 5764
+/tmp/tmpOXVqSK/p/server 5764 /home/cha/CS537/p4/test.img
+tester: packet dropped
+MFS_Create method called: return 0
+Trying to clean project using make clean
+make clean
+rm -f client server client.o server.o
+Trying to build project using make
+make
+gcc server.c udp.c -o server
+server.c: In function ‘main’:
+server.c:63:34: warning: implicit declaration of function ‘mfs_lookup’; did you mean ‘MFS_Lookup’? [-Wimplicit-function-declaration]
+   63 |                     message.rc = mfs_lookup(message.inum, message.name);
+      |                                  ^~~~~~~~~~
+      |                                  MFS_Lookup
+server.c:76:34: warning: implicit declaration of function ‘mfs_write’; did you mean ‘MFS_Write’? [-Wimplicit-function-declaration]
+   76 |                     message.rc = mfs_write(message.inum, message.buffer, message.offset, message.nbytes);
+      |                                  ^~~~~~~~~
+      |                                  MFS_Write
+server.c:82:34: warning: implicit declaration of function ‘mfs_read’; did you mean ‘MFS_Read’? [-Wimplicit-function-declaration]
+   82 |                     message.rc = mfs_read(message.inum,message.buffer,message.offset,message.nbytes);
+      |                                  ^~~~~~~~
+      |                                  MFS_Read
+server.c:87:34: warning: implicit declaration of function ‘mfs_creat’; did you mean ‘MFS_Creat’? [-Wimplicit-function-declaration]
+   87 |                     message.rc = mfs_creat(message.inum,message.type,message.name);
+      |                                  ^~~~~~~~~
+      |                                  MFS_Creat
+server.c:93:35: warning: implicit declaration of function ‘mfs_unlink’; did you mean ‘MFS_Unlink’? [-Wimplicit-function-declaration]
+   93 |                     message.rc  = mfs_unlink(message.inum,message.name);
+      |                                   ^~~~~~~~~~
+      |                                   MFS_Unlink
+server.c: In function ‘mfs_unlink’:
+server.c:338:79: warning: format ‘%d’ expects argument of type ‘int’, but argument 3 has type ‘long unsigned int’ [-Wformat=]
+  338 |                     fprintf(stderr,"Server mfs_unlink: inode is dir, max val %d\n", inode->size/sizeof(dir_ent_t));
+      |                                                                              ~^     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+      |                                                                               |                |
+      |                                                                               int              long unsigned int
+      |                                                                              %ld
+gcc -fPIC -g -c -Wall libmfs.c udp.c
+gcc -shared -Wl,-soname,libmfs.so -o libmfs.so libmfs.o udp.o -lc
+gcc client.c udp.c -o client -L. -lmfs
+gcc mkfs.c -o mkfs
+
+
+test drop FAILED
+ (drop every other packet sent by client)
+ User interrupted test
+ file 'libmfs.so' exists after make clean, removing
+ file 'libmfs.o' exists after make clean, removing
+ file 'udp.o' exists after make clean, removing
+ file 'mkfs.o' exists after make clean, removing
+
+Skipped 5 tests.
+To keep testing after failing a test, use flag '-c' or '--continue'

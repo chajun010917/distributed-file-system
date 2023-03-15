@@ -1,0 +1,11050 @@
+('starting', 'build')
+
+**********************************************************************
+
+Test build
+build project using make
+
+**********************************************************************
+Trying to build project using make
+make
+gcc server.c udp.c -o server
+gcc -fPIC -g -c -Wall libmfs.c udp.c
+gcc -shared -Wl,-soname,libmfs.so -o libmfs.so libmfs.o udp.o -lc
+gcc client.c udp.c -o client -L. -lmfs
+gcc mkfs.c -o mkfs
+
+
+test build PASSED
+ (build project using make)
+
+('starting', 'shutdown')
+
+**********************************************************************
+
+Test shutdown
+init server and client then call shutdown
+
+**********************************************************************
+total blocks        36
+  inodes            32 [size of each: 128]
+  data blocks       32
+layout details
+  inode bitmap address/len 1 [1]
+  data bitmap address/len  2 [1]
+Starting server on port 7333
+/tmp/tmpIgfH1U/p/server 7333 /home/cha/CS537/p4/temppp/test.img
+server:: waiting...
+server:: read message [size:4148 mtype:8 name: inode:2133822704]
+sendREQUEST: rMES type -2051164689, nbytes: 32600
+
+
+test shutdown PASSED
+ (init server and client then call shutdown)
+
+('starting', 'creat')
+
+**********************************************************************
+
+Test creat
+creat a file and check with lookup
+
+**********************************************************************
+total blocks        36
+  inodes            32 [size of each: 128]
+  data blocks       32
+layout details
+  inode bitmap address/len 1 [1]
+  data bitmap address/len  2 [1]
+Starting server on port 9875
+/tmp/tmpIgfH1U/p/server 9875 /home/cha/CS537/p4/temppp/test.img
+server:: waiting...
+server:: read message [size:4148 mtype:6 name:test inode:0]
+Server Create
+Data PTR: 0
+Inum: 0
+Inum: 0
+Inum: -1
+Index: 2, value: 1
+server:: waiting...
+server:: read message [size:4148 mtype:2 name:test inode:0]
+server:: waiting...
+server:: read message [size:4148 mtype:8 name:◊ˆ inode:-2051164689]
+sendREQUEST: rMES type -2051164689, nbytes: 32609
+MFS_Create method called: return 0
+sendREQUEST: rMES type -2051164689, nbytes: 32609
+MFS_Lookup method called: return 1
+sendREQUEST: rMES type -2051164689, nbytes: 32609
+
+
+test creat PASSED
+ (creat a file and check with lookup)
+
+('starting', 'write')
+
+**********************************************************************
+
+Test write
+write then read one block
+
+**********************************************************************
+total blocks        36
+  inodes            32 [size of each: 128]
+  data blocks       32
+layout details
+  inode bitmap address/len 1 [1]
+  data bitmap address/len  2 [1]
+Starting server on port 7139
+/tmp/tmpIgfH1U/p/server 7139 /home/cha/CS537/p4/temppp/test.img
+server:: waiting...
+server:: read message [size:4148 mtype:6 name:test inode:0]
+Server Create
+Data PTR: 0
+Inum: 0
+Inum: 0
+Inum: -1
+Index: 2, value: 1
+server:: waiting...
+server:: read message [size:4148 mtype:2 name:test inode:0]
+server:: waiting...
+server:: read message [size:4148 mtype:4 name: inode:1]
+Server Write
+server:: waiting...
+server:: read message [size:4148 mtype:5 name:hÂô inode:1]
+Server Read
+server:: waiting...
+server:: read message [size:4148 mtype:8 name: inode:0]
+sendREQUEST: rMES type -2051164689, nbytes: 32665
+MFS_Create method called: return 0
+sendREQUEST: rMES type -2051164689, nbytes: 32665
+MFS_Lookup method called: return 1
+sendREQUEST: rMES type -2051164689, nbytes: 32665
+sendREQUEST: rMES type -2051164689, nbytes: 32665
+('START BLOCK 1\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00', '\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00END BLOCK 1')
+('START BLOCK 1\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00', '\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00END BLOCK 1')
+sendREQUEST: rMES type -2051164689, nbytes: 32665
+
+
+test write PASSED
+ (write then read one block)
+
+('starting', 'stat')
+
+**********************************************************************
+
+Test stat
+stat a regular file
+
+**********************************************************************
+total blocks        36
+  inodes            32 [size of each: 128]
+  data blocks       32
+layout details
+  inode bitmap address/len 1 [1]
+  data bitmap address/len  2 [1]
+Starting server on port 8268
+/tmp/tmpIgfH1U/p/server 8268 /home/cha/CS537/p4/temppp/test.img
+server:: waiting...
+server:: read message [size:4148 mtype:6 name:test inode:0]
+Server Create
+Data PTR: 0
+Inum: 0
+Inum: 0
+Inum: -1
+Index: 2, value: 1
+server:: waiting...
+server:: read message [size:4148 mtype:2 name:test inode:0]
+server:: waiting...
+server:: read message [size:4148 mtype:3 name:h5H¿ inode:0]
+Server Stat
+SIZE: 96; TYPE: 0
+server:: waiting...
+server:: read message [size:4148 mtype:3 name:h5H¿ inode:1]
+Server Stat
+SIZE: 0; TYPE: 1
+server:: waiting...
+server:: read message [size:4148 mtype:4 name: inode:1]
+Server Write
+server:: waiting...
+server:: read message [size:4148 mtype:3 name:◊ˆ inode:1]
+Server Stat
+SIZE: 4096; TYPE: 1
+server:: waiting...
+server:: read message [size:4148 mtype:8 name:◊ˆ inode:-2051164689]
+sendREQUEST: rMES type -2051164689, nbytes: 32704
+MFS_Create method called: return 0
+sendREQUEST: rMES type -2051164689, nbytes: 32704
+MFS_Lookup method called: return 1
+sendREQUEST: rMES type 0, nbytes: 96
+STAT::: size 96, type 0sendREQUEST: rMES type 1, nbytes: 0
+STAT::: size 0, type 1sendREQUEST: rMES type 1, nbytes: 0
+sendREQUEST: rMES type 1, nbytes: 4096
+STAT::: size 4096, type 1sendREQUEST: rMES type 1, nbytes: 4096
+
+
+test stat PASSED
+ (stat a regular file)
+
+('starting', 'overwrite')
+
+**********************************************************************
+
+Test overwrite
+overwrite a block
+
+**********************************************************************
+total blocks        36
+  inodes            32 [size of each: 128]
+  data blocks       32
+layout details
+  inode bitmap address/len 1 [1]
+  data bitmap address/len  2 [1]
+Starting server on port 5027
+/tmp/tmpIgfH1U/p/server 5027 /home/cha/CS537/p4/temppp/test.img
+server:: waiting...
+server:: read message [size:4148 mtype:6 name:test inode:0]
+Server Create
+Data PTR: 0
+Inum: 0
+Inum: 0
+Inum: -1
+Index: 2, value: 1
+server:: waiting...
+server:: read message [size:4148 mtype:2 name:test inode:0]
+server:: waiting...
+server:: read message [size:4148 mtype:4 name: inode:1]
+Server Write
+server:: waiting...
+server:: read message [size:4148 mtype:5 name: inode:1]
+Server Read
+server:: waiting...
+server:: read message [size:4148 mtype:4 name: inode:1]
+Server Write
+server:: waiting...
+server:: read message [size:4148 mtype:5 name: inode:1]
+Server Read
+server:: waiting...
+server:: read message [size:4148 mtype:8 name: inode:0]
+sendREQUEST: rMES type 420236016, nbytes: 32662
+MFS_Create method called: return 0
+sendREQUEST: rMES type 420236016, nbytes: 32662
+MFS_Lookup method called: return 1
+sendREQUEST: rMES type 420236016, nbytes: 32662
+sendREQUEST: rMES type 420236016, nbytes: 32662
+sendREQUEST: rMES type 420236016, nbytes: 32662
+sendREQUEST: rMES type 420236016, nbytes: 32662
+sendREQUEST: rMES type 420236016, nbytes: 32662
+
+
+test overwrite PASSED
+ (overwrite a block)
+
+('starting', 'maxfile')
+
+**********************************************************************
+
+Test maxfile
+write largest possible file
+
+**********************************************************************
+total blocks        39
+  inodes            128 [size of each: 128]
+  data blocks       32
+layout details
+  inode bitmap address/len 1 [1]
+  data bitmap address/len  2 [1]
+Starting server on port 6405
+/tmp/tmpIgfH1U/p/server 6405 /home/cha/CS537/p4/temppp/test.img
+server:: waiting...
+server:: read message [size:4148 mtype:6 name:test inode:0]
+Server Create
+Data PTR: 0
+Inum: 0
+Inum: 0
+Inum: -1
+Index: 2, value: 1
+server:: waiting...
+server:: read message [size:4148 mtype:2 name:test inode:0]
+server:: waiting...
+server:: read message [size:4148 mtype:4 name: inode:1]
+Server Write
+server:: waiting...
+server:: read message [size:4148 mtype:4 name:hG™£ inode:1]
+Server Write
+server:: waiting...
+server:: read message [size:4148 mtype:4 name:hG™£ inode:1]
+Server Write
+server:: waiting...
+server:: read message [size:4148 mtype:4 name:hG™£ inode:1]
+Server Write
+server:: waiting...
+server:: read message [size:4148 mtype:4 name:hG™£ inode:1]
+Server Write
+server:: waiting...
+server:: read message [size:4148 mtype:4 name:hG™£ inode:1]
+Server Write
+server:: waiting...
+server:: read message [size:4148 mtype:4 name:hG™£ inode:1]
+Server Write
+server:: waiting...
+server:: read message [size:4148 mtype:4 name:hG™£ inode:1]
+Server Write
+server:: waiting...
+server:: read message [size:4148 mtype:4 name:hG™£ inode:1]
+Server Write
+server:: waiting...
+server:: read message [size:4148 mtype:4 name:hG™£ inode:1]
+Server Write
+server:: waiting...
+server:: read message [size:4148 mtype:4 name:hG™£ inode:1]
+Server Write
+server:: waiting...
+server:: read message [size:4148 mtype:4 name:hG™£ inode:1]
+Server Write
+server:: waiting...
+server:: read message [size:4148 mtype:4 name:hG™£ inode:1]
+Server Write
+server:: waiting...
+server:: read message [size:4148 mtype:4 name:hG™£ inode:1]
+Server Write
+server:: waiting...
+server:: read message [size:4148 mtype:4 name:hG™£ inode:1]
+Server Write
+server:: waiting...
+server:: read message [size:4148 mtype:4 name:hG™£ inode:1]
+Server Write
+server:: waiting...
+server:: read message [size:4148 mtype:4 name:hG™£ inode:1]
+Server Write
+server:: waiting...
+server:: read message [size:4148 mtype:4 name:hG™£ inode:1]
+Server Write
+server:: waiting...
+server:: read message [size:4148 mtype:4 name:hG™£ inode:1]
+Server Write
+server:: waiting...
+server:: read message [size:4148 mtype:4 name:hG™£ inode:1]
+Server Write
+server:: waiting...
+server:: read message [size:4148 mtype:4 name:hG™£ inode:1]
+Server Write
+server:: waiting...
+server:: read message [size:4148 mtype:4 name:hG™£ inode:1]
+Server Write
+server:: waiting...
+server:: read message [size:4148 mtype:4 name:hG™£ inode:1]
+Server Write
+server:: waiting...
+server:: read message [size:4148 mtype:4 name:hG™£ inode:1]
+Server Write
+server:: waiting...
+server:: read message [size:4148 mtype:4 name:hG™£ inode:1]
+Server Write
+server:: waiting...
+server:: read message [size:4148 mtype:4 name:hG™£ inode:1]
+Server Write
+server:: waiting...
+server:: read message [size:4148 mtype:4 name:hG™£ inode:1]
+Server Write
+server:: waiting...
+server:: read message [size:4148 mtype:4 name:hG™£ inode:1]
+Server Write
+server:: waiting...
+server:: read message [size:4148 mtype:4 name:hG™£ inode:1]
+Server Write
+server:: waiting...
+server:: read message [size:4148 mtype:4 name:hG™£ inode:1]
+Server Write
+server:: waiting...
+server:: read message [size:4148 mtype:5 name: inode:1]
+Server Read
+server:: waiting...
+server:: read message [size:4148 mtype:5 name:hG™£ inode:1]
+Server Read
+server:: waiting...
+server:: read message [size:4148 mtype:5 name:hG™£ inode:1]
+Server Read
+server:: waiting...
+server:: read message [size:4148 mtype:5 name:hG™£ inode:1]
+Server Read
+server:: waiting...
+server:: read message [size:4148 mtype:5 name:hG™£ inode:1]
+Server Read
+server:: waiting...
+server:: read message [size:4148 mtype:5 name:hG™£ inode:1]
+Server Read
+server:: waiting...
+server:: read message [size:4148 mtype:5 name:hG™£ inode:1]
+Server Read
+server:: waiting...
+server:: read message [size:4148 mtype:5 name:hG™£ inode:1]
+Server Read
+server:: waiting...
+server:: read message [size:4148 mtype:5 name:hG™£ inode:1]
+Server Read
+server:: waiting...
+server:: read message [size:4148 mtype:5 name:hG™£ inode:1]
+Server Read
+server:: waiting...
+server:: read message [size:4148 mtype:5 name:hG™£ inode:1]
+Server Read
+server:: waiting...
+server:: read message [size:4148 mtype:5 name:hG™£ inode:1]
+Server Read
+server:: waiting...
+server:: read message [size:4148 mtype:5 name:hG™£ inode:1]
+Server Read
+server:: waiting...
+server:: read message [size:4148 mtype:5 name:hG™£ inode:1]
+Server Read
+server:: waiting...
+server:: read message [size:4148 mtype:5 name:hG™£ inode:1]
+Server Read
+server:: waiting...
+server:: read message [size:4148 mtype:5 name:hG™£ inode:1]
+Server Read
+server:: waiting...
+server:: read message [size:4148 mtype:5 name:hG™£ inode:1]
+Server Read
+server:: waiting...
+server:: read message [size:4148 mtype:5 name:hG™£ inode:1]
+Server Read
+server:: waiting...
+server:: read message [size:4148 mtype:5 name:hG™£ inode:1]
+Server Read
+server:: waiting...
+server:: read message [size:4148 mtype:5 name:hG™£ inode:1]
+Server Read
+server:: waiting...
+server:: read message [size:4148 mtype:5 name:hG™£ inode:1]
+Server Read
+server:: waiting...
+server:: read message [size:4148 mtype:5 name:hG™£ inode:1]
+Server Read
+server:: waiting...
+server:: read message [size:4148 mtype:5 name:hG™£ inode:1]
+Server Read
+server:: waiting...
+server:: read message [size:4148 mtype:5 name:hG™£ inode:1]
+Server Read
+server:: waiting...
+server:: read message [size:4148 mtype:5 name:hG™£ inode:1]
+Server Read
+server:: waiting...
+server:: read message [size:4148 mtype:5 name:hG™£ inode:1]
+Server Read
+server:: waiting...
+server:: read message [size:4148 mtype:5 name:hG™£ inode:1]
+Server Read
+server:: waiting...
+server:: read message [size:4148 mtype:5 name:hG™£ inode:1]
+Server Read
+server:: waiting...
+server:: read message [size:4148 mtype:5 name:hG™£ inode:1]
+Server Read
+server:: waiting...
+server:: read message [size:4148 mtype:5 name:hG™£ inode:1]
+Server Read
+server:: waiting...
+server:: read message [size:4148 mtype:8 name: inode:0]
+sendREQUEST: rMES type -2051164689, nbytes: 32675
+MFS_Create method called: return 0
+sendREQUEST: rMES type -2051164689, nbytes: 32675
+MFS_Lookup method called: return 1
+sendREQUEST: rMES type -2051164689, nbytes: 32675
+sendREQUEST: rMES type -2051164689, nbytes: 32675
+sendREQUEST: rMES type -2051164689, nbytes: 32675
+sendREQUEST: rMES type -2051164689, nbytes: 32675
+sendREQUEST: rMES type -2051164689, nbytes: 32675
+sendREQUEST: rMES type -2051164689, nbytes: 32675
+sendREQUEST: rMES type -2051164689, nbytes: 32675
+sendREQUEST: rMES type -2051164689, nbytes: 32675
+sendREQUEST: rMES type -2051164689, nbytes: 32675
+sendREQUEST: rMES type -2051164689, nbytes: 32675
+sendREQUEST: rMES type -2051164689, nbytes: 32675
+sendREQUEST: rMES type -2051164689, nbytes: 32675
+sendREQUEST: rMES type -2051164689, nbytes: 32675
+sendREQUEST: rMES type -2051164689, nbytes: 32675
+sendREQUEST: rMES type -2051164689, nbytes: 32675
+sendREQUEST: rMES type -2051164689, nbytes: 32675
+sendREQUEST: rMES type -2051164689, nbytes: 32675
+sendREQUEST: rMES type -2051164689, nbytes: 32675
+sendREQUEST: rMES type -2051164689, nbytes: 32675
+sendREQUEST: rMES type -2051164689, nbytes: 32675
+sendREQUEST: rMES type -2051164689, nbytes: 32675
+sendREQUEST: rMES type -2051164689, nbytes: 32675
+sendREQUEST: rMES type -2051164689, nbytes: 32675
+sendREQUEST: rMES type -2051164689, nbytes: 32675
+sendREQUEST: rMES type -2051164689, nbytes: 32675
+sendREQUEST: rMES type -2051164689, nbytes: 32675
+sendREQUEST: rMES type -2051164689, nbytes: 32675
+sendREQUEST: rMES type -2051164689, nbytes: 32675
+sendREQUEST: rMES type -2051164689, nbytes: 32675
+sendREQUEST: rMES type -2051164689, nbytes: 32675
+sendREQUEST: rMES type -2051164689, nbytes: 32675
+sendREQUEST: rMES type -2051164689, nbytes: 32675
+sendREQUEST: rMES type -2051164689, nbytes: 32675
+sendREQUEST: rMES type -2051164689, nbytes: 32675
+sendREQUEST: rMES type -2051164689, nbytes: 32675
+sendREQUEST: rMES type -2051164689, nbytes: 32675
+sendREQUEST: rMES type -2051164689, nbytes: 32675
+sendREQUEST: rMES type -2051164689, nbytes: 32675
+sendREQUEST: rMES type -2051164689, nbytes: 32675
+sendREQUEST: rMES type -2051164689, nbytes: 32675
+sendREQUEST: rMES type -2051164689, nbytes: 32675
+sendREQUEST: rMES type -2051164689, nbytes: 32675
+sendREQUEST: rMES type -2051164689, nbytes: 32675
+sendREQUEST: rMES type -2051164689, nbytes: 32675
+sendREQUEST: rMES type -2051164689, nbytes: 32675
+sendREQUEST: rMES type -2051164689, nbytes: 32675
+sendREQUEST: rMES type -2051164689, nbytes: 32675
+sendREQUEST: rMES type -2051164689, nbytes: 32675
+sendREQUEST: rMES type -2051164689, nbytes: 32675
+sendREQUEST: rMES type -2051164689, nbytes: 32675
+sendREQUEST: rMES type -2051164689, nbytes: 32675
+sendREQUEST: rMES type -2051164689, nbytes: 32675
+sendREQUEST: rMES type -2051164689, nbytes: 32675
+sendREQUEST: rMES type -2051164689, nbytes: 32675
+sendREQUEST: rMES type -2051164689, nbytes: 32675
+sendREQUEST: rMES type -2051164689, nbytes: 32675
+sendREQUEST: rMES type -2051164689, nbytes: 32675
+sendREQUEST: rMES type -2051164689, nbytes: 32675
+sendREQUEST: rMES type -2051164689, nbytes: 32675
+sendREQUEST: rMES type -2051164689, nbytes: 32675
+sendREQUEST: rMES type -2051164689, nbytes: 32675
+
+
+test maxfile PASSED
+ (write largest possible file)
+
+('starting', 'maxfile2')
+
+**********************************************************************
+
+Test maxfile2
+write more blocks than possible
+
+**********************************************************************
+total blocks        36
+  inodes            32 [size of each: 128]
+  data blocks       32
+layout details
+  inode bitmap address/len 1 [1]
+  data bitmap address/len  2 [1]
+Starting server on port 8455
+/tmp/tmpIgfH1U/p/server 8455 /home/cha/CS537/p4/temppp/test.img
+server:: waiting...
+server:: read message [size:4148 mtype:6 name:test inode:0]
+Server Create
+Data PTR: 0
+Inum: 0
+Inum: 0
+Inum: -1
+Index: 2, value: 1
+server:: waiting...
+server:: read message [size:4148 mtype:2 name:test inode:0]
+server:: waiting...
+server:: read message [size:4148 mtype:4 name: inode:1]
+Server Write
+server:: waiting...
+server:: read message [size:4148 mtype:4 name:ê’Q¸§ inode:1]
+Server Write
+server:: waiting...
+server:: read message [size:4148 mtype:4 name:ê’Q¸§ inode:1]
+Server Write
+server:: waiting...
+server:: read message [size:4148 mtype:4 name:ê’Q¸§ inode:1]
+Server Write
+server:: waiting...
+server:: read message [size:4148 mtype:4 name:ê’Q¸§ inode:1]
+Server Write
+server:: waiting...
+server:: read message [size:4148 mtype:4 name:ê’Q¸§ inode:1]
+Server Write
+server:: waiting...
+server:: read message [size:4148 mtype:4 name:ê’Q¸§ inode:1]
+Server Write
+server:: waiting...
+server:: read message [size:4148 mtype:4 name:ê’Q¸§ inode:1]
+Server Write
+server:: waiting...
+server:: read message [size:4148 mtype:4 name:ê’Q¸§ inode:1]
+Server Write
+server:: waiting...
+server:: read message [size:4148 mtype:4 name:ê’Q¸§ inode:1]
+Server Write
+server:: waiting...
+server:: read message [size:4148 mtype:4 name:ê’Q¸§ inode:1]
+Server Write
+server:: waiting...
+server:: read message [size:4148 mtype:4 name:ê’Q¸§ inode:1]
+Server Write
+server:: waiting...
+server:: read message [size:4148 mtype:4 name:ê’Q¸§ inode:1]
+Server Write
+server:: waiting...
+server:: read message [size:4148 mtype:4 name:ê’Q¸§ inode:1]
+Server Write
+server:: waiting...
+server:: read message [size:4148 mtype:4 name:ê’Q¸§ inode:1]
+Server Write
+server:: waiting...
+server:: read message [size:4148 mtype:4 name:ê’Q¸§ inode:1]
+Server Write
+server:: waiting...
+server:: read message [size:4148 mtype:4 name:ê’Q¸§ inode:1]
+Server Write
+server:: waiting...
+server:: read message [size:4148 mtype:4 name:ê’Q¸§ inode:1]
+Server Write
+server:: waiting...
+server:: read message [size:4148 mtype:4 name:ê’Q¸§ inode:1]
+Server Write
+server:: waiting...
+server:: read message [size:4148 mtype:4 name:ê’Q¸§ inode:1]
+Server Write
+server:: waiting...
+server:: read message [size:4148 mtype:4 name:ê’Q¸§ inode:1]
+Server Write
+server:: waiting...
+server:: read message [size:4148 mtype:4 name:ê’Q¸§ inode:1]
+Server Write
+server:: waiting...
+server:: read message [size:4148 mtype:4 name:ê’Q¸§ inode:1]
+Server Write
+server:: waiting...
+server:: read message [size:4148 mtype:4 name:ê’Q¸§ inode:1]
+Server Write
+server:: waiting...
+server:: read message [size:4148 mtype:4 name:ê’Q¸§ inode:1]
+Server Write
+server:: waiting...
+server:: read message [size:4148 mtype:4 name:ê’Q¸§ inode:1]
+Server Write
+server:: waiting...
+server:: read message [size:4148 mtype:4 name:ê’Q¸§ inode:1]
+Server Write
+server:: waiting...
+server:: read message [size:4148 mtype:4 name:ê’Q¸§ inode:1]
+Server Write
+server:: waiting...
+server:: read message [size:4148 mtype:4 name:ê’Q¸§ inode:1]
+Server Write
+server:: waiting...
+server:: read message [size:4148 mtype:4 name:ê’Q¸§ inode:1]
+Server Write
+server:: waiting...
+server:: read message [size:4148 mtype:4 name:ÔµΩÖ inode:1]
+Server Write
+server:: waiting...
+server:: read message [size:4148 mtype:5 name: inode:1]
+Server Read
+server:: waiting...
+server:: read message [size:4148 mtype:5 name:ê’Q¸§ inode:1]
+Server Read
+server:: waiting...
+server:: read message [size:4148 mtype:5 name:ê’Q¸§ inode:1]
+Server Read
+server:: waiting...
+server:: read message [size:4148 mtype:5 name:ê’Q¸§ inode:1]
+Server Read
+server:: waiting...
+server:: read message [size:4148 mtype:5 name:ê’Q¸§ inode:1]
+Server Read
+server:: waiting...
+server:: read message [size:4148 mtype:5 name:ê’Q¸§ inode:1]
+Server Read
+server:: waiting...
+server:: read message [size:4148 mtype:5 name:ê’Q¸§ inode:1]
+Server Read
+server:: waiting...
+server:: read message [size:4148 mtype:5 name:ê’Q¸§ inode:1]
+Server Read
+server:: waiting...
+server:: read message [size:4148 mtype:5 name:ê’Q¸§ inode:1]
+Server Read
+server:: waiting...
+server:: read message [size:4148 mtype:5 name:ê’Q¸§ inode:1]
+Server Read
+server:: waiting...
+server:: read message [size:4148 mtype:5 name:ê’Q¸§ inode:1]
+Server Read
+server:: waiting...
+server:: read message [size:4148 mtype:5 name:ê’Q¸§ inode:1]
+Server Read
+server:: waiting...
+server:: read message [size:4148 mtype:5 name:ê’Q¸§ inode:1]
+Server Read
+server:: waiting...
+server:: read message [size:4148 mtype:5 name:ê’Q¸§ inode:1]
+Server Read
+server:: waiting...
+server:: read message [size:4148 mtype:5 name:ê’Q¸§ inode:1]
+Server Read
+server:: waiting...
+server:: read message [size:4148 mtype:5 name:ê’Q¸§ inode:1]
+Server Read
+server:: waiting...
+server:: read message [size:4148 mtype:5 name:ê’Q¸§ inode:1]
+Server Read
+server:: waiting...
+server:: read message [size:4148 mtype:5 name:ê’Q¸§ inode:1]
+Server Read
+server:: waiting...
+server:: read message [size:4148 mtype:5 name:ê’Q¸§ inode:1]
+Server Read
+server:: waiting...
+server:: read message [size:4148 mtype:5 name:ê’Q¸§ inode:1]
+Server Read
+server:: waiting...
+server:: read message [size:4148 mtype:5 name:ê’Q¸§ inode:1]
+Server Read
+server:: waiting...
+server:: read message [size:4148 mtype:5 name:ê’Q¸§ inode:1]
+Server Read
+server:: waiting...
+server:: read message [size:4148 mtype:5 name:ê’Q¸§ inode:1]
+Server Read
+server:: waiting...
+server:: read message [size:4148 mtype:5 name:ê’Q¸§ inode:1]
+Server Read
+server:: waiting...
+server:: read message [size:4148 mtype:5 name:ê’Q¸§ inode:1]
+Server Read
+server:: waiting...
+server:: read message [size:4148 mtype:5 name:ê’Q¸§ inode:1]
+Server Read
+server:: waiting...
+server:: read message [size:4148 mtype:5 name:ê’Q¸§ inode:1]
+Server Read
+server:: waiting...
+server:: read message [size:4148 mtype:5 name:ê’Q¸§ inode:1]
+Server Read
+server:: waiting...
+server:: read message [size:4148 mtype:5 name:ê’Q¸§ inode:1]
+Server Read
+server:: waiting...
+server:: read message [size:4148 mtype:5 name:ê’Q¸§ inode:1]
+Server Read
+server:: waiting...
+server:: read message [size:4148 mtype:5 name: inode:1]
+Server Read
+server:: waiting...
+server:: read message [size:4148 mtype:8 name: inode:0]
+sendREQUEST: rMES type -61506832, nbytes: 32676
+MFS_Create method called: return 0
+sendREQUEST: rMES type -61506832, nbytes: 32676
+MFS_Lookup method called: return 1
+31
+sendREQUEST: rMES type -61506832, nbytes: 32676
+sendREQUEST: rMES type -61506832, nbytes: 32676
+sendREQUEST: rMES type -61506832, nbytes: 32676
+sendREQUEST: rMES type -61506832, nbytes: 32676
+sendREQUEST: rMES type -61506832, nbytes: 32676
+sendREQUEST: rMES type -61506832, nbytes: 32676
+sendREQUEST: rMES type -61506832, nbytes: 32676
+sendREQUEST: rMES type -61506832, nbytes: 32676
+sendREQUEST: rMES type -61506832, nbytes: 32676
+sendREQUEST: rMES type -61506832, nbytes: 32676
+sendREQUEST: rMES type -61506832, nbytes: 32676
+sendREQUEST: rMES type -61506832, nbytes: 32676
+sendREQUEST: rMES type -61506832, nbytes: 32676
+sendREQUEST: rMES type -61506832, nbytes: 32676
+sendREQUEST: rMES type -61506832, nbytes: 32676
+sendREQUEST: rMES type -61506832, nbytes: 32676
+sendREQUEST: rMES type -61506832, nbytes: 32676
+sendREQUEST: rMES type -61506832, nbytes: 32676
+sendREQUEST: rMES type -61506832, nbytes: 32676
+sendREQUEST: rMES type -61506832, nbytes: 32676
+sendREQUEST: rMES type -61506832, nbytes: 32676
+sendREQUEST: rMES type -61506832, nbytes: 32676
+sendREQUEST: rMES type -61506832, nbytes: 32676
+sendREQUEST: rMES type -61506832, nbytes: 32676
+sendREQUEST: rMES type -61506832, nbytes: 32676
+sendREQUEST: rMES type -61506832, nbytes: 32676
+sendREQUEST: rMES type -61506832, nbytes: 32676
+sendREQUEST: rMES type -61506832, nbytes: 32676
+sendREQUEST: rMES type -61506832, nbytes: 32676
+sendREQUEST: rMES type -61506832, nbytes: 32676
+write more than need
+sendREQUEST: rMES type -61506832, nbytes: 32676
+sendREQUEST: rMES type -61506832, nbytes: 32676
+sendREQUEST: rMES type -61506832, nbytes: 32676
+sendREQUEST: rMES type -61506832, nbytes: 32676
+sendREQUEST: rMES type -61506832, nbytes: 32676
+sendREQUEST: rMES type -61506832, nbytes: 32676
+sendREQUEST: rMES type -61506832, nbytes: 32676
+sendREQUEST: rMES type -61506832, nbytes: 32676
+sendREQUEST: rMES type -61506832, nbytes: 32676
+sendREQUEST: rMES type -61506832, nbytes: 32676
+sendREQUEST: rMES type -61506832, nbytes: 32676
+sendREQUEST: rMES type -61506832, nbytes: 32676
+sendREQUEST: rMES type -61506832, nbytes: 32676
+sendREQUEST: rMES type -61506832, nbytes: 32676
+sendREQUEST: rMES type -61506832, nbytes: 32676
+sendREQUEST: rMES type -61506832, nbytes: 32676
+sendREQUEST: rMES type -61506832, nbytes: 32676
+sendREQUEST: rMES type -61506832, nbytes: 32676
+sendREQUEST: rMES type -61506832, nbytes: 32676
+sendREQUEST: rMES type -61506832, nbytes: 32676
+sendREQUEST: rMES type -61506832, nbytes: 32676
+sendREQUEST: rMES type -61506832, nbytes: 32676
+sendREQUEST: rMES type -61506832, nbytes: 32676
+sendREQUEST: rMES type -61506832, nbytes: 32676
+sendREQUEST: rMES type -61506832, nbytes: 32676
+sendREQUEST: rMES type -61506832, nbytes: 32676
+sendREQUEST: rMES type -61506832, nbytes: 32676
+sendREQUEST: rMES type -61506832, nbytes: 32676
+sendREQUEST: rMES type -61506832, nbytes: 32676
+sendREQUEST: rMES type -61506832, nbytes: 32676
+sendREQUEST: rMES type -61506832, nbytes: 32676
+sendREQUEST: rMES type -61506832, nbytes: 32676
+sendREQUEST: rMES type -61506832, nbytes: 32676
+
+
+test maxfile2 PASSED
+ (write more blocks than possible)
+
+('starting', 'dir1')
+
+**********************************************************************
+
+Test dir1
+check root for dot entries
+
+**********************************************************************
+total blocks        36
+  inodes            32 [size of each: 128]
+  data blocks       32
+layout details
+  inode bitmap address/len 1 [1]
+  data bitmap address/len  2 [1]
+Starting server on port 8306
+/tmp/tmpIgfH1U/p/server 8306 /home/cha/CS537/p4/temppp/test.img
+server:: waiting...
+server:: read message [size:4148 mtype:2 name:. inode:0]
+server:: waiting...
+server:: read message [size:4148 mtype:2 name:.. inode:0]
+server:: waiting...
+server:: read message [size:4148 mtype:8 name:Ë„æ¶¸ inode:-347203248]
+sendREQUEST: rMES type 144, nbytes: 0
+MFS_Lookup method called: return 0
+sendREQUEST: rMES type 144, nbytes: 0
+MFS_Lookup method called: return 0
+sendREQUEST: rMES type 144, nbytes: 0
+
+
+test dir1 PASSED
+ (check root for dot entries)
+
+('starting', 'dir2')
+
+**********************************************************************
+
+Test dir2
+create a new directory and check it
+
+**********************************************************************
+total blocks        36
+  inodes            32 [size of each: 128]
+  data blocks       32
+layout details
+  inode bitmap address/len 1 [1]
+  data bitmap address/len  2 [1]
+Starting server on port 6089
+/tmp/tmpIgfH1U/p/server 6089 /home/cha/CS537/p4/temppp/test.img
+server:: waiting...
+server:: read message [size:4148 mtype:6 name:testdir inode:0]
+Server Create
+Data PTR: 0
+Inum: 0
+Inum: 0
+Inum: -1
+Index: 2, value: 1
+server:: waiting...
+server:: read message [size:4148 mtype:2 name:testdir inode:0]
+server:: waiting...
+server:: read message [size:4148 mtype:2 name:. inode:1]
+server:: waiting...
+server:: read message [size:4148 mtype:2 name:.. inode:1]
+server:: waiting...
+server:: read message [size:4148 mtype:8 name:◊ˆ inode:-2051164689]
+sendREQUEST: rMES type -2051164689, nbytes: 32756
+MFS_Create method called: return 0
+sendREQUEST: rMES type -2051164689, nbytes: 32756
+MFS_Lookup method called: return 1
+sendREQUEST: rMES type -2051164689, nbytes: 32756
+MFS_Lookup method called: return 1
+sendREQUEST: rMES type -2051164689, nbytes: 32756
+MFS_Lookup method called: return 0
+sendREQUEST: rMES type -2051164689, nbytes: 32756
+
+
+test dir2 PASSED
+ (create a new directory and check it)
+
+('starting', 'baddir')
+
+**********************************************************************
+
+Test baddir
+try to create a file with a file parent inode
+
+**********************************************************************
+total blocks        36
+  inodes            32 [size of each: 128]
+  data blocks       32
+layout details
+  inode bitmap address/len 1 [1]
+  data bitmap address/len  2 [1]
+Starting server on port 9845
+/tmp/tmpIgfH1U/p/server 9845 /home/cha/CS537/p4/temppp/test.img
+server:: waiting...
+server:: read message [size:4148 mtype:6 name:testdir inode:0]
+Server Create
+Data PTR: 0
+Inum: 0
+Inum: 0
+Inum: -1
+Index: 2, value: 1
+server:: waiting...
+server:: read message [size:4148 mtype:2 name:testdir inode:0]
+server:: waiting...
+server:: read message [size:4148 mtype:6 name:testfile inode:1]
+Server Create
+server:: waiting...
+server:: read message [size:4148 mtype:8 name: inode:0]
+sendREQUEST: rMES type 657513200, nbytes: 32575
+MFS_Create method called: return 0
+sendREQUEST: rMES type 657513200, nbytes: 32575
+MFS_Lookup method called: return 1
+sendREQUEST: rMES type 657513200, nbytes: 32575
+MFS_Create method called: return -1
+sendREQUEST: rMES type 657513200, nbytes: 32575
+
+
+test baddir PASSED
+ (try to create a file with a file parent inode)
+
+('starting', 'baddir2')
+
+**********************************************************************
+
+Test baddir2
+try to lookup a file with a file parent inode
+
+**********************************************************************
+total blocks        36
+  inodes            32 [size of each: 128]
+  data blocks       32
+layout details
+  inode bitmap address/len 1 [1]
+  data bitmap address/len  2 [1]
+Starting server on port 6485
+/tmp/tmpIgfH1U/p/server 6485 /home/cha/CS537/p4/temppp/test.img
+server:: waiting...
+server:: read message [size:4148 mtype:6 name:testdir inode:0]
+Server Create
+Data PTR: 0
+Inum: 0
+Inum: 0
+Inum: -1
+Index: 2, value: 1
+server:: waiting...
+server:: read message [size:4148 mtype:2 name:testdir inode:0]
+server:: waiting...
+server:: read message [size:4148 mtype:2 name:testfile inode:1]
+server:: waiting...
+server:: read message [size:4148 mtype:8 name: inode:0]
+sendREQUEST: rMES type 144, nbytes: 0
+MFS_Create method called: return 0
+sendREQUEST: rMES type 144, nbytes: 0
+MFS_Lookup method called: return 1
+sendREQUEST: rMES type 144, nbytes: 0
+MFS_Lookup method called: return -1
+sendREQUEST: rMES type 144, nbytes: 0
+
+
+test baddir2 PASSED
+ (try to lookup a file with a file parent inode)
+
+('starting', 'unlink')
+
+**********************************************************************
+
+Test unlink
+unlink a file
+
+**********************************************************************
+total blocks        36
+  inodes            32 [size of each: 128]
+  data blocks       32
+layout details
+  inode bitmap address/len 1 [1]
+  data bitmap address/len  2 [1]
+Starting server on port 5933
+/tmp/tmpIgfH1U/p/server 5933 /home/cha/CS537/p4/temppp/test.img
+server:: waiting...
+server:: read message [size:4148 mtype:6 name:test inode:0]
+Server Create
+Data PTR: 0
+Inum: 0
+Inum: 0
+Inum: -1
+Index: 2, value: 1
+server:: waiting...
+server:: read message [size:4148 mtype:2 name:test inode:0]
+server:: waiting...
+server:: read message [size:4148 mtype:7 name:test inode:0]
+server:: waiting...
+server:: read message [size:4148 mtype:2 name:test inode:0]
+server:: waiting...
+server:: read message [size:4148 mtype:8 name: inode:0]
+sendREQUEST: rMES type 144, nbytes: 0
+MFS_Create method called: return 0
+sendREQUEST: rMES type 144, nbytes: 0
+MFS_Lookup method called: return 1
+sendREQUEST: rMES type 144, nbytes: 0
+sendREQUEST: rMES type 144, nbytes: 0
+MFS_Lookup method called: return -1
+sendREQUEST: rMES type 144, nbytes: 0
+
+
+test unlink PASSED
+ (unlink a file)
+
+('starting', 'unlink2')
+
+**********************************************************************
+
+Test unlink2
+unlink a directory
+
+**********************************************************************
+total blocks        36
+  inodes            32 [size of each: 128]
+  data blocks       32
+layout details
+  inode bitmap address/len 1 [1]
+  data bitmap address/len  2 [1]
+Starting server on port 5990
+/tmp/tmpIgfH1U/p/server 5990 /home/cha/CS537/p4/temppp/test.img
+server:: waiting...
+server:: read message [size:4148 mtype:6 name:test inode:0]
+Server Create
+Data PTR: 0
+Inum: 0
+Inum: 0
+Inum: -1
+Index: 2, value: 1
+server:: waiting...
+server:: read message [size:4148 mtype:2 name:test inode:0]
+server:: waiting...
+server:: read message [size:4148 mtype:7 name:test inode:0]
+server:: waiting...
+server:: read message [size:4148 mtype:2 name:test inode:0]
+server:: waiting...
+server:: read message [size:4148 mtype:8 name: inode:0]
+sendREQUEST: rMES type 144, nbytes: 0
+MFS_Create method called: return 0
+sendREQUEST: rMES type 144, nbytes: 0
+MFS_Lookup method called: return 1
+sendREQUEST: rMES type 144, nbytes: 0
+sendREQUEST: rMES type 144, nbytes: 0
+MFS_Lookup method called: return -1
+sendREQUEST: rMES type 144, nbytes: 0
+
+
+test unlink2 PASSED
+ (unlink a directory)
+
+('starting', 'empty')
+
+**********************************************************************
+
+Test empty
+unlink a non-empty directory
+
+**********************************************************************
+total blocks        36
+  inodes            32 [size of each: 128]
+  data blocks       32
+layout details
+  inode bitmap address/len 1 [1]
+  data bitmap address/len  2 [1]
+Starting server on port 7864
+/tmp/tmpIgfH1U/p/server 7864 /home/cha/CS537/p4/temppp/test.img
+server:: waiting...
+server:: read message [size:4148 mtype:6 name:testdir inode:0]
+Server Create
+Data PTR: 0
+Inum: 0
+Inum: 0
+Inum: -1
+Index: 2, value: 1
+server:: waiting...
+server:: read message [size:4148 mtype:2 name:testdir inode:0]
+server:: waiting...
+server:: read message [size:4148 mtype:6 name:testfile inode:1]
+Server Create
+Data PTR: 1
+Inum: 1
+Inum: 0
+Inum: -1
+Index: 2, value: 2
+server:: waiting...
+server:: read message [size:4148 mtype:2 name:testfile inode:1]
+server:: waiting...
+server:: read message [size:4148 mtype:7 name:testdir inode:0]
+server:: waiting...
+server:: read message [size:4148 mtype:7 name:testfile inode:1]
+server:: waiting...
+server:: read message [size:4148 mtype:7 name:testdir inode:0]
+server:: waiting...
+server:: read message [size:4148 mtype:8 name:Ãp inode:1050161320]
+sendREQUEST: rMES type 144, nbytes: 0
+MFS_Create method called: return 0
+sendREQUEST: rMES type 144, nbytes: 0
+MFS_Lookup method called: return 1
+sendREQUEST: rMES type 144, nbytes: 0
+MFS_Create method called: return 0
+sendREQUEST: rMES type 144, nbytes: 0
+MFS_Lookup method called: return 2
+sendREQUEST: rMES type 144, nbytes: 0
+sendREQUEST: rMES type 144, nbytes: 0
+sendREQUEST: rMES type 144, nbytes: 0
+sendREQUEST: rMES type 144, nbytes: 0
+
+
+test empty PASSED
+ (unlink a non-empty directory)
+
+('starting', 'name')
+
+**********************************************************************
+
+Test name
+name too long
+
+**********************************************************************
+total blocks        36
+  inodes            32 [size of each: 128]
+  data blocks       32
+layout details
+  inode bitmap address/len 1 [1]
+  data bitmap address/len  2 [1]
+Starting server on port 9884
+/tmp/tmpIgfH1U/p/server 9884 /home/cha/CS537/p4/temppp/test.img
+server:: waiting...
+server:: read message [size:4148 mtype:8 name: inode:2133822704]
+sendREQUEST: rMES type 144, nbytes: 0
+
+
+test name PASSED
+ (name too long)
+
+('starting', 'persist')
+
+**********************************************************************
+
+Test persist
+restart server after creating a file
+
+**********************************************************************
+total blocks        36
+  inodes            32 [size of each: 128]
+  data blocks       32
+layout details
+  inode bitmap address/len 1 [1]
+  data bitmap address/len  2 [1]
+Starting server on port 7204
+/tmp/tmpIgfH1U/p/server 7204 /home/cha/CS537/p4/temppp/test.img
+server:: waiting...
+server:: read message [size:4148 mtype:6 name:test inode:0]
+Server Create
+Data PTR: 0
+Inum: 0
+Inum: 0
+Inum: -1
+Index: 2, value: 1
+server:: waiting...
+server:: read message [size:4148 mtype:2 name:test inode:0]
+server:: waiting...
+server:: read message [size:4148 mtype:4 name: inode:1]
+Server Write
+server:: waiting...
+server:: read message [size:4148 mtype:2 name:test inode:0]
+server:: waiting...
+server:: read message [size:4148 mtype:5 name: inode:1]
+Server Read
+server:: waiting...
+server:: read message [size:4148 mtype:8 name: inode:0]
+sendREQUEST: rMES type 144, nbytes: 0
+MFS_Create method called: return 0
+sendREQUEST: rMES type 144, nbytes: 0
+MFS_Lookup method called: return 1
+sendREQUEST: rMES type 144, nbytes: 0
+sendREQUEST: rMES type 144, nbytes: 0
+MFS_Lookup method called: return 1
+sendREQUEST: rMES type 144, nbytes: 0
+sendREQUEST: rMES type 144, nbytes: 0
+Failure: MFS_Init returned failure
+
+
+test persist FAILED
+ (restart server after creating a file)
+ MFS_Init returned failure
+
+('starting', 'bigdir')
+
+**********************************************************************
+
+Test bigdir
+create a directory with 126 files
+
+**********************************************************************
+total blocks        39
+  inodes            128 [size of each: 128]
+  data blocks       32
+layout details
+  inode bitmap address/len 1 [1]
+  data bitmap address/len  2 [1]
+Starting server on port 5803
+/tmp/tmpIgfH1U/p/server 5803 /home/cha/CS537/p4/temppp/test.img
+server:: waiting...
+server:: read message [size:4148 mtype:6 name:testdir inode:0]
+Server Create
+Data PTR: 0
+Inum: 0
+Inum: 0
+Inum: -1
+Index: 2, value: 1
+server:: waiting...
+server:: read message [size:4148 mtype:2 name:testdir inode:0]
+server:: waiting...
+server:: read message [size:4148 mtype:6 name:0 inode:1]
+Server Create
+Data PTR: 1
+Inum: 1
+Inum: 0
+Inum: -1
+Index: 2, value: 2
+server:: waiting...
+server:: read message [size:4148 mtype:6 name:1 inode:1]
+Server Create
+Data PTR: 1
+Inum: 1
+Inum: 0
+Inum: 2
+Inum: -1
+Index: 3, value: 3
+server:: waiting...
+server:: read message [size:4148 mtype:6 name:2 inode:1]
+Server Create
+Data PTR: 1
+Inum: 1
+Inum: 0
+Inum: 2
+Inum: 3
+Inum: -1
+Index: 4, value: 4
+server:: waiting...
+server:: read message [size:4148 mtype:6 name:3 inode:1]
+Server Create
+Data PTR: 1
+Inum: 1
+Inum: 0
+Inum: 2
+Inum: 3
+Inum: 4
+Inum: -1
+Index: 5, value: 5
+server:: waiting...
+server:: read message [size:4148 mtype:6 name:4 inode:1]
+Server Create
+Data PTR: 1
+Inum: 1
+Inum: 0
+Inum: 2
+Inum: 3
+Inum: 4
+Inum: 5
+Inum: -1
+Index: 6, value: 6
+server:: waiting...
+server:: read message [size:4148 mtype:6 name:5 inode:1]
+Server Create
+Data PTR: 1
+Inum: 1
+Inum: 0
+Inum: 2
+Inum: 3
+Inum: 4
+Inum: 5
+Inum: 6
+Inum: -1
+Index: 7, value: 7
+server:: waiting...
+server:: read message [size:4148 mtype:6 name:6 inode:1]
+Server Create
+Data PTR: 1
+Inum: 1
+Inum: 0
+Inum: 2
+Inum: 3
+Inum: 4
+Inum: 5
+Inum: 6
+Inum: 7
+Inum: -1
+Index: 8, value: 8
+server:: waiting...
+server:: read message [size:4148 mtype:6 name:7 inode:1]
+Server Create
+Data PTR: 1
+Inum: 1
+Inum: 0
+Inum: 2
+Inum: 3
+Inum: 4
+Inum: 5
+Inum: 6
+Inum: 7
+Inum: 8
+Inum: -1
+Index: 9, value: 9
+server:: waiting...
+server:: read message [size:4148 mtype:6 name:8 inode:1]
+Server Create
+Data PTR: 1
+Inum: 1
+Inum: 0
+Inum: 2
+Inum: 3
+Inum: 4
+Inum: 5
+Inum: 6
+Inum: 7
+Inum: 8
+Inum: 9
+Inum: -1
+Index: 10, value: 10
+server:: waiting...
+server:: read message [size:4148 mtype:6 name:9 inode:1]
+Server Create
+Data PTR: 1
+Inum: 1
+Inum: 0
+Inum: 2
+Inum: 3
+Inum: 4
+Inum: 5
+Inum: 6
+Inum: 7
+Inum: 8
+Inum: 9
+Inum: 10
+Inum: -1
+Index: 11, value: 11
+server:: waiting...
+server:: read message [size:4148 mtype:6 name:10 inode:1]
+Server Create
+Data PTR: 1
+Inum: 1
+Inum: 0
+Inum: 2
+Inum: 3
+Inum: 4
+Inum: 5
+Inum: 6
+Inum: 7
+Inum: 8
+Inum: 9
+Inum: 10
+Inum: 11
+Inum: -1
+Index: 12, value: 12
+server:: waiting...
+server:: read message [size:4148 mtype:6 name:11 inode:1]
+Server Create
+Data PTR: 1
+Inum: 1
+Inum: 0
+Inum: 2
+Inum: 3
+Inum: 4
+Inum: 5
+Inum: 6
+Inum: 7
+Inum: 8
+Inum: 9
+Inum: 10
+Inum: 11
+Inum: 12
+Inum: -1
+Index: 13, value: 13
+server:: waiting...
+server:: read message [size:4148 mtype:6 name:12 inode:1]
+Server Create
+Data PTR: 1
+Inum: 1
+Inum: 0
+Inum: 2
+Inum: 3
+Inum: 4
+Inum: 5
+Inum: 6
+Inum: 7
+Inum: 8
+Inum: 9
+Inum: 10
+Inum: 11
+Inum: 12
+Inum: 13
+Inum: -1
+Index: 14, value: 14
+server:: waiting...
+server:: read message [size:4148 mtype:6 name:13 inode:1]
+Server Create
+Data PTR: 1
+Inum: 1
+Inum: 0
+Inum: 2
+Inum: 3
+Inum: 4
+Inum: 5
+Inum: 6
+Inum: 7
+Inum: 8
+Inum: 9
+Inum: 10
+Inum: 11
+Inum: 12
+Inum: 13
+Inum: 14
+Inum: -1
+Index: 15, value: 15
+server:: waiting...
+server:: read message [size:4148 mtype:6 name:14 inode:1]
+Server Create
+Data PTR: 1
+Inum: 1
+Inum: 0
+Inum: 2
+Inum: 3
+Inum: 4
+Inum: 5
+Inum: 6
+Inum: 7
+Inum: 8
+Inum: 9
+Inum: 10
+Inum: 11
+Inum: 12
+Inum: 13
+Inum: 14
+Inum: 15
+Inum: -1
+Index: 16, value: 16
+server:: waiting...
+server:: read message [size:4148 mtype:6 name:15 inode:1]
+Server Create
+Data PTR: 1
+Inum: 1
+Inum: 0
+Inum: 2
+Inum: 3
+Inum: 4
+Inum: 5
+Inum: 6
+Inum: 7
+Inum: 8
+Inum: 9
+Inum: 10
+Inum: 11
+Inum: 12
+Inum: 13
+Inum: 14
+Inum: 15
+Inum: 16
+Inum: -1
+Index: 17, value: 17
+server:: waiting...
+server:: read message [size:4148 mtype:6 name:16 inode:1]
+Server Create
+Data PTR: 1
+Inum: 1
+Inum: 0
+Inum: 2
+Inum: 3
+Inum: 4
+Inum: 5
+Inum: 6
+Inum: 7
+Inum: 8
+Inum: 9
+Inum: 10
+Inum: 11
+Inum: 12
+Inum: 13
+Inum: 14
+Inum: 15
+Inum: 16
+Inum: 17
+Inum: -1
+Index: 18, value: 18
+server:: waiting...
+server:: read message [size:4148 mtype:6 name:17 inode:1]
+Server Create
+Data PTR: 1
+Inum: 1
+Inum: 0
+Inum: 2
+Inum: 3
+Inum: 4
+Inum: 5
+Inum: 6
+Inum: 7
+Inum: 8
+Inum: 9
+Inum: 10
+Inum: 11
+Inum: 12
+Inum: 13
+Inum: 14
+Inum: 15
+Inum: 16
+Inum: 17
+Inum: 18
+Inum: -1
+Index: 19, value: 19
+server:: waiting...
+server:: read message [size:4148 mtype:6 name:18 inode:1]
+Server Create
+Data PTR: 1
+Inum: 1
+Inum: 0
+Inum: 2
+Inum: 3
+Inum: 4
+Inum: 5
+Inum: 6
+Inum: 7
+Inum: 8
+Inum: 9
+Inum: 10
+Inum: 11
+Inum: 12
+Inum: 13
+Inum: 14
+Inum: 15
+Inum: 16
+Inum: 17
+Inum: 18
+Inum: 19
+Inum: -1
+Index: 20, value: 20
+server:: waiting...
+server:: read message [size:4148 mtype:6 name:19 inode:1]
+Server Create
+Data PTR: 1
+Inum: 1
+Inum: 0
+Inum: 2
+Inum: 3
+Inum: 4
+Inum: 5
+Inum: 6
+Inum: 7
+Inum: 8
+Inum: 9
+Inum: 10
+Inum: 11
+Inum: 12
+Inum: 13
+Inum: 14
+Inum: 15
+Inum: 16
+Inum: 17
+Inum: 18
+Inum: 19
+Inum: 20
+Inum: -1
+Index: 21, value: 21
+server:: waiting...
+server:: read message [size:4148 mtype:6 name:20 inode:1]
+Server Create
+Data PTR: 1
+Inum: 1
+Inum: 0
+Inum: 2
+Inum: 3
+Inum: 4
+Inum: 5
+Inum: 6
+Inum: 7
+Inum: 8
+Inum: 9
+Inum: 10
+Inum: 11
+Inum: 12
+Inum: 13
+Inum: 14
+Inum: 15
+Inum: 16
+Inum: 17
+Inum: 18
+Inum: 19
+Inum: 20
+Inum: 21
+Inum: -1
+Index: 22, value: 22
+server:: waiting...
+server:: read message [size:4148 mtype:6 name:21 inode:1]
+Server Create
+Data PTR: 1
+Inum: 1
+Inum: 0
+Inum: 2
+Inum: 3
+Inum: 4
+Inum: 5
+Inum: 6
+Inum: 7
+Inum: 8
+Inum: 9
+Inum: 10
+Inum: 11
+Inum: 12
+Inum: 13
+Inum: 14
+Inum: 15
+Inum: 16
+Inum: 17
+Inum: 18
+Inum: 19
+Inum: 20
+Inum: 21
+Inum: 22
+Inum: -1
+Index: 23, value: 23
+server:: waiting...
+server:: read message [size:4148 mtype:6 name:22 inode:1]
+Server Create
+Data PTR: 1
+Inum: 1
+Inum: 0
+Inum: 2
+Inum: 3
+Inum: 4
+Inum: 5
+Inum: 6
+Inum: 7
+Inum: 8
+Inum: 9
+Inum: 10
+Inum: 11
+Inum: 12
+Inum: 13
+Inum: 14
+Inum: 15
+Inum: 16
+Inum: 17
+Inum: 18
+Inum: 19
+Inum: 20
+Inum: 21
+Inum: 22
+Inum: 23
+Inum: -1
+Index: 24, value: 24
+server:: waiting...
+server:: read message [size:4148 mtype:6 name:23 inode:1]
+Server Create
+Data PTR: 1
+Inum: 1
+Inum: 0
+Inum: 2
+Inum: 3
+Inum: 4
+Inum: 5
+Inum: 6
+Inum: 7
+Inum: 8
+Inum: 9
+Inum: 10
+Inum: 11
+Inum: 12
+Inum: 13
+Inum: 14
+Inum: 15
+Inum: 16
+Inum: 17
+Inum: 18
+Inum: 19
+Inum: 20
+Inum: 21
+Inum: 22
+Inum: 23
+Inum: 24
+Inum: -1
+Index: 25, value: 25
+server:: waiting...
+server:: read message [size:4148 mtype:6 name:24 inode:1]
+Server Create
+Data PTR: 1
+Inum: 1
+Inum: 0
+Inum: 2
+Inum: 3
+Inum: 4
+Inum: 5
+Inum: 6
+Inum: 7
+Inum: 8
+Inum: 9
+Inum: 10
+Inum: 11
+Inum: 12
+Inum: 13
+Inum: 14
+Inum: 15
+Inum: 16
+Inum: 17
+Inum: 18
+Inum: 19
+Inum: 20
+Inum: 21
+Inum: 22
+Inum: 23
+Inum: 24
+Inum: 25
+Inum: -1
+Index: 26, value: 26
+server:: waiting...
+server:: read message [size:4148 mtype:6 name:25 inode:1]
+Server Create
+Data PTR: 1
+Inum: 1
+Inum: 0
+Inum: 2
+Inum: 3
+Inum: 4
+Inum: 5
+Inum: 6
+Inum: 7
+Inum: 8
+Inum: 9
+Inum: 10
+Inum: 11
+Inum: 12
+Inum: 13
+Inum: 14
+Inum: 15
+Inum: 16
+Inum: 17
+Inum: 18
+Inum: 19
+Inum: 20
+Inum: 21
+Inum: 22
+Inum: 23
+Inum: 24
+Inum: 25
+Inum: 26
+Inum: -1
+Index: 27, value: 27
+server:: waiting...
+server:: read message [size:4148 mtype:6 name:26 inode:1]
+Server Create
+Data PTR: 1
+Inum: 1
+Inum: 0
+Inum: 2
+Inum: 3
+Inum: 4
+Inum: 5
+Inum: 6
+Inum: 7
+Inum: 8
+Inum: 9
+Inum: 10
+Inum: 11
+Inum: 12
+Inum: 13
+Inum: 14
+Inum: 15
+Inum: 16
+Inum: 17
+Inum: 18
+Inum: 19
+Inum: 20
+Inum: 21
+Inum: 22
+Inum: 23
+Inum: 24
+Inum: 25
+Inum: 26
+Inum: 27
+Inum: -1
+Index: 28, value: 28
+server:: waiting...
+server:: read message [size:4148 mtype:6 name:27 inode:1]
+Server Create
+Data PTR: 1
+Inum: 1
+Inum: 0
+Inum: 2
+Inum: 3
+Inum: 4
+Inum: 5
+Inum: 6
+Inum: 7
+Inum: 8
+Inum: 9
+Inum: 10
+Inum: 11
+Inum: 12
+Inum: 13
+Inum: 14
+Inum: 15
+Inum: 16
+Inum: 17
+Inum: 18
+Inum: 19
+Inum: 20
+Inum: 21
+Inum: 22
+Inum: 23
+Inum: 24
+Inum: 25
+Inum: 26
+Inum: 27
+Inum: 28
+Inum: -1
+Index: 29, value: 29
+server:: waiting...
+server:: read message [size:4148 mtype:6 name:28 inode:1]
+Server Create
+Data PTR: 1
+Inum: 1
+Inum: 0
+Inum: 2
+Inum: 3
+Inum: 4
+Inum: 5
+Inum: 6
+Inum: 7
+Inum: 8
+Inum: 9
+Inum: 10
+Inum: 11
+Inum: 12
+Inum: 13
+Inum: 14
+Inum: 15
+Inum: 16
+Inum: 17
+Inum: 18
+Inum: 19
+Inum: 20
+Inum: 21
+Inum: 22
+Inum: 23
+Inum: 24
+Inum: 25
+Inum: 26
+Inum: 27
+Inum: 28
+Inum: 29
+Inum: -1
+Index: 30, value: 30
+server:: waiting...
+server:: read message [size:4148 mtype:6 name:29 inode:1]
+Server Create
+Data PTR: 1
+Inum: 1
+Inum: 0
+Inum: 2
+Inum: 3
+Inum: 4
+Inum: 5
+Inum: 6
+Inum: 7
+Inum: 8
+Inum: 9
+Inum: 10
+Inum: 11
+Inum: 12
+Inum: 13
+Inum: 14
+Inum: 15
+Inum: 16
+Inum: 17
+Inum: 18
+Inum: 19
+Inum: 20
+Inum: 21
+Inum: 22
+Inum: 23
+Inum: 24
+Inum: 25
+Inum: 26
+Inum: 27
+Inum: 28
+Inum: 29
+Inum: 30
+Inum: -1
+Index: 31, value: 31
+server:: waiting...
+server:: read message [size:4148 mtype:6 name:30 inode:1]
+Server Create
+Data PTR: 1
+Inum: 1
+Inum: 0
+Inum: 2
+Inum: 3
+Inum: 4
+Inum: 5
+Inum: 6
+Inum: 7
+Inum: 8
+Inum: 9
+Inum: 10
+Inum: 11
+Inum: 12
+Inum: 13
+Inum: 14
+Inum: 15
+Inum: 16
+Inum: 17
+Inum: 18
+Inum: 19
+Inum: 20
+Inum: 21
+Inum: 22
+Inum: 23
+Inum: 24
+Inum: 25
+Inum: 26
+Inum: 27
+Inum: 28
+Inum: 29
+Inum: 30
+Inum: 31
+Inum: -1
+Index: 32, value: 32
+server:: waiting...
+server:: read message [size:4148 mtype:6 name:31 inode:1]
+Server Create
+Data PTR: 1
+Inum: 1
+Inum: 0
+Inum: 2
+Inum: 3
+Inum: 4
+Inum: 5
+Inum: 6
+Inum: 7
+Inum: 8
+Inum: 9
+Inum: 10
+Inum: 11
+Inum: 12
+Inum: 13
+Inum: 14
+Inum: 15
+Inum: 16
+Inum: 17
+Inum: 18
+Inum: 19
+Inum: 20
+Inum: 21
+Inum: 22
+Inum: 23
+Inum: 24
+Inum: 25
+Inum: 26
+Inum: 27
+Inum: 28
+Inum: 29
+Inum: 30
+Inum: 31
+Inum: 32
+Inum: -1
+Index: 33, value: 33
+server:: waiting...
+server:: read message [size:4148 mtype:6 name:32 inode:1]
+Server Create
+Data PTR: 1
+Inum: 1
+Inum: 0
+Inum: 2
+Inum: 3
+Inum: 4
+Inum: 5
+Inum: 6
+Inum: 7
+Inum: 8
+Inum: 9
+Inum: 10
+Inum: 11
+Inum: 12
+Inum: 13
+Inum: 14
+Inum: 15
+Inum: 16
+Inum: 17
+Inum: 18
+Inum: 19
+Inum: 20
+Inum: 21
+Inum: 22
+Inum: 23
+Inum: 24
+Inum: 25
+Inum: 26
+Inum: 27
+Inum: 28
+Inum: 29
+Inum: 30
+Inum: 31
+Inum: 32
+Inum: 33
+Inum: -1
+Index: 34, value: 34
+server:: waiting...
+server:: read message [size:4148 mtype:6 name:33 inode:1]
+Server Create
+Data PTR: 1
+Inum: 1
+Inum: 0
+Inum: 2
+Inum: 3
+Inum: 4
+Inum: 5
+Inum: 6
+Inum: 7
+Inum: 8
+Inum: 9
+Inum: 10
+Inum: 11
+Inum: 12
+Inum: 13
+Inum: 14
+Inum: 15
+Inum: 16
+Inum: 17
+Inum: 18
+Inum: 19
+Inum: 20
+Inum: 21
+Inum: 22
+Inum: 23
+Inum: 24
+Inum: 25
+Inum: 26
+Inum: 27
+Inum: 28
+Inum: 29
+Inum: 30
+Inum: 31
+Inum: 32
+Inum: 33
+Inum: 34
+Inum: -1
+Index: 35, value: 35
+server:: waiting...
+server:: read message [size:4148 mtype:6 name:34 inode:1]
+Server Create
+Data PTR: 1
+Inum: 1
+Inum: 0
+Inum: 2
+Inum: 3
+Inum: 4
+Inum: 5
+Inum: 6
+Inum: 7
+Inum: 8
+Inum: 9
+Inum: 10
+Inum: 11
+Inum: 12
+Inum: 13
+Inum: 14
+Inum: 15
+Inum: 16
+Inum: 17
+Inum: 18
+Inum: 19
+Inum: 20
+Inum: 21
+Inum: 22
+Inum: 23
+Inum: 24
+Inum: 25
+Inum: 26
+Inum: 27
+Inum: 28
+Inum: 29
+Inum: 30
+Inum: 31
+Inum: 32
+Inum: 33
+Inum: 34
+Inum: 35
+Inum: -1
+Index: 36, value: 36
+server:: waiting...
+server:: read message [size:4148 mtype:6 name:35 inode:1]
+Server Create
+Data PTR: 1
+Inum: 1
+Inum: 0
+Inum: 2
+Inum: 3
+Inum: 4
+Inum: 5
+Inum: 6
+Inum: 7
+Inum: 8
+Inum: 9
+Inum: 10
+Inum: 11
+Inum: 12
+Inum: 13
+Inum: 14
+Inum: 15
+Inum: 16
+Inum: 17
+Inum: 18
+Inum: 19
+Inum: 20
+Inum: 21
+Inum: 22
+Inum: 23
+Inum: 24
+Inum: 25
+Inum: 26
+Inum: 27
+Inum: 28
+Inum: 29
+Inum: 30
+Inum: 31
+Inum: 32
+Inum: 33
+Inum: 34
+Inum: 35
+Inum: 36
+Inum: -1
+Index: 37, value: 37
+server:: waiting...
+server:: read message [size:4148 mtype:6 name:36 inode:1]
+Server Create
+Data PTR: 1
+Inum: 1
+Inum: 0
+Inum: 2
+Inum: 3
+Inum: 4
+Inum: 5
+Inum: 6
+Inum: 7
+Inum: 8
+Inum: 9
+Inum: 10
+Inum: 11
+Inum: 12
+Inum: 13
+Inum: 14
+Inum: 15
+Inum: 16
+Inum: 17
+Inum: 18
+Inum: 19
+Inum: 20
+Inum: 21
+Inum: 22
+Inum: 23
+Inum: 24
+Inum: 25
+Inum: 26
+Inum: 27
+Inum: 28
+Inum: 29
+Inum: 30
+Inum: 31
+Inum: 32
+Inum: 33
+Inum: 34
+Inum: 35
+Inum: 36
+Inum: 37
+Inum: -1
+Index: 38, value: 38
+server:: waiting...
+server:: read message [size:4148 mtype:6 name:37 inode:1]
+Server Create
+Data PTR: 1
+Inum: 1
+Inum: 0
+Inum: 2
+Inum: 3
+Inum: 4
+Inum: 5
+Inum: 6
+Inum: 7
+Inum: 8
+Inum: 9
+Inum: 10
+Inum: 11
+Inum: 12
+Inum: 13
+Inum: 14
+Inum: 15
+Inum: 16
+Inum: 17
+Inum: 18
+Inum: 19
+Inum: 20
+Inum: 21
+Inum: 22
+Inum: 23
+Inum: 24
+Inum: 25
+Inum: 26
+Inum: 27
+Inum: 28
+Inum: 29
+Inum: 30
+Inum: 31
+Inum: 32
+Inum: 33
+Inum: 34
+Inum: 35
+Inum: 36
+Inum: 37
+Inum: 38
+Inum: -1
+Index: 39, value: 39
+server:: waiting...
+server:: read message [size:4148 mtype:6 name:38 inode:1]
+Server Create
+Data PTR: 1
+Inum: 1
+Inum: 0
+Inum: 2
+Inum: 3
+Inum: 4
+Inum: 5
+Inum: 6
+Inum: 7
+Inum: 8
+Inum: 9
+Inum: 10
+Inum: 11
+Inum: 12
+Inum: 13
+Inum: 14
+Inum: 15
+Inum: 16
+Inum: 17
+Inum: 18
+Inum: 19
+Inum: 20
+Inum: 21
+Inum: 22
+Inum: 23
+Inum: 24
+Inum: 25
+Inum: 26
+Inum: 27
+Inum: 28
+Inum: 29
+Inum: 30
+Inum: 31
+Inum: 32
+Inum: 33
+Inum: 34
+Inum: 35
+Inum: 36
+Inum: 37
+Inum: 38
+Inum: 39
+Inum: -1
+Index: 40, value: 40
+server:: waiting...
+server:: read message [size:4148 mtype:6 name:39 inode:1]
+Server Create
+Data PTR: 1
+Inum: 1
+Inum: 0
+Inum: 2
+Inum: 3
+Inum: 4
+Inum: 5
+Inum: 6
+Inum: 7
+Inum: 8
+Inum: 9
+Inum: 10
+Inum: 11
+Inum: 12
+Inum: 13
+Inum: 14
+Inum: 15
+Inum: 16
+Inum: 17
+Inum: 18
+Inum: 19
+Inum: 20
+Inum: 21
+Inum: 22
+Inum: 23
+Inum: 24
+Inum: 25
+Inum: 26
+Inum: 27
+Inum: 28
+Inum: 29
+Inum: 30
+Inum: 31
+Inum: 32
+Inum: 33
+Inum: 34
+Inum: 35
+Inum: 36
+Inum: 37
+Inum: 38
+Inum: 39
+Inum: 40
+Inum: -1
+Index: 41, value: 41
+server:: waiting...
+server:: read message [size:4148 mtype:6 name:40 inode:1]
+Server Create
+Data PTR: 1
+Inum: 1
+Inum: 0
+Inum: 2
+Inum: 3
+Inum: 4
+Inum: 5
+Inum: 6
+Inum: 7
+Inum: 8
+Inum: 9
+Inum: 10
+Inum: 11
+Inum: 12
+Inum: 13
+Inum: 14
+Inum: 15
+Inum: 16
+Inum: 17
+Inum: 18
+Inum: 19
+Inum: 20
+Inum: 21
+Inum: 22
+Inum: 23
+Inum: 24
+Inum: 25
+Inum: 26
+Inum: 27
+Inum: 28
+Inum: 29
+Inum: 30
+Inum: 31
+Inum: 32
+Inum: 33
+Inum: 34
+Inum: 35
+Inum: 36
+Inum: 37
+Inum: 38
+Inum: 39
+Inum: 40
+Inum: 41
+Inum: -1
+Index: 42, value: 42
+server:: waiting...
+server:: read message [size:4148 mtype:6 name:41 inode:1]
+Server Create
+Data PTR: 1
+Inum: 1
+Inum: 0
+Inum: 2
+Inum: 3
+Inum: 4
+Inum: 5
+Inum: 6
+Inum: 7
+Inum: 8
+Inum: 9
+Inum: 10
+Inum: 11
+Inum: 12
+Inum: 13
+Inum: 14
+Inum: 15
+Inum: 16
+Inum: 17
+Inum: 18
+Inum: 19
+Inum: 20
+Inum: 21
+Inum: 22
+Inum: 23
+Inum: 24
+Inum: 25
+Inum: 26
+Inum: 27
+Inum: 28
+Inum: 29
+Inum: 30
+Inum: 31
+Inum: 32
+Inum: 33
+Inum: 34
+Inum: 35
+Inum: 36
+Inum: 37
+Inum: 38
+Inum: 39
+Inum: 40
+Inum: 41
+Inum: 42
+Inum: -1
+Index: 43, value: 43
+server:: waiting...
+server:: read message [size:4148 mtype:6 name:42 inode:1]
+Server Create
+Data PTR: 1
+Inum: 1
+Inum: 0
+Inum: 2
+Inum: 3
+Inum: 4
+Inum: 5
+Inum: 6
+Inum: 7
+Inum: 8
+Inum: 9
+Inum: 10
+Inum: 11
+Inum: 12
+Inum: 13
+Inum: 14
+Inum: 15
+Inum: 16
+Inum: 17
+Inum: 18
+Inum: 19
+Inum: 20
+Inum: 21
+Inum: 22
+Inum: 23
+Inum: 24
+Inum: 25
+Inum: 26
+Inum: 27
+Inum: 28
+Inum: 29
+Inum: 30
+Inum: 31
+Inum: 32
+Inum: 33
+Inum: 34
+Inum: 35
+Inum: 36
+Inum: 37
+Inum: 38
+Inum: 39
+Inum: 40
+Inum: 41
+Inum: 42
+Inum: 43
+Inum: -1
+Index: 44, value: 44
+server:: waiting...
+server:: read message [size:4148 mtype:6 name:43 inode:1]
+Server Create
+Data PTR: 1
+Inum: 1
+Inum: 0
+Inum: 2
+Inum: 3
+Inum: 4
+Inum: 5
+Inum: 6
+Inum: 7
+Inum: 8
+Inum: 9
+Inum: 10
+Inum: 11
+Inum: 12
+Inum: 13
+Inum: 14
+Inum: 15
+Inum: 16
+Inum: 17
+Inum: 18
+Inum: 19
+Inum: 20
+Inum: 21
+Inum: 22
+Inum: 23
+Inum: 24
+Inum: 25
+Inum: 26
+Inum: 27
+Inum: 28
+Inum: 29
+Inum: 30
+Inum: 31
+Inum: 32
+Inum: 33
+Inum: 34
+Inum: 35
+Inum: 36
+Inum: 37
+Inum: 38
+Inum: 39
+Inum: 40
+Inum: 41
+Inum: 42
+Inum: 43
+Inum: 44
+Inum: -1
+Index: 45, value: 45
+server:: waiting...
+server:: read message [size:4148 mtype:6 name:44 inode:1]
+Server Create
+Data PTR: 1
+Inum: 1
+Inum: 0
+Inum: 2
+Inum: 3
+Inum: 4
+Inum: 5
+Inum: 6
+Inum: 7
+Inum: 8
+Inum: 9
+Inum: 10
+Inum: 11
+Inum: 12
+Inum: 13
+Inum: 14
+Inum: 15
+Inum: 16
+Inum: 17
+Inum: 18
+Inum: 19
+Inum: 20
+Inum: 21
+Inum: 22
+Inum: 23
+Inum: 24
+Inum: 25
+Inum: 26
+Inum: 27
+Inum: 28
+Inum: 29
+Inum: 30
+Inum: 31
+Inum: 32
+Inum: 33
+Inum: 34
+Inum: 35
+Inum: 36
+Inum: 37
+Inum: 38
+Inum: 39
+Inum: 40
+Inum: 41
+Inum: 42
+Inum: 43
+Inum: 44
+Inum: 45
+Inum: -1
+Index: 46, value: 46
+server:: waiting...
+server:: read message [size:4148 mtype:6 name:45 inode:1]
+Server Create
+Data PTR: 1
+Inum: 1
+Inum: 0
+Inum: 2
+Inum: 3
+Inum: 4
+Inum: 5
+Inum: 6
+Inum: 7
+Inum: 8
+Inum: 9
+Inum: 10
+Inum: 11
+Inum: 12
+Inum: 13
+Inum: 14
+Inum: 15
+Inum: 16
+Inum: 17
+Inum: 18
+Inum: 19
+Inum: 20
+Inum: 21
+Inum: 22
+Inum: 23
+Inum: 24
+Inum: 25
+Inum: 26
+Inum: 27
+Inum: 28
+Inum: 29
+Inum: 30
+Inum: 31
+Inum: 32
+Inum: 33
+Inum: 34
+Inum: 35
+Inum: 36
+Inum: 37
+Inum: 38
+Inum: 39
+Inum: 40
+Inum: 41
+Inum: 42
+Inum: 43
+Inum: 44
+Inum: 45
+Inum: 46
+Inum: -1
+Index: 47, value: 47
+server:: waiting...
+server:: read message [size:4148 mtype:6 name:46 inode:1]
+Server Create
+Data PTR: 1
+Inum: 1
+Inum: 0
+Inum: 2
+Inum: 3
+Inum: 4
+Inum: 5
+Inum: 6
+Inum: 7
+Inum: 8
+Inum: 9
+Inum: 10
+Inum: 11
+Inum: 12
+Inum: 13
+Inum: 14
+Inum: 15
+Inum: 16
+Inum: 17
+Inum: 18
+Inum: 19
+Inum: 20
+Inum: 21
+Inum: 22
+Inum: 23
+Inum: 24
+Inum: 25
+Inum: 26
+Inum: 27
+Inum: 28
+Inum: 29
+Inum: 30
+Inum: 31
+Inum: 32
+Inum: 33
+Inum: 34
+Inum: 35
+Inum: 36
+Inum: 37
+Inum: 38
+Inum: 39
+Inum: 40
+Inum: 41
+Inum: 42
+Inum: 43
+Inum: 44
+Inum: 45
+Inum: 46
+Inum: 47
+Inum: -1
+Index: 48, value: 48
+server:: waiting...
+server:: read message [size:4148 mtype:6 name:47 inode:1]
+Server Create
+Data PTR: 1
+Inum: 1
+Inum: 0
+Inum: 2
+Inum: 3
+Inum: 4
+Inum: 5
+Inum: 6
+Inum: 7
+Inum: 8
+Inum: 9
+Inum: 10
+Inum: 11
+Inum: 12
+Inum: 13
+Inum: 14
+Inum: 15
+Inum: 16
+Inum: 17
+Inum: 18
+Inum: 19
+Inum: 20
+Inum: 21
+Inum: 22
+Inum: 23
+Inum: 24
+Inum: 25
+Inum: 26
+Inum: 27
+Inum: 28
+Inum: 29
+Inum: 30
+Inum: 31
+Inum: 32
+Inum: 33
+Inum: 34
+Inum: 35
+Inum: 36
+Inum: 37
+Inum: 38
+Inum: 39
+Inum: 40
+Inum: 41
+Inum: 42
+Inum: 43
+Inum: 44
+Inum: 45
+Inum: 46
+Inum: 47
+Inum: 48
+Inum: -1
+Index: 49, value: 49
+server:: waiting...
+server:: read message [size:4148 mtype:6 name:48 inode:1]
+Server Create
+Data PTR: 1
+Inum: 1
+Inum: 0
+Inum: 2
+Inum: 3
+Inum: 4
+Inum: 5
+Inum: 6
+Inum: 7
+Inum: 8
+Inum: 9
+Inum: 10
+Inum: 11
+Inum: 12
+Inum: 13
+Inum: 14
+Inum: 15
+Inum: 16
+Inum: 17
+Inum: 18
+Inum: 19
+Inum: 20
+Inum: 21
+Inum: 22
+Inum: 23
+Inum: 24
+Inum: 25
+Inum: 26
+Inum: 27
+Inum: 28
+Inum: 29
+Inum: 30
+Inum: 31
+Inum: 32
+Inum: 33
+Inum: 34
+Inum: 35
+Inum: 36
+Inum: 37
+Inum: 38
+Inum: 39
+Inum: 40
+Inum: 41
+Inum: 42
+Inum: 43
+Inum: 44
+Inum: 45
+Inum: 46
+Inum: 47
+Inum: 48
+Inum: 49
+Inum: -1
+Index: 50, value: 50
+server:: waiting...
+server:: read message [size:4148 mtype:6 name:49 inode:1]
+Server Create
+Data PTR: 1
+Inum: 1
+Inum: 0
+Inum: 2
+Inum: 3
+Inum: 4
+Inum: 5
+Inum: 6
+Inum: 7
+Inum: 8
+Inum: 9
+Inum: 10
+Inum: 11
+Inum: 12
+Inum: 13
+Inum: 14
+Inum: 15
+Inum: 16
+Inum: 17
+Inum: 18
+Inum: 19
+Inum: 20
+Inum: 21
+Inum: 22
+Inum: 23
+Inum: 24
+Inum: 25
+Inum: 26
+Inum: 27
+Inum: 28
+Inum: 29
+Inum: 30
+Inum: 31
+Inum: 32
+Inum: 33
+Inum: 34
+Inum: 35
+Inum: 36
+Inum: 37
+Inum: 38
+Inum: 39
+Inum: 40
+Inum: 41
+Inum: 42
+Inum: 43
+Inum: 44
+Inum: 45
+Inum: 46
+Inum: 47
+Inum: 48
+Inum: 49
+Inum: 50
+Inum: -1
+Index: 51, value: 51
+server:: waiting...
+server:: read message [size:4148 mtype:6 name:50 inode:1]
+Server Create
+Data PTR: 1
+Inum: 1
+Inum: 0
+Inum: 2
+Inum: 3
+Inum: 4
+Inum: 5
+Inum: 6
+Inum: 7
+Inum: 8
+Inum: 9
+Inum: 10
+Inum: 11
+Inum: 12
+Inum: 13
+Inum: 14
+Inum: 15
+Inum: 16
+Inum: 17
+Inum: 18
+Inum: 19
+Inum: 20
+Inum: 21
+Inum: 22
+Inum: 23
+Inum: 24
+Inum: 25
+Inum: 26
+Inum: 27
+Inum: 28
+Inum: 29
+Inum: 30
+Inum: 31
+Inum: 32
+Inum: 33
+Inum: 34
+Inum: 35
+Inum: 36
+Inum: 37
+Inum: 38
+Inum: 39
+Inum: 40
+Inum: 41
+Inum: 42
+Inum: 43
+Inum: 44
+Inum: 45
+Inum: 46
+Inum: 47
+Inum: 48
+Inum: 49
+Inum: 50
+Inum: 51
+Inum: -1
+Index: 52, value: 52
+server:: waiting...
+server:: read message [size:4148 mtype:6 name:51 inode:1]
+Server Create
+Data PTR: 1
+Inum: 1
+Inum: 0
+Inum: 2
+Inum: 3
+Inum: 4
+Inum: 5
+Inum: 6
+Inum: 7
+Inum: 8
+Inum: 9
+Inum: 10
+Inum: 11
+Inum: 12
+Inum: 13
+Inum: 14
+Inum: 15
+Inum: 16
+Inum: 17
+Inum: 18
+Inum: 19
+Inum: 20
+Inum: 21
+Inum: 22
+Inum: 23
+Inum: 24
+Inum: 25
+Inum: 26
+Inum: 27
+Inum: 28
+Inum: 29
+Inum: 30
+Inum: 31
+Inum: 32
+Inum: 33
+Inum: 34
+Inum: 35
+Inum: 36
+Inum: 37
+Inum: 38
+Inum: 39
+Inum: 40
+Inum: 41
+Inum: 42
+Inum: 43
+Inum: 44
+Inum: 45
+Inum: 46
+Inum: 47
+Inum: 48
+Inum: 49
+Inum: 50
+Inum: 51
+Inum: 52
+Inum: -1
+Index: 53, value: 53
+server:: waiting...
+server:: read message [size:4148 mtype:6 name:52 inode:1]
+Server Create
+Data PTR: 1
+Inum: 1
+Inum: 0
+Inum: 2
+Inum: 3
+Inum: 4
+Inum: 5
+Inum: 6
+Inum: 7
+Inum: 8
+Inum: 9
+Inum: 10
+Inum: 11
+Inum: 12
+Inum: 13
+Inum: 14
+Inum: 15
+Inum: 16
+Inum: 17
+Inum: 18
+Inum: 19
+Inum: 20
+Inum: 21
+Inum: 22
+Inum: 23
+Inum: 24
+Inum: 25
+Inum: 26
+Inum: 27
+Inum: 28
+Inum: 29
+Inum: 30
+Inum: 31
+Inum: 32
+Inum: 33
+Inum: 34
+Inum: 35
+Inum: 36
+Inum: 37
+Inum: 38
+Inum: 39
+Inum: 40
+Inum: 41
+Inum: 42
+Inum: 43
+Inum: 44
+Inum: 45
+Inum: 46
+Inum: 47
+Inum: 48
+Inum: 49
+Inum: 50
+Inum: 51
+Inum: 52
+Inum: 53
+Inum: -1
+Index: 54, value: 54
+server:: waiting...
+server:: read message [size:4148 mtype:6 name:53 inode:1]
+Server Create
+Data PTR: 1
+Inum: 1
+Inum: 0
+Inum: 2
+Inum: 3
+Inum: 4
+Inum: 5
+Inum: 6
+Inum: 7
+Inum: 8
+Inum: 9
+Inum: 10
+Inum: 11
+Inum: 12
+Inum: 13
+Inum: 14
+Inum: 15
+Inum: 16
+Inum: 17
+Inum: 18
+Inum: 19
+Inum: 20
+Inum: 21
+Inum: 22
+Inum:sendREQUEST: rMES type 144, nbytes: 0
+MFS_Create method called: return 0
+sendREQUEST: rMES type 144, nbytes: 0
+MFS_Lookup method called: return 1
+sendREQUEST: rMES type 144, nbytes: 0
+MFS_Create method called: return 0
+sendREQUEST: rMES type 144, nbytes: 0
+MFS_Create method called: return 0
+sendREQUEST: rMES type 144, nbytes: 0
+MFS_Create method called: return 0
+sendREQUEST: rMES type 144, nbytes: 0
+MFS_Create method called: return 0
+sendREQUEST: rMES type 144, nbytes: 0
+MFS_Create method called: return 0
+sendREQUEST: rMES type 144, nbytes: 0
+MFS_Create method called: return 0
+sendREQUEST: rMES type 144, nbytes: 0
+MFS_Create method called: return 0
+sendREQUEST: rMES type 144, nbytes: 0
+MFS_Create method called: return 0
+sendREQUEST: rMES type 144, nbytes: 0
+MFS_Create method called: return 0
+sendREQUEST: rMES type 144, nbytes: 0
+MFS_Create method called: return 0
+sendREQUEST: rMES type 144, nbytes: 0
+MFS_Create method called: return 0
+sendREQUEST: rMES type 144, nbytes: 0
+MFS_Create method called: return 0
+sendREQUEST: rMES type 144, nbytes: 0
+MFS_Create method called: return 0
+sendREQUEST: rMES type 144, nbytes: 0
+MFS_Create method called: return 0
+sendREQUEST: rMES type 144, nbytes: 0
+MFS_Create method called: return 0
+sendREQUEST: rMES type 144, nbytes: 0
+MFS_Create method called: return 0
+sendREQUEST: rMES type 144, nbytes: 0
+MFS_Create method called: return 0
+sendREQUEST: rMES type 144, nbytes: 0
+MFS_Create method called: return 0
+sendREQUEST: rMES type 144, nbytes: 0
+MFS_Create method called: return 0
+sendREQUEST: rMES type 144, nbytes: 0
+MFS_Create method called: return 0
+sendREQUEST: rMES type 144, nbytes: 0
+MFS_Create method called: return 0
+sendREQUEST: rMES type 144, nbytes: 0
+MFS_Create method called: return 0
+sendREQUEST: rMES type 144, nbytes: 0
+MFS_Create method called: return 0
+sendREQUEST: rMES type 144, nbytes: 0
+MFS_Create method called: return 0
+sendREQUEST: rMES type 144, nbytes: 0
+MFS_Create method called: return 0
+sendREQUEST: rMES type 144, nbytes: 0
+MFS_Create method called: return 0
+sendREQUEST: rMES type 144, nbytes: 0
+MFS_Create method called: return 0
+sendREQUEST: rMES type 144, nbytes: 0
+MFS_Create method called: return 0
+sendREQUEST: rMES type 144, nbytes: 0
+MFS_Create method called: return 0
+sendREQUEST: rMES type 144, nbytes: 0
+MFS_Create method called: return 0
+sendREQUEST: rMES type 144, nbytes: 0
+MFS_Create method called: return 0
+sendREQUEST: rMES type 144, nbytes: 0
+MFS_Create method called: return 0
+sendREQUEST: rMES type 144, nbytes: 0
+MFS_Create method called: return 0
+sendREQUEST: rMES type 144, nbytes: 0
+MFS_Create method called: return 0
+sendREQUEST: rMES type 144, nbytes: 0
+MFS_Create method called: return 0
+sendREQUEST: rMES type 144, nbytes: 0
+MFS_Create method called: return 0
+sendREQUEST: rMES type 144, nbytes: 0
+MFS_Create method called: return 0
+sendREQUEST: rMES type 144, nbytes: 0
+MFS_Create method called: return 0
+sendREQUEST: rMES type 144, nbytes: 0
+MFS_Create method called: return 0
+sendREQUEST: rMES type 144, nbytes: 0
+MFS_Create method called: return 0
+sendREQUEST: rMES type 144, nbytes: 0
+MFS_Create method called: return 0
+sendREQUEST: rMES type 144, nbytes: 0
+MFS_Create method called: return 0
+sendREQUEST: rMES type 144, nbytes: 0
+MFS_Create method called: return 0
+sendREQUEST: rMES type 144, nbytes: 0
+MFS_Create method called: return 0
+sendREQUEST: rMES type 144, nbytes: 0
+MFS_Create method called: return 0
+sendREQUEST: rMES type 144, nbytes: 0
+MFS_Create method called: return 0
+sendREQUEST: rMES type 144, nbytes: 0
+MFS_Create method called: return 0
+sendREQUEST: rMES type 144, nbytes: 0
+MFS_Create method called: return 0
+sendREQUEST: rMES type 144, nbytes: 0
+MFS_Create method called: return 0
+sendREQUEST: rMES type 144, nbytes: 0
+MFS_Create method called: return 0
+sendREQUEST: rMES type 144, nbytes: 0
+MFS_Create method called: return 0
+sendREQUEST: rMES type 144, nbytes: 0
+MFS_Create method called: return 0
+sendREQUEST: rMES type 144, nbytes: 0
+MFS_Create method called: return 0
+sendREQUEST: rMES type 144, nbytes: 0
+MFS_Create method called: return 0
+sendREQU 23
+Inum: 24
+Inum: 25
+Inum: 26
+Inum: 27
+Inum: 28
+Inum: 29
+Inum: 30
+Inum: 31
+Inum: 32
+Inum: 33
+Inum: 34
+Inum: 35
+Inum: 36
+Inum: 37
+Inum: 38
+Inum: 39
+Inum: 40
+Inum: 41
+Inum: 42
+Inum: 43
+Inum: 44
+Inum: 45
+Inum: 46
+Inum: 47
+Inum: 48
+Inum: 49
+Inum: 50
+Inum: 51
+Inum: 52
+Inum: 53
+Inum: 54
+Inum: -1
+Index: 55, value: 55
+server:: waiting...
+server:: read message [size:4148 mtype:6 name:54 inode:1]
+Server Create
+Data PTR: 1
+Inum: 1
+Inum: 0
+Inum: 2
+Inum: 3
+Inum: 4
+Inum: 5
+Inum: 6
+Inum: 7
+Inum: 8
+Inum: 9
+Inum: 10
+Inum: 11
+Inum: 12
+Inum: 13
+Inum: 14
+Inum: 15
+Inum: 16
+Inum: 17
+Inum: 18
+Inum: 19
+Inum: 20
+Inum: 21
+Inum: 22
+Inum: 23
+Inum: 24
+Inum: 25
+Inum: 26
+Inum: 27
+Inum: 28
+Inum: 29
+Inum: 30
+Inum: 31
+Inum: 32
+Inum: 33
+Inum: 34
+Inum: 35
+Inum: 36
+Inum: 37
+Inum: 38
+Inum: 39
+Inum: 40
+Inum: 41
+Inum: 42
+Inum: 43
+Inum: 44
+Inum: 45
+Inum: 46
+Inum: 47
+Inum: 48
+Inum: 49
+Inum: 50
+Inum: 51
+Inum: 52
+Inum: 53
+Inum: 54
+Inum: 55
+Inum: -1
+Index: 56, value: 56
+server:: waiting...
+server:: read message [size:4148 mtype:6 name:55 inode:1]
+Server Create
+Data PTR: 1
+Inum: 1
+Inum: 0
+Inum: 2
+Inum: 3
+Inum: 4
+Inum: 5
+Inum: 6
+Inum: 7
+Inum: 8
+Inum: 9
+Inum: 10
+Inum: 11
+Inum: 12
+Inum: 13
+Inum: 14
+Inum: 15
+Inum: 16
+Inum: 17
+Inum: 18
+Inum: 19
+Inum: 20
+Inum: 21
+Inum: 22
+Inum: 23
+Inum: 24
+Inum: 25
+Inum: 26
+Inum: 27
+Inum: 28
+Inum: 29
+Inum: 30
+Inum: 31
+Inum: 32
+Inum: 33
+Inum: 34
+Inum: 35
+Inum: 36
+Inum: 37
+Inum: 38
+Inum: 39
+Inum: 40
+Inum: 41
+Inum: 42
+Inum: 43
+Inum: 44
+Inum: 45
+Inum: 46
+Inum: 47
+Inum: 48
+Inum: 49
+Inum: 50
+Inum: 51
+Inum: 52
+Inum: 53
+Inum: 54
+Inum: 55
+Inum: 56
+Inum: -1
+Index: 57, value: 57
+server:: waiting...
+server:: read message [size:4148 mtype:6 name:56 inode:1]
+Server Create
+Data PTR: 1
+Inum: 1
+Inum: 0
+Inum: 2
+Inum: 3
+Inum: 4
+Inum: 5
+Inum: 6
+Inum: 7
+Inum: 8
+Inum: 9
+Inum: 10
+Inum: 11
+Inum: 12
+Inum: 13
+Inum: 14
+Inum: 15
+Inum: 16
+Inum: 17
+Inum: 18
+Inum: 19
+Inum: 20
+Inum: 21
+Inum: 22
+Inum: 23
+Inum: 24
+Inum: 25
+Inum: 26
+Inum: 27
+Inum: 28
+Inum: 29
+Inum: 30
+Inum: 31
+Inum: 32
+Inum: 33
+Inum: 34
+Inum: 35
+Inum: 36
+Inum: 37
+Inum: 38
+Inum: 39
+Inum: 40
+Inum: 41
+Inum: 42
+Inum: 43
+Inum: 44
+Inum: 45
+Inum: 46
+Inum: 47
+Inum: 48
+Inum: 49
+Inum: 50
+Inum: 51
+Inum: 52
+Inum: 53
+Inum: 54
+Inum: 55
+Inum: 56
+Inum: 57
+Inum: -1
+Index: 58, value: 58
+server:: waiting...
+server:: read message [size:4148 mtype:6 name:57 inode:1]
+Server Create
+Data PTR: 1
+Inum: 1
+Inum: 0
+Inum: 2
+Inum: 3
+Inum: 4
+Inum: 5
+Inum: 6
+Inum: 7
+Inum: 8
+Inum: 9
+Inum: 10
+Inum: 11
+Inum: 12
+Inum: 13
+Inum: 14
+Inum: 15
+Inum: 16
+Inum: 17
+Inum: 18
+Inum: 19
+Inum: 20
+Inum: 21
+Inum: 22
+Inum: 23
+Inum: 24
+Inum: 25
+Inum: 26
+Inum: 27
+Inum: 28
+Inum: 29
+Inum: 30
+Inum: 31
+Inum: 32
+Inum: 33
+Inum: 34
+Inum: 35
+Inum: 36
+Inum: 37
+Inum: 38
+Inum: 39
+Inum: 40
+Inum: 41
+Inum: 42
+Inum: 43
+Inum: 44
+Inum: 45
+Inum: 46
+Inum: 47
+Inum: 48
+Inum: 49
+Inum: 50
+Inum: 51
+Inum: 52
+Inum: 53
+Inum: 54
+Inum: 55
+Inum: 56
+Inum: 57
+Inum: 58
+Inum: -1
+Index: 59, value: 59
+server:: waiting...
+server:: read message [size:4148 mtype:6 name:58 inode:1]
+Server Create
+Data PTR: 1
+Inum: 1
+Inum: 0
+Inum: 2
+Inum: 3
+Inum: 4
+Inum: 5
+Inum: 6
+Inum: 7
+Inum: 8
+Inum: 9
+Inum: 10
+Inum: 11
+Inum: 12
+Inum: 13
+Inum: 14
+Inum: 15
+Inum: 16
+Inum: 17
+Inum: 18
+Inum: 19
+Inum: 20
+Inum: 21
+Inum: 22
+Inum: 23
+Inum: 24
+Inum: 25
+Inum: 26
+Inum: 27
+Inum: 28
+Inum: 29
+Inum: 30
+Inum: 31
+Inum: 32
+Inum: 33
+Inum: 34
+Inum: 35
+Inum: 36
+Inum: 37
+Inum: 38
+Inum: 39
+Inum: 40
+Inum: 41
+Inum: 42
+Inum: 43
+Inum: 44
+Inum: 45
+Inum: 46
+Inum: 47
+Inum: 48
+Inum: 49
+Inum: 50
+Inum: 51
+Inum: 52
+Inum: 53
+Inum: 54
+Inum: 55
+Inum: 56
+Inum: 57
+Inum: 58
+Inum: 59
+Inum: -1
+Index: 60, value: 60
+server:: waiting...
+server:: read message [size:4148 mtype:6 name:59 inode:1]
+Server Create
+Data PTR: 1
+Inum: 1
+Inum: 0
+Inum: 2
+Inum: 3
+Inum: 4
+Inum: 5
+Inum: 6
+Inum: 7
+Inum: 8
+Inum: 9
+Inum: 10
+Inum: 11
+Inum: 12
+Inum: 13
+Inum: 14
+Inum: 15
+Inum: 16
+Inum: 17
+Inum: 18
+Inum: 19
+Inum: 20
+Inum: 21
+Inum: 22
+Inum: 23
+Inum: 24
+Inum: 25
+Inum: 26
+Inum: 27
+Inum: 28
+Inum: 29
+Inum: 30
+Inum: 31
+Inum: 32
+Inum: 33
+Inum: 34
+Inum: 35
+Inum: 36
+Inum: 37
+Inum: 38
+Inum: 39
+Inum: 40
+Inum: 41
+Inum: 42
+Inum: 43
+Inum: 44
+Inum: 45
+Inum: 46
+Inum: 47
+Inum: 48
+Inum: 49
+Inum: 50
+Inum: 51
+Inum: 52
+Inum: 53
+Inum: 54
+Inum: 55
+Inum: 56
+Inum: 57
+Inum: 58
+Inum: 59
+Inum: 60
+Inum: -1
+Index: 61, value: 61
+server:: waiting...
+server:: read message [size:4148 mtype:6 name:60 inode:1]
+Server Create
+Data PTR: 1
+Inum: 1
+Inum: 0
+Inum: 2
+Inum: 3
+Inum: 4
+Inum: 5
+Inum: 6
+Inum: 7
+Inum: 8
+Inum: 9
+Inum: 10
+Inum: 11
+Inum: 12
+Inum: 13
+Inum: 14
+Inum: 15
+Inum: 16
+Inum: 17
+Inum: 18
+Inum: 19
+Inum: 20
+Inum: 21
+Inum: 22
+Inum: 23
+Inum: 24
+Inum: 25
+Inum: 26
+Inum: 27
+Inum: 28
+Inum: 29
+Inum: 30
+Inum: 31
+Inum: 32
+Inum: 33
+Inum: 34
+Inum: 35
+Inum: 36
+Inum: 37
+Inum: 38
+Inum: 39
+Inum: 40
+Inum: 41
+Inum: 42
+Inum: 43
+Inum: 44
+Inum: 45
+Inum: 46
+Inum: 47
+Inum: 48
+Inum: 49
+Inum: 50
+Inum: 51
+Inum: 52
+Inum: 53
+Inum: 54
+Inum: 55
+Inum: 56
+Inum: 57
+Inum: 58
+Inum: 59
+Inum: 60
+Inum: 61
+Inum: -1
+Index: 62, value: 62
+server:: waiting...
+server:: read message [size:4148 mtype:6 name:61 inode:1]
+Server Create
+Data PTR: 1
+Inum: 1
+Inum: 0
+Inum: 2
+Inum: 3
+Inum: 4
+Inum: 5
+Inum: 6
+Inum: 7
+Inum: 8
+Inum: 9
+Inum: 10
+Inum: 11
+Inum: 12
+Inum: 13
+Inum: 14
+Inum: 15
+Inum: 16
+Inum: 17
+Inum: 18
+Inum: 19
+Inum: 20
+Inum: 21
+Inum: 22
+Inum: 23
+Inum: 24
+Inum: 25
+Inum: 26
+Inum: 27
+Inum: 28
+Inum: 29
+Inum: 30
+Inum: 31
+Inum: 32
+Inum: 33
+Inum: 34
+Inum: 35
+Inum: 36
+Inum: 37
+Inum: 38
+Inum: 39
+Inum: 40
+Inum: 41
+Inum: 42
+Inum: 43
+Inum: 44
+Inum: 45
+Inum: 46
+Inum: 47
+Inum: 48
+Inum: 49
+Inum: 50
+Inum: 51
+Inum: 52
+Inum: 53
+Inum: 54
+Inum: 55
+Inum: 56
+Inum: 57
+Inum: 58
+Inum: 59
+Inum: 60
+Inum: 61
+Inum: 62
+Inum: -1
+Index: 63, value: 63
+server:: waiting...
+server:: read message [size:4148 mtype:6 name:62 inode:1]
+Server Create
+Data PTR: 1
+Inum: 1
+Inum: 0
+Inum: 2
+Inum: 3
+Inum: 4
+Inum: 5
+Inum: 6
+Inum: 7
+Inum: 8
+Inum: 9
+Inum: 10
+Inum: 11
+Inum: 12
+Inum: 13
+Inum: 14
+Inum: 15
+Inum: 16
+Inum: 17
+Inum: 18
+Inum: 19
+Inum: 20
+Inum: 21
+Inum: 22
+Inum: 23
+Inum: 24
+Inum: 25
+Inum: 26
+Inum: 27
+Inum: 28
+Inum: 29
+Inum: 30
+Inum: 31
+Inum: 32
+Inum: 33
+Inum: 34
+Inum: 35
+Inum: 36
+Inum: 37
+Inum: 38
+Inum: 39
+Inum: 40
+Inum: 41
+Inum: 42
+Inum: 43
+Inum: 44
+Inum: 45
+Inum: 46
+Inum: 47
+Inum: 48
+Inum: 49
+Inum: 50
+Inum: 51
+Inum: 52
+Inum: 53
+Inum: 54
+Inum: 55
+Inum: 56
+Inum: 57
+Inum: 58
+Inum: 59
+Inum: 60
+Inum: 61
+Inum: 62
+Inum: 63
+Inum: -1
+Index: 64, value: 64
+server:: waiting...
+server:: read message [size:4148 mtype:6 name:63 inode:1]
+Server Create
+Data PTR: 1
+Inum: 1
+Inum: 0
+Inum: 2
+Inum: 3
+Inum: 4
+Inum: 5
+Inum: 6
+Inum: 7
+Inum: 8
+Inum: 9
+Inum: 10
+Inum: 11
+Inum: 12
+Inum: 13
+Inum: 14
+Inum: 15
+Inum: 16
+Inum: 17
+Inum: 18
+Inum: 19
+Inum: 20
+Inum: 21
+Inum: 22
+Inum: 23
+Inum: 24
+Inum: 25
+Inum: 26
+Inum: 27
+Inum: 28
+Inum: 29
+Inum: 30
+Inum: 31
+Inum: 32
+Inum: 33
+Inum: 34
+Inum: 35
+Inum: 36
+Inum: 37
+Inum: 38
+Inum: 39
+Inum: 40
+Inum: 41
+Inum: 42
+Inum: 43
+Inum: 44
+Inum: 45
+Inum: 46
+Inum: 47
+Inum: 48
+Inum: 49
+Inum: 50
+Inum: 51
+Inum: 52
+Inum: 53
+Inum: 54
+Inum: 55
+Inum: 56
+Inum: 57
+Inum: 58
+Inum: 59
+Inum: 60
+Inum: 61
+Inum: 62
+Inum: 63
+Inum: 64
+Inum: -1
+Index: 65, value: 65
+server:: waiting...
+server:: read message [size:4148 mtype:6 name:64 inode:1]
+Server Create
+Data PTR: 1
+Inum: 1
+Inum: 0
+Inum: 2
+Inum: 3
+Inum: 4
+Inum: 5
+Inum: 6
+Inum: 7
+Inum: 8
+Inum: 9
+Inum: 10
+Inum: 11
+Inum: 12
+Inum: 13
+Inum: 14
+Inum: 15
+Inum: 16
+Inum: 17
+Inum: 18
+Inum: 19
+Inum: 20
+Inum: 21
+Inum: 22
+Inum: 23
+Inum: 24
+Inum: 25
+Inum: 26
+Inum: 27
+Inum: 28
+Inum: 29
+Inum: 30
+Inum: 31
+Inum: 32
+Inum: 33
+Inum: 34
+Inum: 35
+Inum: 36
+Inum: 37
+Inum: 38
+Inum: 39
+Inum: 40
+Inum: 41
+Inum: 42
+Inum: 43
+Inum: 44
+Inum: 45
+Inum: 46
+Inum: 47
+Inum: 48
+Inum: 49
+Inum: 50
+Inum: 51
+Inum: 52
+Inum: 53
+Inum: 54
+Inum: 55
+Inum: 56
+Inum: 57
+Inum: 58
+Inum: 59
+Inum: 60
+Inum: 61
+Inum: 62
+Inum: 63
+Inum: 64
+Inum: 65
+Inum: -1
+Index: 66, value: 66
+server:: waiting...
+server:: read message [size:4148 mtype:6 name:65 inode:1]
+Server Create
+Data PTR: 1
+Inum: 1
+Inum: 0
+Inum: 2
+Inum: 3
+Inum: 4
+Inum: 5
+Inum: 6
+Inum: 7
+Inum: 8
+Inum: 9
+Inum: 10
+Inum: 11
+Inum: 12
+Inum: 13
+Inum: 14
+Inum: 15
+Inum: 16
+Inum: 17
+Inum: 18
+Inum: 19
+Inum: 20
+Inum: 21
+Inum: 22
+Inum: 23
+Inum: 24
+Inum: 25
+Inum: 26
+Inum: 27
+Inum: 28
+Inum: 29
+Inum: 30
+Inum: 31
+Inum: 32
+Inum: 33
+Inum: 34
+Inum: 35
+Inum: 36
+Inum: 37
+Inum: 38
+Inum: 39
+Inum: 40
+Inum: 41
+Inum: 42
+Inum: 43
+Inum: 44
+Inum: 45
+Inum: 46
+Inum: 47
+Inum: 48
+Inum: 49
+Inum: 50
+Inum: 51
+Inum: 52
+Inum: 53
+Inum: 54
+Inum: 55
+Inum: 56
+Inum: 57
+Inum: 58
+Inum: 59
+Inum: 60
+Inum: 61
+Inum: 62
+Inum: 63
+Inum: 64
+Inum: 65
+Inum: 66
+Inum: -1
+Index: 67, value: 67
+server:: waiting...
+server:: read message [size:4148 mtype:6 name:66 inode:1]
+Server Create
+Data PTR: 1
+Inum: 1
+Inum: 0
+Inum: 2
+Inum: 3
+Inum: 4
+Inum: 5
+Inum: 6
+Inum: 7
+Inum: 8
+Inum: 9
+Inum: 10
+Inum: 11
+Inum: 12
+Inum: 13
+Inum: 14
+Inum: 15
+Inum: 16
+Inum: 17
+Inum: 18
+Inum: 19
+Inum: 20
+Inum: 21
+Inum: 22
+Inum: 23
+Inum: 24
+Inum: 25
+Inum: 26
+Inum: 27
+Inum: 28
+Inum: 29
+Inum: 30
+Inum: 31
+Inum: 32
+Inum: 33
+Inum: 34
+Inum: 35
+Inum: 36
+Inum: 37
+Inum: 38
+Inum: 39
+Inum: 40
+Inum: 41
+Inum: 42
+Inum: 43
+Inum: 44
+Inum: 45
+Inum: 46
+Inum: 47
+Inum: 48
+Inum: 49
+Inum: 50
+Inum: 51
+Inum: 52
+Inum: 53
+Inum: 54
+Inum: 55
+Inum: 56
+Inum: 57
+Inum: 58
+Inum: 59
+Inum: 60
+Inum: 61
+Inum: 62
+Inum: 63
+Inum: 64
+Inum: 65
+Inum: 66
+Inum: 67
+Inum: -1
+Index: 68, value: 68
+server:: waiting...
+server:: read message [size:4148 mtype:6 name:67 inode:1]
+Server Create
+Data PTR: 1
+Inum: 1
+Inum: 0
+Inum: 2
+Inum: 3
+Inum: 4
+Inum: 5
+Inum: 6
+Inum: 7
+Inum: 8
+Inum: 9
+Inum: 10
+Inum: 11
+Inum: 12
+Inum: 13
+Inum: 14
+Inum: 15
+Inum: 16
+Inum: 17
+Inum: 18
+Inum: 19
+Inum: 20
+Inum: 21
+Inum: 22
+Inum: 23
+Inum: 24
+Inum: 25
+Inum: 26
+Inum: 27
+Inum: 28
+Inum: 29
+Inum: 30
+Inum: 31
+Inum: 32
+Inum: 33
+Inum: 34
+Inum: 35
+Inum: 36
+Inum: 37
+Inum: 38
+Inum: 39
+Inum: 40
+Inum: 41
+Inum: 42
+Inum: 43
+Inum: 44
+Inum: 45
+Inum: 46
+Inum: 47
+Inum: 48
+Inum: 49
+Inum: 50
+Inum: 51
+Inum: 52
+Inum: 53
+Inum: 54
+Inum: 55
+Inum: 56
+Inum: 57
+Inum: 58
+Inum: 59
+Inum: 60
+Inum: 61
+Inum: 62
+Inum: 63
+Inum: 64
+Inum: 65
+Inum: 66
+Inum: 67
+Inum: 68
+Inum: -1
+Index: 69, value: 69
+server:: waiting...
+server:: read message [size:4148 mtype:6 name:68 inode:1]
+Server Create
+Data PTR: 1
+Inum: 1
+Inum: 0
+Inum: 2
+Inum: 3
+Inum: 4
+Inum: 5
+Inum: 6
+Inum: 7
+Inum: 8
+Inum: 9
+Inum: 10
+Inum: 11
+Inum: 12
+Inum: 13
+Inum: 14
+Inum: 15
+Inum: 16
+Inum: 17
+Inum: 18
+Inum: 19
+Inum: 20
+Inum: 21
+Inum: 22
+Inum: 23
+Inum: 24
+Inum: 25
+Inum: 26
+Inum: 27
+Inum: 28
+Inum: 29
+Inum: 30
+Inum: 31
+Inum: 32
+Inum: 33
+Inum: 34
+Inum: 35
+Inum: 36
+Inum: 37
+Inum: 38
+Inum: 39
+Inum: 40
+Inum: 41
+Inum: 42
+Inum: 43
+Inum: 44
+Inum: 45
+Inum: 46
+Inum: 47
+Inum: 48
+Inum: 49
+Inum: 50
+Inum: 51
+Inum: 52
+Inum: 53
+Inum: 54
+Inum: 55
+Inum: 56
+Inum: 57
+Inum: 58
+Inum: 59
+Inum: 60
+Inum: 61
+Inum: 62
+Inum: 63
+Inum: 64
+Inum: 65
+Inum: 66
+Inum: 67
+Inum: 68
+Inum: 69
+Inum: -1
+Index: 70, value: 70
+server:: waiting...
+server:: read message [size:4148 mtype:6 name:69 inode:1]
+Server Create
+Data PTR: 1
+Inum: 1
+Inum: 0
+Inum: 2
+Inum: 3
+Inum: 4
+Inum: 5
+Inum: 6
+Inum: 7
+Inum: 8
+Inum: 9
+Inum: 10
+Inum: 11
+Inum: 12
+Inum: 13
+Inum: 14
+Inum: 15
+Inum: 16
+Inum: 17
+Inum: 18
+Inum: 19
+Inum: 20
+Inum: 21
+Inum: 22
+Inum: 23
+Inum: 24
+Inum: 25
+Inum: 26
+Inum: 27
+Inum: 28
+Inum: 29
+Inum: 30
+Inum: 31
+Inum: 32
+Inum: 33
+Inum: 34
+Inum: 35
+Inum: 36
+Inum: 37
+Inum: 38
+Inum: 39
+Inum: 40
+Inum: 41
+Inum: 42
+Inum: 43
+Inum: 44
+Inum: 45
+Inum: 46
+Inum: 47
+Inum: 48
+Inum: 49
+Inum: 50
+Inum: 51
+Inum: 52
+Inum: 53
+Inum: 54
+Inum: 55
+Inum: 56
+Inum: 57
+Inum: 58
+Inum: 59
+Inum: 60
+Inum: 61
+Inum: 62
+Inum: 63
+Inum: 64
+Inum: 65
+Inum: 66
+Inum: 67
+Inum: 68
+Inum: 69
+Inum: 70
+Inum: -1
+Index: 71, value: 71
+server:: waiting...
+server:: read message [size:4148 mtype:6 name:70 inode:1]
+Server Create
+Data PTR: 1
+Inum: 1
+Inum: 0
+Inum: 2
+Inum: 3
+Inum: 4
+Inum: 5
+Inum: 6
+Inum: 7
+Inum: 8
+Inum: 9
+Inum: 10
+Inum: 11
+Inum: 12
+Inum: 13
+Inum: 14
+Inum: 15
+Inum: 16
+Inum: 17
+Inum: 18
+Inum: 19
+Inum: 20
+Inum: 21
+Inum: 22
+Inum: 23
+Inum: 24
+Inum: 25
+Inum: 26
+Inum: 27
+Inum: 28
+Inum: 29
+Inum: 30
+Inum: 31
+Inum: 32
+Inum: 33
+Inum: 34
+Inum: 35
+Inum: 36
+Inum: 37
+Inum: 38
+Inum: 39
+Inum: 40
+Inum: 41
+Inum: 42
+Inum: 43
+Inum: 44
+Inum: 45
+Inum: 46
+Inum: 47
+Inum: 48
+Inum: 49
+Inum: 50
+Inum: 51
+Inum: 52
+Inum: 53
+Inum: 54
+Inum: 55
+Inum: 56
+Inum: 57
+Inum: 58
+Inum: 59
+Inum: 60
+Inum: 61
+Inum: 62
+Inum: 63
+Inum: 64
+Inum: 65
+Inum: 66
+Inum: 67
+Inum: 68
+Inum: 69
+Inum: 70
+Inum: 71
+Inum: -1
+Index: 72, value: 72
+server:: waiting...
+server:: read message [size:4148 mtype:6 name:71 inode:1]
+Server Create
+Data PTR: 1
+Inum: 1
+Inum: 0
+Inum: 2
+Inum: 3
+Inum: 4
+Inum: 5
+Inum: 6
+Inum: 7
+Inum: 8
+Inum: 9
+Inum: 10
+Inum: 11
+Inum: 12
+Inum: 13
+Inum: 14
+Inum: 15
+Inum: 16
+Inum: 17
+Inum: 18
+Inum: 19
+Inum: 20
+Inum: 21
+Inum: 22
+Inum: 23
+Inum: 24
+Inum: 25
+Inum: 26
+Inum: 27
+Inum: 28
+Inum: 29
+Inum: 30
+Inum: 31
+Inum: 32
+Inum: 33
+Inum: 34
+Inum: 35
+Inum: 36
+Inum: 37
+Inum: 38
+Inum: 39
+Inum: 40
+Inum: 41
+Inum: 42
+Inum: 43
+Inum: 44
+Inum: 45
+Inum: 46
+Inum: 47
+Inum: 48
+Inum: 49
+Inum: 50
+Inum: 51
+Inum: 52
+Inum: 53
+Inum: 54
+Inum: 55
+Inum: 56
+Inum: 57
+Inum: 58
+Inum: 59
+Inum: 60
+Inum: 61
+Inum: 62
+Inum: 63
+Inum: 64
+Inum: 65
+Inum: 66
+Inum: 67
+Inum: 68
+Inum: 69
+Inum: 70
+Inum: 71
+Inum: 72
+Inum: -1
+Index: 73, value: 73
+server:: waiting...
+server:: read message [size:4148 mtype:6 name:72 inode:1]
+Server Create
+Data PTR: 1
+Inum: 1
+Inum: 0
+Inum: 2
+Inum: 3
+Inum: 4
+Inum: 5
+Inum: 6
+Inum: 7
+Inum: 8
+Inum: 9
+Inum: 10
+Inum: 11
+Inum: 12
+Inum: 13
+Inum: 14
+Inum: 15
+Inum: 16
+Inum: 17
+Inum: 18
+Inum: 19
+Inum: 20
+Inum: 21
+Inum: 22
+Inum: 23
+Inum: 24
+Inum: 25
+Inum: 26
+Inum: 27
+Inum: 28
+Inum: 29
+Inum: 30
+Inum: 31
+Inum: 32
+Inum: 33
+Inum: 34
+Inum: 35
+Inum: 36
+Inum: 37
+Inum: 38
+Inum: 39
+Inum: 40
+Inum: 41
+Inum: 42
+Inum: 43
+Inum: 44
+Inum: 45
+Inum: 46
+Inum: 47
+Inum: 48
+Inum: 49
+Inum: 50
+Inum: 51
+Inum: 52
+Inum: 53
+Inum: 54
+Inum: 55
+Inum: 56
+Inum: 57
+Inum: 58
+Inum: 59
+Inum: 60
+Inum: 61
+Inum: 62
+Inum: 63
+Inum: 64
+Inum: 65
+Inum: 66
+Inum: 67
+Inum: 68
+Inum: 69
+Inum: 70
+Inum: 71
+Inum: 72
+Inum: 73
+Inum: -1
+Index: 74, value: 74
+server:: waiting...
+server:: read message [size:4148 mtype:6 name:73 inode:1]
+Server Create
+Data PTR: 1
+Inum: 1
+Inum: 0
+Inum: 2
+Inum: 3
+Inum: 4
+Inum: 5
+Inum: 6
+Inum: 7
+Inum: 8
+Inum: 9
+Inum: 10
+Inum: 11
+Inum: 12
+Inum: 13
+Inum: 14
+Inum: 15
+Inum: 16
+Inum: 17
+Inum: 18
+Inum: 19
+Inum: 20
+Inum: 21
+Inum: 22
+Inum: 23
+Inum: 24
+Inum: 25
+Inum: 26
+Inum: 27
+Inum: 28
+Inum: 29
+Inum: 30
+Inum: 31
+Inum: 32
+Inum: 33
+Inum: 34
+Inum: 35
+Inum: 36
+Inum: 37
+Inum: 38
+Inum: 39
+Inum: 40
+Inum: 41
+Inum: 42
+Inum: 43
+Inum: 44
+Inum: 45
+Inum: 46
+Inum: 47
+Inum: 48
+Inum: 49
+Inum: 50
+Inum: 51
+Inum: 52
+Inum: 53
+Inum: 54
+Inum: 55
+Inum: 56
+Inum: 57
+Inum: 58
+Inum: 59
+Inum: 60
+Inum: 61
+Inum: 62
+Inum: 63
+Inum: 64
+Inum: 65
+Inum: 66
+Inum: 67
+Inum: 68
+Inum: 69
+Inum: 70
+Inum: 71
+Inum: 72
+Inum: 73
+Inum: 74
+Inum: -1
+Index: 75, value: 75
+server:: waiting...
+server:: read message [size:4148 mtype:6 name:74 inode:1]
+Server Create
+Data PTR: 1
+Inum: 1
+Inum: 0
+Inum: 2
+Inum: 3
+Inum: 4
+Inum: 5
+Inum: 6
+Inum: 7
+Inum: 8
+Inum: 9
+Inum: 10
+Inum: 11
+Inum: 12
+Inum: 13
+Inum: 14
+Inum: 15
+Inum: 16
+Inum: 17
+Inum: 18
+Inum: 19
+Inum: 20
+Inum: 21
+Inum: 22
+Inum: 23
+Inum: 24
+Inum: 25
+Inum: 26
+Inum: 27
+Inum: 28
+Inum: 29
+Inum: 30
+Inum: 31
+Inum: 32
+Inum: 33
+Inum: 34
+Inum: 35
+Inum: 36
+Inum: 37
+Inum: 38
+Inum: 39
+Inum: 40
+Inum: 41
+Inum: 42
+Inum: 43
+Inum: 44
+Inum: 45
+Inum: 46
+Inum: 47
+Inum: 48
+Inum: 49
+Inum: 50
+Inum: 51
+Inum: 52
+Inum: 53
+Inum: 54
+Inum: 55
+Inum: 56
+Inum: 57
+Inum: 58
+Inum: 59
+Inum: 60
+Inum: 61
+Inum: 62
+Inum: 63
+Inum: 64
+Inum: 65
+Inum: 66
+Inum: 67
+Inum: 68
+Inum: 69
+Inum: 70
+Inum: 71
+Inum: 72
+Inum: 73
+Inum: 74
+Inum: 75
+Inum: -1
+Index: 76, value: 76
+server:: waiting...
+server:: read message [size:4148 mtype:6 name:75 inode:1]
+Server Create
+Data PTR: 1
+Inum: 1
+Inum: 0
+Inum: 2
+Inum: 3
+Inum: 4
+Inum: 5
+Inum: 6
+Inum: 7
+Inum: 8
+Inum: 9
+Inum: 10
+Inum: 11
+Inum: 12
+Inum: 13
+Inum: 14
+Inum: 15
+Inum: 16
+Inum: 17
+Inum: 18
+Inum: 19
+Inum: 20
+Inum: 21
+Inum: 22
+Inum: 23
+Inum: 24
+Inum: 25
+Inum: 26
+Inum: 27
+Inum: 28
+Inum: 29
+Inum: 30
+Inum: 31
+Inum: 32
+Inum: 33
+Inum: 34
+Inum: 35
+Inum: 36
+Inum: 37
+Inum: 38
+Inum: 39
+Inum: 40
+Inum: 41
+Inum: 42
+Inum: 43
+Inum: 44
+Inum: 45
+Inum: 46
+Inum: 47
+Inum: 48
+Inum: 49
+Inum: 50
+Inum: 51
+Inum: 52
+Inum: 53
+Inum: 54
+Inum: 55
+Inum: 56
+Inum: 57
+Inum: 58
+Inum: 59
+Inum: 60
+Inum: 61
+Inum: 62
+Inum: 63
+Inum: 64
+Inum: 65
+Inum: 66
+Inum: 67
+Inum: 68
+Inum: 69
+Inum: 70
+Inum: 71
+Inum: 72
+Inum: 73
+Inum: 74
+Inum: 75
+Inum: 76
+Inum: -1
+Index: 77, value: 77
+server:: waiting...
+server:: read message [size:4148 mtype:6 name:76 inode:1]
+Server Create
+Data PTR: 1
+Inum: 1
+Inum: 0
+Inum: 2
+Inum: 3
+Inum: 4
+Inum: 5
+Inum: 6
+Inum: 7
+Inum: 8
+Inum: 9
+Inum: 10
+Inum: 11
+Inum: 12
+Inum: 13
+Inum: 14
+Inum: 15
+Inum: 16
+Inum: 17
+Inum: 18
+Inum: 19
+Inum: 20
+Inum: 21
+Inum: 22
+Inum: 23
+Inum: 24
+Inum: 25
+Inum: 26
+Inum: 27
+Inum: 28
+Inum: 29
+Inum: 30
+Inum: 31
+Inum: 32
+Inum: 33
+Inum: 34
+Inum: 35
+Inum: 36
+Inum: 37
+Inum: 38
+Inum: 39
+Inum: 40
+Inum: 41
+Inum: 42
+Inum: 43
+Inum: 44
+Inum: 45
+Inum: 46
+Inum: 47
+Inum: 48
+Inum: 49
+Inum: 50
+Inum: 51
+Inum: 52
+Inum: 53
+Inum: 54
+Inum: 55
+Inum: 56
+Inum: 57
+Inum: 58
+Inum: 59
+Inum: 60
+Inum: 61
+Inum: 62
+Inum: 63
+Inum: 64
+Inum: 65
+Inum: 66
+Inum: 67
+Inum: 68
+Inum: 69
+Inum: 70
+Inum: 71
+Inum: 72
+Inum: 73
+Inum: 74
+Inum: 75
+Inum: 76
+Inum: 77
+Inum: -1
+Index: 78, value: 78
+server:: waiting...
+server:: read message [size:4148 mtype:6 name:77 inode:1]
+Server Create
+Data PTR: 1
+Inum: 1
+Inum: 0
+Inum: 2
+Inum: 3
+Inum: 4
+Inum: 5
+Inum: 6
+Inum: 7
+Inum: 8
+Inum: 9
+Inum: 10
+Inum: 11
+Inum: 12
+Inum: 13
+Inum: 14
+Inum: 15
+Inum: 16
+Inum: 17
+Inum: 18
+Inum: 19
+Inum: 20
+Inum: 21
+Inum: 22
+Inum: 23
+Inum: 24
+Inum: 25
+Inum: 26
+Inum: 27
+Inum: 28
+Inum: 29
+Inum: 30
+Inum: 31
+Inum: 32
+Inum: 33
+Inum: 34
+Inum: 35
+Inum: 36
+Inum: 37
+Inum: 38
+Inum: 39
+Inum: 40
+Inum: 41
+Inum: 42
+Inum: 43
+Inum: 44
+Inum: 45
+Inum: 46
+Inum: 47
+Inum: 48
+Inum: 49
+Inum: 50
+Inum: 51
+Inum: 52
+Inum: 53
+Inum: 54
+Inum: 55
+Inum: 56
+Inum: 57
+Inum: 58
+Inum: 59
+Inum: 60
+Inum: 61
+Inum: 62
+Inum: 63
+Inum: 64
+Inum: 65
+Inum: 66
+Inum: 67
+Inum: 68
+Inum: 69
+Inum: 70
+Inum: 71
+Inum: 72
+Inum: 73
+Inum: 74
+Inum: 75
+Inum: 76
+Inum: 77
+Inum: 78
+Inum: -1
+Index: 79, value: 79
+server:: waiting...
+server:: read message [size:4148 mtype:6 name:78 inode:1]
+Server Create
+Data PTR: 1
+Inum: 1
+Inum: 0
+Inum: 2
+Inum: 3
+Inum: 4
+Inum: 5
+Inum: 6
+Inum: 7
+Inum: 8
+Inum: 9
+Inum: 10
+Inum: 11
+Inum: 12
+Inum: 13
+Inum: 14
+Inum: 15
+Inum: 16
+Inum: 17
+Inum: 18
+Inum: 19
+Inum: 20
+Inum: 21
+Inum: 22
+Inum: 23
+Inum: 24
+Inum: 25
+Inum: 26
+Inum: 27
+Inum: 28
+Inum: 29
+Inum: 30
+Inum: 31
+Inum: 32
+Inum: 33
+Inum: 34
+Inum: 35
+Inum: 36
+Inum: 37
+Inum: 38
+Inum: 39
+Inum: 40
+Inum: 41
+Inum: 42
+Inum: 43
+Inum: 44
+Inum: 45
+Inum: 46
+Inum: 47
+Inum: 48
+Inum: 49
+Inum: 50
+Inum: 51
+Inum: 52
+Inum: 53
+Inum: 54
+Inum: 55
+Inum: 56
+Inum: 57
+Inum: 58
+Inum: 59
+Inum: 60
+Inum: 61
+Inum: 62
+Inum: 63
+Inum: 64
+Inum: 65
+Inum: 66
+Inum: 67
+Inum: 68
+Inum: 69
+Inum: 70
+Inum: 71
+Inum: 72
+Inum: 73
+Inum: 74
+Inum: 75
+Inum: 76
+Inum: 77
+Inum: 78
+Inum: 79
+Inum: -1
+Index: 80, value: 80
+server:: waiting...
+server:: read message [size:4148 mtype:6 name:79 inode:1]
+Server Create
+Data PTR: 1
+Inum: 1
+Inum: 0
+Inum: 2
+Inum: 3
+Inum: 4
+Inum: 5
+Inum: 6
+Inum: 7
+Inum: 8
+Inum: 9
+Inum: 10
+Inum: 11
+Inum: 12
+Inum: 13
+Inum: 14
+Inum: 15
+Inum: 16
+Inum: 17
+Inum: 18
+Inum: 19
+Inum: 20
+Inum: 21
+Inum: 22
+Inum: 23
+Inum: 24
+Inum: 25
+Inum: 26
+Inum: 27
+Inum: 28
+Inum: 29
+Inum: 30
+Inum: 31
+Inum: 32
+Inum: 33
+Inum: 34
+Inum: 35
+Inum: 36
+Inum: 37
+Inum: 38
+Inum: 39
+Inum: 40
+Inum: 41
+Inum: 42
+Inum: 43
+Inum: 44
+Inum: 45
+Inum: 46
+Inum: 47
+Inum: 48
+Inum: 49
+Inum: 50
+Inum: 51
+Inum: 52
+Inum: 53
+Inum: 54
+Inum: 55
+Inum: 56
+Inum: 57
+Inum: 58
+Inum: 59
+Inum: 60
+Inum: 61
+Inum: 62
+Inum: 63
+Inum: 64
+Inum: 65
+Inum: 66
+Inum: 67
+Inum: 68
+Inum: 69
+Inum: 70
+Inum: 71
+Inum: 72
+Inum: 73
+Inum: 74
+Inum: 75
+Inum: 76
+Inum: 77
+Inum: 78
+Inum: 79
+Inum: 80
+Inum: -1
+Index: 81, value: 81
+server:: waiting...
+server:: read message [size:4148 mtype:6 name:80 inode:1]
+Server Create
+Data PTR: 1
+Inum: 1
+Inum: 0
+Inum: 2
+Inum: 3
+Inum: 4
+Inum: 5
+Inum: 6
+Inum: 7
+Inum: 8
+Inum: 9
+Inum: 10
+Inum: 11
+Inum: 12
+Inum: 13
+Inum: 14
+Inum: 15
+Inum: 16
+Inum: 17
+Inum: 18
+Inum: 19
+Inum: 20
+Inum: 21
+Inum: 22
+Inum: 23
+Inum: 24
+Inum: 25
+Inum: 26
+Inum: 27
+Inum: 28
+Inum: 29
+Inum: 30
+Inum: 31
+Inum: 32
+Inum: 33
+Inum: 34
+Inum: 35
+Inum: 36
+Inum: 37
+Inum: 38
+Inum: 39
+Inum: 40
+Inum: 41
+Inum: 42
+Inum: 43
+Inum: 44
+Inum: 45
+Inum: 46
+Inum: 47
+Inum: 48
+Inum: 49
+Inum: 50
+Inum: 51
+Inum: 52
+Inum: 53
+Inum: 54
+Inum: 55
+Inum: 56
+Inum: 57
+Inum: 58
+Inum: 59
+Inum: 60
+Inum: 61
+Inum: 62
+Inum: 63
+Inum: 64
+Inum: 65
+Inum: 66
+Inum: 67
+Inum: 68
+Inum: 69
+Inum: 70
+Inum: 71
+Inum: 72
+Inum: 73
+Inum: 74
+Inum: 75
+Inum: 76
+Inum: 77
+Inum: 78
+Inum: 79
+Inum: 80
+Inum: 81
+Inum: -1
+Index: 82, value: 82
+server:: waiting...
+server:: read message [size:4148 mtype:6 name:81 inode:1]
+Server Create
+Data PTR: 1
+Inum: 1
+Inum: 0
+Inum: 2
+Inum: 3
+Inum: 4
+Inum: 5
+Inum: 6
+Inum: 7
+Inum: 8
+Inum: 9
+Inum: 10
+Inum: 11
+Inum: 12
+Inum: 13
+Inum: 14
+Inum: 15
+Inum: 16
+Inum: 17
+Inum: 18
+Inum: 19
+Inum: 20
+Inum: 21
+Inum: 22
+Inum: 23
+Inum: 24
+Inum: 25
+Inum: 26
+Inum: 27
+Inum: 28
+Inum: 29
+Inum: 30
+Inum: 31
+Inum: 32
+Inum: 33
+Inum: 34
+Inum: 35
+Inum: 36
+Inum: 37
+Inum: 38
+Inum: 39
+Inum: 40
+Inum: 41
+Inum: 42
+Inum: 43
+Inum: 44
+Inum: 45
+Inum: 46
+Inum: 47
+Inum: 48
+Inum: 49
+Inum: 50
+Inum: 51
+Inum: 52
+Inum: 53
+Inum: 54
+Inum: 55
+Inum: 56
+Inum: 57
+Inum: 58
+Inum: 59
+Inum: 60
+Inum: 61
+Inum: 62
+Inum: 63
+Inum: 64
+Inum: 65
+Inum: 66
+Inum: 67
+Inum: 68
+Inum: 69
+Inum: 70
+Inum: 71
+Inum: 72
+Inum: 73
+Inum: 74
+Inum: 75
+Inum: 76
+Inum: 77
+Inum: 78
+Inum: 79
+Inum: 80
+Inum: 81
+Inum: 82
+Inum: -1
+Index: 83, value: 83
+server:: waiting...
+server:: read message [size:4148 mtype:6 name:82 inode:1]
+Server Create
+Data PTR: 1
+Inum: 1
+Inum: 0
+Inum: 2
+Inum: 3
+Inum: 4
+Inum: 5
+Inum: 6
+Inum: 7
+Inum: 8
+Inum: 9
+Inum: 10
+Inum: 11
+Inum: 12
+Inum: 13
+Inum: 14
+Inum: 15
+Inum: 16
+Inum: 17
+Inum: 18
+Inum: 19
+Inum: 20
+Inum: 21
+Inum: 22
+Inum: 23
+Inum: 24
+Inum: 25
+Inum: 26
+Inum: 27
+Inum: 28
+Inum: 29
+Inum: 30
+Inum: 31
+Inum: 32
+Inum: 33
+Inum: 34
+Inum: 35
+Inum: 36
+Inum: 37
+Inum: 38
+Inum: 39
+Inum: 40
+Inum: 41
+Inum: 42
+Inum: 43
+Inum: 44
+Inum: 45
+Inum: 46
+Inum: 47
+Inum: 48
+Inum: 49
+Inum: 50
+Inum: 51
+Inum: 52
+Inum: 53
+Inum: 54
+Inum: 55
+Inum: 56
+Inum: 57
+Inum: 58
+Inum: 59
+Inum: 60
+Inum: 61
+Inum: 62
+Inum: 63
+Inum: 64
+Inum: 65
+Inum: 66
+Inum: 67
+Inum: 68
+Inum: 69
+Inum: 70
+Inum: 71
+Inum: 72
+Inum: 73
+Inum: 74
+Inum: 75
+Inum: 76
+Inum: 77
+Inum: 78
+Inum: 79
+Inum: 80
+Inum: 81
+Inum: 82
+Inum: 83
+Inum: -1
+Index: 84, value: 84
+server:: waiting...
+server:: read message [size:4148 mtype:6 name:83 inode:1]
+Server Create
+Data PTR: 1
+Inum: 1
+Inum: 0
+Inum: 2
+Inum: 3
+Inum: 4
+Inum: 5
+Inum: 6
+Inum: 7
+Inum: 8
+Inum: 9
+Inum: 10
+Inum: 11
+Inum: 12
+Inum: 13
+Inum: 14
+Inum: 15
+Inum: 16
+Inum: 17
+Inum: 18
+Inum: 19
+Inum: 20
+Inum: 21
+Inum: 22
+Inum: 23
+Inum: 24
+Inum: 25
+Inum: 26
+Inum: 27
+Inum: 28
+Inum: 29
+Inum: 30
+Inum: 31
+Inum: 32
+Inum: 33
+Inum: 34
+Inum: 35
+Inum: 36
+Inum: 37
+Inum: 38
+Inum: 39
+Inum: 40
+Inum: 41
+Inum: 42
+Inum: 43
+Inum: 44
+Inum: 45
+Inum: 46
+Inum: 47
+Inum: 48
+Inum: 49
+Inum: 50
+Inum: 51
+Inum: 52
+Inum: 53
+Inum: 54
+Inum: 55
+Inum: 56
+Inum: 57
+Inum: 58
+Inum: 59
+Inum: 60
+Inum: 61
+Inum: 62
+Inum: 63
+Inum: 64
+Inum: 65
+Inum: 66
+Inum: 67
+Inum: 68
+Inum: 69
+Inum: 70
+Inum: 71
+Inum: 72
+Inum: 73
+Inum: 74
+Inum: 75
+Inum: 76
+Inum: 77
+Inum: 78
+Inum: 79
+Inum: 80
+Inum: 81
+Inum: 82
+Inum: 83
+Inum: 84
+Inum: -1
+Index: 85, value: 85
+server:: waiting...
+server:: read message [size:4148 mtype:6 name:84 inode:1]
+Server Create
+Data PTR: 1
+Inum: 1
+Inum: 0
+Inum: 2
+Inum: 3
+Inum: 4
+Inum: 5
+Inum: 6
+Inum: 7
+Inum: 8
+Inum: 9
+Inum: 10
+Inum: 11
+Inum: 12
+Inum: 13
+Inum: 14
+Inum: 15
+Inum: 16
+Inum: 17
+Inum: 18
+Inum: 19
+Inum: 20
+Inum: 21
+Inum: 22
+Inum: 23
+Inum: 24
+Inum: 25
+Inum: 26
+Inum: 27
+Inum: 28
+Inum: 29
+Inum: 30
+Inum: 31
+Inum: 32
+Inum: 33
+Inum: 34
+Inum: 35
+Inum: 36
+Inum: 37
+Inum: 38
+Inum: 39
+Inum: 40
+Inum: 41
+Inum: 42
+Inum: 43
+Inum: 44
+Inum: 45
+Inum: 46
+Inum: 47
+Inum: 48
+Inum: 49
+Inum: 50
+Inum: 51
+Inum: 52
+Inum: 53
+Inum: 54
+Inum: 55
+Inum: 56
+Inum: 57
+Inum: 58
+Inum: 59
+Inum: 60
+Inum: 61
+Inum: 62
+Inum: 63
+Inum: 64
+Inum: 65
+Inum: 66
+Inum: 67
+Inum: 68
+Inum: 69
+Inum: 70
+Inum: 71
+Inum: 72
+Inum: 73
+Inum: 74
+Inum: 75
+Inum: 76
+Inum: 77
+Inum: 78
+Inum: 79
+Inum: 80
+Inum: 81
+Inum: 82
+Inum: 83
+Inum: 84
+Inum: 85
+Inum: -1
+Index: 86, value: 86
+server:: waiting...
+server:: read message [size:4148 mtype:6 name:85 inode:1]
+Server Create
+Data PTR: 1
+Inum: 1
+Inum: 0
+Inum: 2
+Inum: 3
+Inum: 4
+Inum: 5
+Inum: 6
+Inum: 7
+Inum: 8
+Inum: 9
+Inum: 10
+Inum: 11
+Inum: 12
+Inum: 13
+Inum: 14
+Inum: 15
+Inum: 16
+Inum: 17
+Inum: 18
+Inum: 19
+Inum: 20
+Inum: 21
+Inum: 22
+Inum: 23
+Inum: 24
+Inum: 25
+Inum: 26
+Inum: 27
+Inum: 28
+Inum: 29
+Inum: 30
+Inum: 31
+Inum: 32
+Inum: 33
+Inum: 34
+Inum: 35
+Inum: 36
+Inum: 37
+Inum: 38
+Inum: 39
+Inum: 40
+Inum: 41
+Inum: 42
+Inum: 43
+Inum: 44
+Inum: 45
+Inum: 46
+Inum: 47
+Inum: 48
+Inum: 49
+Inum: 50
+Inum: 51
+Inum: 52
+Inum: 53
+Inum: 54
+Inum: 55
+Inum: 56
+Inum: 57
+Inum: 58
+Inum: 59
+Inum: 60
+Inum: 61
+Inum: 62
+Inum: 63
+Inum: 64
+Inum: 65
+Inum: 66
+Inum: 67
+Inum: 68
+Inum: 69
+Inum: 70
+Inum: 71
+Inum: 72
+Inum: 73
+Inum: 74
+Inum: 75
+Inum: 76
+Inum: 77
+Inum: 78
+Inum: 79
+Inum: 80
+Inum: 81
+Inum: 82
+Inum: 83
+Inum: 84
+Inum: 85
+Inum: 86
+Inum: -1
+Index: 87, value: 87
+server:: waiting...
+server:: read message [size:4148 mtype:6 name:86 inode:1]
+Server Create
+Data PTR: 1
+Inum: 1
+Inum: 0
+Inum: 2
+Inum: 3
+Inum: 4
+Inum: 5
+Inum: 6
+Inum: 7
+Inum: 8
+Inum: 9
+Inum: 10
+Inum: 11
+Inum: 12
+Inum: 13
+Inum: 14
+Inum: 15
+Inum: 16
+Inum: 17
+Inum: 18
+Inum: 19
+Inum: 20
+Inum: 21
+Inum: 22
+Inum: 23
+Inum: 24
+Inum: 25
+Inum: 26
+Inum: 27
+Inum: 28
+Inum: 29
+Inum: 30
+Inum: 31
+Inum: 32
+Inum: 33
+Inum: 34
+Inum: 35
+Inum: 36
+Inum: 37
+Inum: 38
+Inum: 39
+Inum: 40
+Inum: 41
+Inum: 42
+Inum: 43
+Inum: 44
+Inum: 45
+Inum: 46
+Inum: 47
+Inum: 48
+Inum: 49
+Inum: 50
+Inum: 51
+Inum: 52
+Inum: 53
+Inum: 54
+Inum: 55
+Inum: 56
+Inum: 57
+Inum: 58
+Inum: 59
+Inum: 60
+Inum: 61
+Inum: 62
+Inum: 63
+Inum: 64
+Inum: 65
+Inum: 66
+Inum: 67
+Inum: 68
+Inum: 69
+Inum: 70
+Inum: 71
+Inum: 72
+Inum: 73
+Inum: 74
+Inum: 75
+Inum: 76
+Inum: 77
+Inum: 78
+Inum: 79
+Inum: 80
+Inum: 81
+Inum: 82
+Inum: 83
+Inum: 84
+Inum: 85
+Inum: 86
+Inum: 87
+Inum: -1
+Index: 88, value: 88
+server:: waiting...
+server:: read message [size:4148 mtype:6 name:87 inode:1]
+Server Create
+Data PTR: 1
+Inum: 1
+Inum: 0
+Inum: 2
+Inum: 3
+Inum: 4
+Inum: 5
+Inum: 6
+Inum: 7
+Inum: 8
+Inum: 9
+Inum: 10
+Inum: 11
+Inum: 12
+Inum: 13
+Inum: 14
+Inum: 15
+Inum: 16
+Inum: 17
+Inum: 18
+Inum: 19
+Inum: 20
+Inum: 21
+Inum: 22
+Inum: 23
+Inum: 24
+Inum: 25
+Inum: 26
+Inum: 27
+Inum: 28
+Inum: 29
+Inum: 30
+Inum: 31
+Inum: 32
+Inum: 33
+Inum: 34
+Inum: 35
+Inum: 36
+Inum: 37
+Inum: 38
+Inum: 39
+Inum: 40
+Inum: 41
+Inum: 42
+Inum: 43
+Inum: 44
+Inum: 45
+Inum: 46
+Inum: 47
+Inum: 48
+Inum: 49
+Inum: 50
+Inum: 51
+Inum: 52
+Inum: 53
+Inum: 54
+Inum: 55
+Inum: 56
+Inum: 57
+Inum: 58
+Inum: 59
+Inum: 60
+Inum: 61
+Inum: 62
+Inum: 63
+Inum: 64
+Inum: 65
+Inum: 66
+Inum: 67
+Inum: 68
+Inum: 69
+Inum: 70
+Inum: 71
+Inum: 72
+Inum: 73
+Inum: 74
+Inum: 75
+Inum: 76
+Inum: 77
+Inum: 78
+Inum: 79
+Inum: 80
+Inum: 81
+Inum: 82
+Inum: 83
+Inum: 84
+Inum: 85
+Inum: 86
+Inum: 87
+Inum: 88
+Inum: -1
+Index: 89, value: 89
+server:: waiting...
+server:: read message [size:4148 mtype:6 name:88 inode:1]
+Server Create
+Data PTR: 1
+Inum: 1
+Inum: 0
+Inum: 2
+Inum: 3
+Inum: 4
+Inum: 5
+Inum: 6
+Inum: 7
+Inum: 8
+Inum: 9
+Inum: 10
+Inum: 11
+Inum: 12
+Inum: 13
+Inum: 14
+Inum: 15
+Inum: 16
+Inum: 17
+Inum: 18
+Inum: 19
+Inum: 20
+Inum: 21
+Inum: 22
+Inum: 23
+Inum: 24
+Inum: 25
+Inum: 26
+Inum: 27
+Inum: 28
+Inum: 29
+Inum: 30
+Inum: 31
+Inum: 32
+Inum: 33
+Inum: 34
+Inum: 35
+Inum: 36
+Inum: 37
+Inum: 38
+Inum: 39
+Inum: 40
+Inum: 41
+Inum: 42
+Inum: 43
+Inum: 44
+Inum: 45
+Inum: 46
+Inum: 47
+Inum: 48
+Inum: 49
+Inum: 50
+Inum: 51
+Inum: 52
+Inum: 53
+Inum: 54
+Inum: 55
+Inum: 56
+Inum: 57
+Inum: 58
+Inum: 59
+Inum: 60
+Inum: 61
+Inum: 62
+Inum: 63
+Inum: 64
+Inum: 65
+Inum: 66
+Inum: 67
+Inum: 68
+Inum: 69
+Inum: 70
+Inum: 71
+Inum: 72
+Inum: 73
+Inum: 74
+Inum: 75
+Inum: 76
+Inum: 77
+Inum: 78
+Inum: 79
+Inum: 80
+Inum: 81
+Inum: 82
+Inum: 83
+Inum: 84
+Inum: 85
+Inum: 86
+Inum: 87
+Inum: 88
+Inum: 89
+Inum: -1
+Index: 90, value: 90
+server:: waiting...
+server:: read message [size:4148 mtype:6 name:89 inode:1]
+Server Create
+Data PTR: 1
+Inum: 1
+Inum: 0
+Inum: 2
+Inum: 3
+Inum: 4
+Inum: 5
+Inum: 6
+Inum: 7
+Inum: 8
+Inum: 9
+Inum: 10
+Inum: 11
+Inum: 12
+Inum: 13
+Inum: 14
+Inum: 15
+Inum: 16
+Inum: 17
+Inum: 18
+Inum: 19
+Inum: 20
+Inum: 21
+Inum: 22
+Inum: 23
+Inum: 24
+Inum: 25
+Inum: 26
+Inum: 27
+Inum: 28
+Inum: 29
+Inum: 30
+Inum: 31
+Inum: 32
+Inum: 33
+Inum: 34
+Inum: 35
+Inum: 36
+Inum: 37
+Inum: 38
+Inum: 39
+Inum: 40
+Inum: 41
+Inum: 42
+Inum: 43
+Inum: 44
+Inum: 45
+Inum: 46
+Inum: 47
+Inum: 48
+Inum: 49
+Inum: 50
+Inum: 51
+Inum: 52
+Inum: 53
+Inum: 54
+Inum: 55
+Inum: 56
+Inum: 57
+Inum: 58
+Inum: 59
+Inum: 60
+Inum: 61
+Inum: 62
+Inum: 63
+Inum: 64
+Inum: 65
+Inum: 66
+Inum: 67
+Inum: 68
+Inum: 69
+Inum: 70
+Inum: 71
+Inum: 72
+Inum: 73
+Inum: 74
+Inum: 75
+Inum: 76
+Inum: 77
+Inum: 78
+Inum: 79
+Inum: 80
+Inum: 81
+Inum: 82
+Inum: 83
+Inum: 84
+Inum: 85
+Inum: 86
+Inum: 87
+Inum: 88
+Inum: 89
+Inum: 90
+Inum: -1
+Index: 91, value: 91
+server:: waiting...
+server:: read message [size:4148 mtype:6 name:90 inode:1]
+Server Create
+Data PTR: 1
+Inum: 1
+Inum: 0
+Inum: 2
+Inum: 3
+Inum: 4
+Inum: 5
+Inum: 6
+Inum: 7
+Inum: 8
+Inum: 9
+Inum: 10
+Inum: 11
+Inum: 12
+Inum: 13
+Inum: 14
+Inum: 15
+Inum: 16
+Inum: 17
+Inum: 18
+Inum: 19
+Inum: 20
+Inum: 21
+Inum: 22
+Inum: 23
+Inum: 24
+Inum: 25
+Inum: 26
+Inum: 27
+Inum: 28
+Inum: 29
+Inum: 30
+Inum: 31
+Inum: 32
+Inum: 33
+Inum: 34
+Inum: 35
+Inum: 36
+Inum: 37
+Inum: 38
+Inum: 39
+Inum: 40
+Inum: 41
+Inum: 42
+Inum: 43
+Inum: 44
+Inum: 45
+Inum: 46
+Inum: 47
+Inum: 48
+Inum: 49
+Inum: 50
+Inum: 51
+Inum: 52
+Inum: 53
+Inum: 54
+Inum: 55
+Inum: 56
+Inum: 57
+Inum: 58
+Inum: 59
+Inum: 60
+Inum: 61
+Inum: 62
+Inum: 63
+Inum: 64
+Inum: 65
+Inum: 66
+Inum: 67
+Inum: 68
+Inum: 69
+Inum: 70
+Inum: 71
+Inum: 72
+Inum: 73
+Inum: 74
+Inum: 75
+Inum: 76
+Inum: 77
+Inum: 78
+Inum: 79
+Inum: 80
+Inum: 81
+Inum: 82
+Inum: 83
+Inum: 84
+Inum: 85
+Inum: 86
+Inum: 87
+Inum: 88
+Inum: 89
+Inum: 90
+Inum: 91
+Inum: -1
+Index: 92, value: 92
+server:: waiting...
+server:: read message [size:4148 mtype:6 name:91 inode:1]
+Server Create
+Data PTR: 1
+Inum: 1
+Inum: 0
+Inum: 2
+Inum: 3
+Inum: 4
+Inum: 5
+Inum: 6
+Inum: 7
+Inum: 8
+Inum: 9
+Inum: 10
+Inum: 11
+Inum: 12
+Inum: 13
+Inum: 14
+Inum: 15
+Inum: 16
+Inum: 17
+Inum: 18
+Inum: 19
+Inum: 20
+Inum: 21
+Inum: 22
+Inum: 23
+Inum: 24
+Inum: 25
+Inum: 26
+Inum: 27
+Inum: 28
+Inum: 29
+Inum: 30
+Inum: 31
+Inum: 32
+Inum: 33
+Inum: 34
+Inum: 35
+Inum: 36
+Inum: 37
+Inum: 38
+Inum: 39
+Inum: 40
+Inum: 41
+Inum: 42
+Inum: 43
+Inum: 44
+Inum: 45
+Inum: 46
+Inum: 47
+Inum: 48
+Inum: 49
+Inum: 50
+Inum: 51
+Inum: 52
+Inum: 53
+Inum: 54
+Inum: 55
+Inum: 56
+Inum: 57
+Inum: 58
+Inum: 59
+Inum: 60
+Inum: 61
+Inum: 62
+Inum: 63
+Inum: 64
+Inum: 65
+Inum: 66
+Inum: 67
+Inum: 68
+Inum: 69
+Inum: 70
+Inum: 71
+Inum: 72
+Inum: 73
+Inum: 74
+Inum: 75
+Inum: 76
+Inum: 77
+Inum: 78
+Inum: 79
+Inum: 80
+Inum: 81
+Inum: 82
+Inum: 83
+Inum: 84
+Inum: 85
+Inum: 86
+Inum: 87
+Inum: 88
+Inum: 89
+Inum: 90
+Inum: 91
+Inum: 92
+Inum: -1
+Index: 93, value: 93
+server:: waiting...
+server:: read message [size:4148 mtype:6 name:92 inode:1]
+Server Create
+Data PTR: 1
+Inum: 1
+Inum: 0
+Inum: 2
+Inum: 3
+Inum: 4
+Inum: 5
+Inum: 6
+Inum: 7
+Inum: 8
+Inum: 9
+Inum: 10
+Inum: 11
+Inum: 12
+Inum: 13
+Inum: 14
+Inum: 15
+Inum: 16
+Inum: 17
+Inum: 18
+Inum: 19
+Inum: 20
+Inum: 21
+Inum: 22
+Inum: 23
+Inum: 24
+Inum: 25
+Inum: 26
+Inum: 27
+Inum: 28
+Inum: 29
+Inum: 30
+Inum: 31
+Inum: 32
+Inum: 33
+Inum: 34
+Inum: 35
+Inum: 36
+Inum: 37
+Inum: 38
+Inum: 39
+Inum: 40
+Inum: 41
+Inum: 42
+Inum: 43
+Inum: 44
+Inum: 45
+Inum: 46
+Inum: 47
+Inum: 48
+Inum: 49
+Inum: 50
+Inum: 51
+Inum: 52
+Inum: 53
+Inum: 54
+Inum: 55
+Inum: 56
+Inum: 57
+Inum: 58
+Inum: 59
+Inum: 60
+Inum: 61
+Inum: 62
+Inum: 63
+Inum: 64
+Inum: 65
+Inum: 66
+Inum: 67
+Inum: 68
+Inum: 69
+Inum: 70
+Inum: 71
+Inum: 72
+Inum: 73
+Inum: 74
+Inum: 75
+Inum: 76
+Inum: 77
+Inum: 78
+Inum: 79
+Inum: 80
+Inum: 81
+Inum: 82
+Inum: 83
+Inum: 84
+Inum: 85
+Inum: 86
+Inum: 87
+Inum: 88
+Inum: 89
+Inum: 90
+Inum: 91
+Inum: 92
+Inum: 93
+Inum: -1
+Index: 94, value: 94
+server:: waiting...
+server:: read message [size:4148 mtype:6 name:93 inode:1]
+Server Create
+Data PTR: 1
+Inum: 1
+Inum: 0
+Inum: 2
+Inum: 3
+Inum: 4
+Inum: 5
+Inum: 6
+Inum: 7
+Inum: 8
+Inum: 9
+Inum: 10
+Inum: 11
+Inum: 12
+Inum: 13
+Inum: 14
+Inum: 15
+Inum: 16
+Inum: 17
+Inum: 18
+Inum: 19
+Inum: 20
+Inum: 21
+Inum: 22
+Inum: 23
+Inum: 24
+Inum: 25
+Inum: 26
+Inum: 27
+Inum: 28
+Inum: 29
+Inum: 30
+Inum: 31
+Inum: 32
+Inum: 33
+Inum: 34
+Inum: 35
+Inum: 36
+Inum: 37
+Inum: 38
+Inum: 39
+Inum: 40
+Inum: 41
+Inum: 42
+Inum: 43
+Inum: 44
+Inum: 45
+Inum: 46
+Inum: 47
+Inum: 48
+Inum: 49
+Inum: 50
+Inum: 51
+Inum: 52
+Inum: 53
+Inum: 54
+Inum: 55
+Inum: 56
+Inum: 57
+Inum: 58
+Inum: 59
+Inum: 60
+Inum: 61
+Inum: 62
+Inum: 63
+Inum: 64
+Inum: 65
+Inum: 66
+Inum: 67
+Inum: 68
+Inum: 69
+Inum: 70
+Inum: 71
+Inum: 72
+Inum: 73
+Inum: 74
+Inum: 75
+Inum: 76
+Inum: 77
+Inum: 78
+Inum: 79
+Inum: 80
+Inum: 81
+Inum: 82
+Inum: 83
+Inum: 84
+Inum: 85
+Inum: 86
+Inum: 87
+Inum: 88
+Inum: 89
+Inum: 90
+Inum: 91
+Inum: 92
+Inum: 93
+Inum: 94
+Inum: -1
+Index: 95, value: 95
+server:: waiting...
+server:: read message [size:4148 mtype:6 name:94 inode:1]
+Server Create
+Data PTR: 1
+Inum: 1
+Inum: 0
+Inum: 2
+Inum: 3
+Inum: 4
+Inum: 5
+Inum: 6
+Inum: 7
+Inum: 8
+Inum: 9
+Inum: 10
+Inum: 11
+Inum: 12
+Inum: 13
+Inum: 14
+Inum: 15
+Inum: 16
+Inum: 17
+Inum: 18
+Inum: 19
+Inum: 20
+Inum: 21
+Inum: 22
+Inum: 23
+Inum: 24
+Inum: 25
+Inum: 26
+Inum: 27
+Inum: 28
+Inum: 29
+Inum: 30
+Inum: 31
+Inum: 32
+Inum: 33
+Inum: 34
+Inum: 35
+Inum: 36
+Inum: 37
+Inum: 38
+Inum: 39
+Inum: 40
+Inum: 41
+Inum: 42
+Inum: 43
+Inum: 44
+Inum: 45
+Inum: 46
+Inum: 47
+Inum: 48
+Inum: 49
+Inum: 50
+Inum: 51
+Inum: 52
+Inum: 53
+Inum: 54
+Inum: 55
+Inum: 56
+Inum: 57
+Inum: 58
+Inum: 59
+Inum: 60
+Inum: 61
+Inum: 62
+Inum: 63
+Inum: 64
+Inum: 65
+Inum: 66
+Inum: 67
+Inum: 68
+Inum: 69
+Inum: 70
+Inum: 71
+Inum: 72
+Inum: 73
+Inum: 74
+Inum: 75
+Inum: 76
+Inum: 77
+Inum: 78
+Inum: 79
+Inum: 80
+Inum: 81
+Inum: 82
+Inum: 83
+Inum: 84
+Inum: 85
+Inum: 86
+Inum: 87
+Inum: 88
+Inum: 89
+Inum: 90
+Inum: 91
+Inum: 92
+Inum: 93
+Inum: 94
+Inum: 95
+Inum: -1
+Index: 96, value: 96
+server:: waiting...
+server:: read message [size:4148 mtype:6 name:95 inode:1]
+Server Create
+Data PTR: 1
+Inum: 1
+Inum: 0
+Inum: 2
+Inum: 3
+Inum: 4
+Inum: 5
+Inum: 6
+Inum: 7
+Inum: 8
+Inum: 9
+Inum: 10
+Inum: 11
+Inum: 12
+Inum: 13
+Inum: 14
+Inum: 15
+Inum: 16
+Inum: 17
+Inum: 18
+Inum: 19
+Inum: 20
+Inum: 21
+Inum: 22
+Inum: 23
+Inum: 24
+Inum: 25
+Inum: 26
+Inum: 27
+Inum: 28
+Inum: 29
+Inum: 30
+Inum: 31
+Inum: 32
+Inum: 33
+Inum: 34
+Inum: 35
+Inum: 36
+Inum: 37
+Inum: 38
+Inum: 39
+Inum: 40
+Inum: 41
+Inum: 42
+Inum: 43
+Inum: 44
+Inum: 45
+Inum: 46
+Inum: 47
+Inum: 48
+Inum: 49
+Inum: 50
+Inum: 51
+Inum: 52
+Inum: 53
+Inum: 54
+Inum: 55
+Inum: 56
+Inum: 57
+Inum: 58
+Inum: 59
+Inum: 60
+Inum: 61
+Inum: 62
+Inum: 63
+Inum: 64
+Inum: 65
+Inum: 66
+Inum: 67
+Inum: 68
+Inum: 69
+Inum: 70
+Inum: 71
+Inum: 72
+Inum: 73
+Inum: 74
+Inum: 75
+Inum: 76
+Inum: 77
+Inum: 78
+Inum: 79
+Inum: 80
+Inum: 81
+Inum: 82
+Inum: 83
+Inum: 84
+Inum: 85
+Inum: 86
+Inum: 87
+Inum: 88
+Inum: 89
+Inum: 90
+Inum: 91
+Inum: 92
+Inum: 93
+Inum: 94
+Inum: 95
+Inum: 96
+Inum: -1
+Index: 97, value: 97
+server:: waiting...
+server:: read message [size:4148 mtype:6 name:96 inode:1]
+Server Create
+Data PTR: 1
+Inum: 1
+Inum: 0
+Inum: 2
+Inum: 3
+Inum: 4
+Inum: 5
+Inum: 6
+Inum: 7
+Inum: 8
+Inum: 9
+Inum: 10
+Inum: 11
+Inum: 12
+Inum: 13
+Inum: 14
+Inum: 15
+Inum: 16
+Inum: 17
+Inum: 18
+Inum: 19
+Inum: 20
+Inum: 21
+Inum: 22
+Inum: 23
+Inum: 24
+Inum: 25
+Inum: 26
+Inum: 27
+Inum: 28
+Inum: 29
+Inum: 30
+Inum: 31
+Inum: 32
+Inum: 33
+Inum: 34
+Inum: 35
+Inum: 36
+Inum: 37
+Inum: 38
+Inum: 39
+Inum: 40
+Inum: 41
+Inum: 42
+Inum: 43
+Inum: 44
+Inum: 45
+Inum: 46
+Inum: 47
+Inum: 48
+Inum: 49
+Inum: 50
+Inum: 51
+Inum: 52
+Inum: 53
+Inum: 54
+Inum: 55
+Inum: 56
+Inum: 57
+Inum: 58
+Inum: 59
+Inum: 60
+Inum: 61
+Inum: 62
+Inum: 63
+Inum: 64
+Inum: 65
+Inum: 66
+Inum: 67
+Inum: 68
+Inum: 69
+Inum: 70
+Inum: 71
+Inum: 72
+Inum: 73
+Inum: 74
+Inum: 75
+Inum: 76
+Inum: 77
+Inum: 78
+Inum: 79
+Inum: 80
+Inum: 81
+Inum: 82
+Inum: 83
+Inum: 84
+Inum: 85
+Inum: 86
+Inum: 87
+Inum: 88
+Inum: 89
+Inum: 90
+Inum: 91
+Inum: 92
+Inum: 93
+Inum: 94
+Inum: 95
+Inum: 96
+Inum: 97
+Inum: -1
+Index: 98, value: 98
+server:: waiting...
+server:: read message [size:4148 mtype:6 name:97 inode:1]
+Server Create
+Data PTR: 1
+Inum: 1
+Inum: 0
+Inum: 2
+Inum: 3
+Inum: 4
+Inum: 5
+Inum: 6
+Inum: 7
+Inum: 8
+Inum: 9
+Inum: 10
+Inum: 11
+Inum: 12
+Inum: 13
+Inum: 14
+Inum: 15
+Inum: 16
+Inum: 17
+Inum: 18
+Inum: 19
+Inum: 20
+Inum: 21
+Inum: 22
+Inum: 23
+Inum: 24
+Inum: 25
+Inum: 26
+Inum: 27
+Inum: 28
+Inum: 29
+Inum: 30
+Inum: 31
+Inum: 32
+Inum: 33
+Inum: 34
+Inum: 35
+Inum: 36
+Inum: 37
+Inum: 38
+Inum: 39
+Inum: 40
+Inum: 41
+Inum: 42
+Inum: 43
+Inum: 44
+Inum: 45
+Inum: 46
+Inum: 47
+Inum: 48
+Inum: 49
+Inum: 50
+Inum: 51
+Inum: 52
+Inum: 53
+Inum: 54
+Inum: 55
+Inum: 56
+Inum: 57
+Inum: 58
+Inum: 59
+Inum: 60
+Inum: 61
+Inum: 62
+Inum: 63
+Inum: 64
+Inum: 65
+Inum: 66
+Inum: 67
+Inum: 68
+Inum: 69
+Inum: 70
+Inum: 71
+Inum: 72
+Inum: 73
+Inum: 74
+Inum: 75
+Inum: 76
+Inum: 77
+Inum: 78
+Inum: 79
+Inum: 80
+Inum: 81
+Inum: 82
+Inum: 83
+Inum: 84
+Inum: 85
+Inum: 86
+Inum: 87
+Inum: 88
+Inum: 89
+Inum: 90
+Inum: 91
+Inum: 92
+Inum: 93
+Inum: 94
+Inum: 95
+Inum: 96
+Inum: 97
+Inum: 98
+Inum: -1
+Index: 99, value: 99
+server:: waiting...
+server:: read message [size:4148 mtype:6 name:98 inode:1]
+Server Create
+Data PTR: 1
+Inum: 1
+Inum: 0
+Inum: 2
+Inum: 3
+Inum: 4
+Inum: 5
+Inum: 6
+Inum: 7
+Inum: 8
+Inum: 9
+Inum: 10
+Inum: 11
+Inum: 12
+Inum: 13
+Inum: 14
+Inum: 15
+Inum: 16
+Inum: 17
+Inum: 18
+Inum: 19
+Inum: 20
+Inum: 21
+Inum: 22
+Inum: 23
+Inum: 24
+Inum: 25
+Inum: 26
+Inum: 27
+Inum: 28
+Inum: 29
+Inum: 30
+Inum: 31
+Inum: 32
+Inum: 33
+Inum: 34
+Inum: 35
+Inum: 36
+Inum: 37
+Inum: 38
+Inum: 39
+Inum: 40
+Inum: 41
+Inum: 42
+Inum: 43
+Inum: 44
+Inum: 45
+Inum: 46
+Inum: 47
+Inum: 48
+Inum: 49
+Inum: 50
+Inum: 51
+Inum: 52
+Inum: 53
+Inum: 54
+Inum: 55
+Inum: 56
+Inum: 57
+Inum: 58
+Inum: 59
+Inum: 60
+Inum: 61
+Inum: 62
+Inum: 63
+Inum: 64
+Inum: 65
+Inum: 66
+Inum: 67
+Inum: 68
+Inum: 69
+Inum: 70
+Inum: 71
+Inum: 72
+Inum: 73
+Inum: 74
+Inum: 75
+Inum: 76
+Inum: 77
+Inum: 78
+Inum: 79
+Inum: 80
+Inum: 81
+Inum: 82
+Inum: 83
+Inum: 84
+Inum: 85
+Inum: 86
+Inum: 87
+Inum: 88
+Inum: 89
+Inum: 90
+Inum: 91
+Inum: 92
+Inum: 93
+Inum: 94
+Inum: 95
+Inum: 96
+Inum: 97
+Inum: 98
+Inum: 99
+Inum: -1
+Index: 100, value: 100
+server:: waiting...
+server:: read message [size:4148 mtype:6 name:99 inode:1]
+Server Create
+Data PTR: 1
+Inum: 1
+Inum: 0
+Inum: 2
+Inum: 3
+Inum: 4
+Inum: 5
+Inum: 6
+Inum: 7
+Inum: 8
+Inum: 9
+Inum: 10
+Inum: 11
+Inum: 12
+Inum: 13
+Inum: 14
+Inum: 15
+Inum: 16
+Inum: 17
+Inum: 18
+Inum: 19
+Inum: 20
+Inum: 21
+Inum: 22
+Inum: 23
+Inum: 24
+Inum: 25
+Inum: 26
+Inum: 27
+Inum: 28
+Inum: 29
+Inum: 30
+Inum: 31
+Inum: 32
+Inum: 33
+Inum: 34
+Inum: 35
+Inum: 36
+Inum: 37
+Inum: 38
+Inum: 39
+Inum: 40
+Inum: 41
+Inum: 42
+Inum: 43
+Inum: 44
+Inum: 45
+Inum: 46
+Inum: 47
+Inum: 48
+Inum: 49
+Inum: 50
+Inum: 51
+Inum: 52
+Inum: 53
+Inum: 54
+Inum: 55
+Inum: 56
+Inum: 57
+Inum: 58
+Inum: 59
+Inum: 60
+Inum: 61
+Inum: 62
+Inum: 63
+Inum: 64
+Inum: 65
+Inum: 66
+Inum: 67
+Inum: 68
+Inum: 69
+Inum: 70
+Inum: 71
+Inum: 72
+Inum: 73
+Inum: 74
+Inum: 75
+Inum: 76
+Inum: 77
+Inum: 78
+Inum: 79
+Inum: 80
+Inum: 81
+Inum: 82
+Inum: 83
+Inum: 84
+Inum: 85
+Inum: 86
+Inum: 87
+Inum: 88
+Inum: 89
+Inum: 90
+Inum: 91
+Inum: 92
+Inum: 93
+Inum: 94
+Inum: 95
+Inum: 96
+Inum: 97
+Inum: 98
+Inum: 99
+Inum: 100
+Inum: -1
+Index: 101, value: 101
+server:: waiting...
+server:: read message [size:4148 mtype:6 name:100 inode:1]
+Server Create
+Data PTR: 1
+Inum: 1
+Inum: 0
+Inum: 2
+Inum: 3
+Inum: 4
+Inum: 5
+Inum: 6
+Inum: 7
+Inum: 8
+Inum: 9
+Inum: 10
+Inum: 11
+Inum: 12
+Inum: 13
+Inum: 14
+Inum: 15
+Inum: 16
+Inum: 17
+Inum: 18
+Inum: 19
+Inum: 20
+Inum: 21
+Inum: 22
+Inum: 23
+Inum: 24
+Inum: 25
+Inum: 26
+Inum: 27
+Inum: 28
+Inum: 29
+Inum: 30
+Inum: 31
+Inum: 32
+Inum: 33
+Inum: 34
+Inum: 35
+Inum: 36
+Inum: 37
+Inum: 38
+Inum: 39
+Inum: 40
+Inum: 41
+Inum: 42
+Inum: 43
+Inum: 44
+Inum: 45
+Inum: 46
+Inum: 47
+Inum: 48
+Inum: 49
+Inum: 50
+Inum: 51
+Inum: 52
+Inum: 53
+Inum: 54
+Inum: 55
+Inum: 56
+Inum: 57
+Inum: 58
+Inum: 59
+Inum: 60
+Inum: 61
+Inum: 62
+Inum: 63
+Inum: 64
+Inum: 65
+Inum: 66
+Inum: 67
+Inum: 68
+Inum: 69
+Inum: 70
+Inum: 71
+Inum: 72
+Inum: 73
+Inum: 74
+Inum: 75
+Inum: 76
+Inum: 77
+Inum: 78
+Inum: 79
+Inum: 80
+Inum: 81
+Inum: 82
+Inum: 83
+Inum: 84
+Inum: 85
+Inum: 86
+Inum: 87
+Inum: 88
+Inum: 89
+Inum: 90
+Inum: 91
+Inum: 92
+Inum: 93
+Inum: 94
+Inum: 95
+Inum: 96
+Inum: 97
+Inum: 98
+Inum: 99
+Inum: 100
+Inum: 101
+Inum: -1
+Index: 102, value: 102
+server:: waiting...
+server:: read message [size:4148 mtype:6 name:101 inode:1]
+Server Create
+Data PTR: 1
+Inum: 1
+Inum: 0
+Inum: 2
+Inum: 3
+Inum: 4
+Inum: 5
+Inum: 6
+Inum: 7
+Inum: 8
+Inum: 9
+Inum: 10
+Inum: 11
+Inum: 12
+Inum: 13
+Inum: 14
+Inum: 15
+Inum: 16
+Inum: 17
+Inum: 18
+Inum: 19
+Inum: 20
+Inum: 21
+Inum: 22
+Inum: 23
+Inum: 24
+Inum: 25
+Inum: 26
+Inum: 27
+Inum: 28
+Inum: 29
+Inum: 30
+Inum: 31
+Inum: 32
+Inum: 33
+Inum: 34
+Inum: 35
+Inum: 36
+Inum: 37
+Inum: 38
+Inum: 39
+Inum: 40
+Inum: 41
+Inum: 42
+Inum: 43
+Inum: 44
+Inum: 45
+Inum: 46
+Inum: 47
+Inum: 48
+Inum: 49
+Inum: 50
+Inum: 51
+Inum: 52
+Inum: 53
+Inum: 54
+Inum: 55
+Inum: 56
+Inum: 57
+Inum: 58
+Inum: 59
+Inum: 60
+Inum: 61
+Inum: 62
+Inum: 63
+Inum: 64
+Inum: 65
+Inum: 66
+Inum: 67
+Inum: 68
+Inum: 69
+Inum: 70
+Inum: 71
+Inum: 72
+Inum: 73
+Inum: 74
+Inum: 75
+Inum: 76
+Inum: 77
+Inum: 78
+Inum: 79
+Inum: 80
+Inum: 81
+Inum: 82
+Inum: 83
+Inum: 84
+Inum: 85
+Inum: 86
+Inum: 87
+Inum: 88
+Inum: 89
+Inum: 90
+Inum: 91
+Inum: 92
+Inum: 93
+Inum: 94
+Inum: 95
+Inum: 96
+Inum: 97
+Inum: 98
+Inum: 99
+Inum: 100
+Inum: 101
+Inum: 102
+Inum: -1
+Index: 103, value: 103
+server:: waiting...
+server:: read message [size:4148 mtype:6 name:102 inode:1]
+Server Create
+Data PTR: 1
+Inum: 1
+Inum: 0
+Inum: 2
+Inum: 3
+Inum: 4
+Inum: 5
+Inum: 6
+Inum: 7
+Inum: 8
+Inum: 9
+Inum: 10
+Inum: 11
+Inum: 12
+Inum: 13
+Inum: 14
+Inum: 15
+Inum: 16
+Inum: 17
+Inum: 18
+Inum: 19
+Inum: 20
+Inum: 21
+Inum: 22
+Inum: 23
+Inum: 24
+Inum: 25
+Inum: 26
+Inum: 27
+Inum: 28
+Inum: 29
+Inum: 30
+Inum: 31
+Inum: 32
+Inum: 33
+Inum: 34
+Inum: 35
+Inum: 36
+Inum: 37
+Inum: 38
+Inum: 39
+Inum: 40
+Inum: 41
+Inum: 42
+Inum: 43
+Inum: 44
+Inum: 45
+Inum: 46
+Inum: 47
+Inum: 48
+Inum: 49
+Inum: 50
+Inum: 51
+Inum: 52
+Inum: 53
+Inum: 54
+Inum: 55
+Inum: 56
+Inum: 57
+Inum: 58
+Inum: 59
+Inum: 60
+Inum: 61
+Inum: 62
+Inum: 63
+Inum: 64
+Inum: 65
+Inum: 66
+Inum: 67
+Inum: 68
+Inum: 69
+Inum: 70
+Inum: 71
+Inum: 72
+Inum: 73
+Inum: 74
+Inum: 75
+Inum: 76
+Inum: 77
+Inum: 78
+Inum: 79
+Inum: 80
+Inum: 81
+Inum: 82
+Inum: 83
+Inum: 84
+Inum: 85
+Inum: 86
+Inum: 87
+Inum: 88
+Inum: 89
+Inum: 90
+Inum: 91
+Inum: 92
+Inum: 93
+Inum: 94
+Inum: 95
+Inum: 96
+Inum: 97
+Inum: 98
+Inum: 99
+Inum: 100
+Inum: 101
+Inum: 102
+Inum: 103
+Inum: -1
+Index: 104, value: 104
+server:: waiting...
+server:: read message [size:4148 mtype:6 name:103 inode:1]
+Server Create
+Data PTR: 1
+Inum: 1
+Inum: 0
+Inum: 2
+Inum: 3
+Inum: 4
+Inum: 5
+Inum: 6
+Inum: 7
+Inum: 8
+Inum: 9
+Inum: 10
+Inum: 11
+Inum: 12
+Inum: 13
+Inum: 14
+Inum: 15
+Inum: 16
+Inum: 17
+Inum: 18
+Inum: 19
+Inum: 20
+Inum: 21
+Inum: 22
+Inum: 23
+Inum: 24
+Inum: 25
+Inum: 26
+Inum: 27
+Inum: 28
+Inum: 29
+Inum: 30
+Inum: 31
+Inum: 32
+Inum: 33
+Inum: 34
+Inum: 35
+Inum: 36
+Inum: 37
+Inum: 38
+Inum: 39
+Inum: 40
+Inum: 41
+Inum: 42
+Inum: 43
+Inum: 44
+Inum: 45
+Inum: 46
+Inum: 47
+Inum: 48
+Inum: 49
+Inum: 50
+Inum: 51
+Inum: 52
+Inum: 53
+Inum: 54
+Inum: 55
+Inum: 56
+Inum: 57
+Inum: 58
+Inum: 59
+Inum: 60
+Inum: 61
+Inum: 62
+Inum: 63
+Inum: 64
+Inum: 65
+Inum: 66
+Inum: 67
+Inum: 68
+Inum: 69
+Inum: 70
+Inum: 71
+Inum: 72
+Inum: 73
+Inum: 74
+Inum: 75
+Inum: 76
+Inum: 77
+Inum: 78
+Inum: 79
+Inum: 80
+Inum: 81
+Inum: 82
+Inum: 83
+Inum: 84
+Inum: 85
+Inum: 86
+Inum: 87
+Inum: 88
+Inum: 89
+Inum: 90
+Inum: 91
+Inum: 92
+Inum: 93
+Inum: 94
+Inum: 95
+Inum: 96
+Inum: 97
+Inum: 98
+Inum: 99
+Inum: 100
+Inum: 101
+Inum: 102
+Inum: 103
+Inum: 104
+Inum: -1
+Index: 105, value: 105
+server:: waiting...
+server:: read message [size:4148 mtype:6 name:104 inode:1]
+Server Create
+Data PTR: 1
+Inum: 1
+Inum: 0
+Inum: 2
+Inum: 3
+Inum: 4
+Inum: 5
+Inum: 6
+Inum: 7
+Inum: 8
+Inum: 9
+Inum: 10
+Inum: 11
+Inum: 12
+Inum: 13
+Inum: 14
+Inum: 15
+Inum: 16
+Inum: 17
+Inum: 18
+Inum: 19
+Inum: 20
+Inum: 21
+Inum: 22
+Inum: 23
+Inum: 24
+Inum: 25
+Inum: 26
+Inum: 27
+Inum: 28
+Inum: 29
+Inum: 30
+Inum: 31
+Inum: 32
+Inum: 33
+Inum: 34
+Inum: 35
+Inum: 36
+Inum: 37
+Inum: 38
+Inum: 39
+Inum: 40
+Inum: 41
+Inum: 42
+Inum: 43
+Inum: 44
+Inum: 45
+Inum: 46
+Inum: 47
+Inum: 48
+Inum: 49
+Inum: 50
+Inum: 51
+Inum: 52
+Inum: 53
+Inum: 54
+Inum: 55
+Inum: 56
+Inum: 57
+Inum: 58
+Inum: 59
+Inum: 60
+Inum: 61
+Inum: 62
+Inum: 63
+Inum: 64
+Inum: 65
+Inum: 66
+Inum: 67
+Inum: 68
+Inum: 69
+Inum: 70
+Inum: 71
+Inum: 72
+Inum: 73
+Inum: 74
+Inum: 75
+Inum: 76
+Inum: 77
+Inum: 78
+Inum: 79
+Inum: 80
+Inum: 81
+Inum: 82
+Inum: 83
+Inum: 84
+Inum: 85
+Inum: 86
+Inum: 87
+Inum: 88
+Inum: 89
+Inum: 90
+Inum: 91
+Inum: 92
+Inum: 93
+Inum: 94
+Inum: 95
+Inum: 96
+Inum: 97
+Inum: 98
+Inum: 99
+Inum: 100
+Inum: 101
+Inum: 102
+Inum: 103
+Inum: 104
+Inum: 105
+Inum: -1
+Index: 106, value: 106
+server:: waiting...
+server:: read message [size:4148 mtype:6 name:105 inode:1]
+Server Create
+Data PTR: 1
+Inum: 1
+Inum: 0
+Inum: 2
+Inum: 3
+Inum: 4
+Inum: 5
+Inum: 6
+Inum: 7
+Inum: 8
+Inum: 9
+Inum: 10
+Inum: 11
+Inum: 12
+Inum: 13
+Inum: 14
+Inum: 15
+Inum: 16
+Inum: 17
+Inum: 18
+Inum: 19
+Inum: 20
+Inum: 21
+Inum: 22
+Inum: 23
+Inum: 24
+Inum: 25
+Inum: 26
+Inum: 27
+Inum: 28
+Inum: 29
+Inum: 30
+Inum: 31
+Inum: 32
+Inum: 33
+Inum: 34
+Inum: 35
+Inum: 36
+Inum: 37
+Inum: 38
+Inum: 39
+Inum: 40
+Inum: 41
+Inum: 42
+Inum: 43
+Inum: 44
+Inum: 45
+Inum: 46
+Inum: 47
+Inum: 48
+Inum: 49
+Inum: 50
+Inum: 51
+Inum: 52
+Inum: 53
+Inum: 54
+Inum: 55
+Inum: 56
+Inum: 57
+Inum: 58
+Inum: 59
+Inum: 60
+Inum: 61
+Inum: 62
+Inum: 63
+Inum: 64
+Inum: 65
+Inum: 66
+Inum: 67
+Inum: 68
+Inum: 69
+Inum: 70
+Inum: 71
+Inum: 72
+Inum: 73
+Inum: 74
+Inum: 75
+Inum: 76
+Inum: 77
+Inum: 78
+Inum: 79
+Inum: 80
+Inum: 81
+Inum: 82
+Inum: 83
+Inum: 84
+Inum: 85
+Inum: 86
+Inum: 87
+Inum: 88
+Inum: 89
+Inum: 90
+Inum: 91
+Inum: 92
+Inum: 93
+Inum: 94
+Inum: 95
+Inum: 96
+Inum: 97
+Inum: 98
+Inum: 99
+Inum: 100
+Inum: 101
+Inum: 102
+Inum: 103
+Inum: 104
+Inum: 105
+Inum: 106
+Inum: -1
+Index: 107, value: 107
+server:: waiting...
+server:: read message [size:4148 mtype:6 name:106 inode:1]
+Server Create
+Data PTR: 1
+Inum: 1
+Inum: 0
+Inum: 2
+Inum: 3
+Inum: 4
+Inum: 5
+Inum: 6
+Inum: 7
+Inum: 8
+Inum: 9
+Inum: 10
+Inum: 11
+Inum: 12
+Inum: 13
+Inum: 14
+Inum: 15
+Inum: 16
+Inum: 17
+Inum: 18
+Inum: 19
+Inum: 20
+Inum: 21
+Inum: 22
+Inum: 23
+Inum: 24
+Inum: 25
+Inum: 26
+Inum: 27
+Inum: 28
+Inum: 29
+Inum: 30
+Inum: 31
+Inum: 32
+Inum: 33
+Inum: 34
+Inum: 35
+Inum: 36
+Inum: 37
+Inum: 38
+Inum: 39
+Inum: 40
+Inum: 41
+Inum: 42
+Inum: 43
+Inum: 44
+Inum: 45
+Inum: 46
+Inum: 47
+Inum: 48
+Inum: 49
+Inum: 50
+Inum: 51
+Inum: 52
+Inum: 53
+Inum: 54
+Inum: 55
+Inum: 56
+Inum: 57
+Inum: 58
+Inum: 59
+Inum: 60
+Inum: 61
+Inum: 62
+Inum: 63
+Inum: 64
+Inum: 65
+Inum: 66
+Inum: 67
+Inum: 68
+Inum: 69
+Inum: 70
+Inum: 71
+Inum: 72
+Inum: 73
+Inum: 74
+Inum: 75
+Inum: 76
+Inum: 77
+Inum: 78
+Inum: 79
+Inum: 80
+Inum: 81
+Inum: 82
+Inum: 83
+Inum: 84
+Inum: 85
+Inum: 86
+Inum: 87
+Inum: 88
+Inum: 89
+Inum: 90
+Inum: 91
+Inum: 92
+Inum: 93
+Inum: 94
+Inum: 95
+Inum: 96
+Inum: 97
+Inum: 98
+Inum: 99
+Inum: 100
+Inum: 101
+Inum: 102
+Inum: 103
+Inum: 104
+Inum: 105
+Inum: 106
+Inum: 107
+Inum: -1
+Index: 108, value: 108
+server:: waiting...
+server:: read message [size:4148 mtype:6 name:107 inode:1]
+Server Create
+Data PTR: 1
+Inum: 1
+Inum: 0
+Inum: 2
+Inum: 3
+Inum: 4
+Inum: 5
+Inum: 6
+Inum: 7
+Inum: 8
+Inum: 9
+Inum: 10
+Inum: 11
+Inum: 12
+Inum: 13
+Inum: 14
+Inum: 15
+Inum: 16
+Inum: 17
+Inum: 18
+Inum: 19
+Inum: 20
+Inum: 21
+Inum: 22
+Inum: 23
+Inum: 24
+Inum: 25
+Inum: 26
+Inum: 27
+Inum: 28
+Inum: 29
+Inum: 30
+Inum: 31
+Inum: 32
+Inum: 33
+Inum: 34
+Inum: 35
+Inum: 36
+Inum: 37
+Inum: 38
+Inum: 39
+Inum: 40
+Inum: 41
+Inum: 42
+Inum: 43
+Inum: 44
+Inum: 45
+Inum: 46
+Inum: 47
+Inum: 48
+Inum: 49
+Inum: 50
+Inum: 51
+Inum: 52
+Inum: 53
+Inum: 54
+Inum: 55
+Inum: 56
+Inum: 57
+Inum: 58
+Inum: 59
+Inum: 60
+Inum: 61
+Inum: 62
+Inum: 63
+Inum: 64
+Inum: 65
+Inum: 66
+Inum: 67
+Inum: 68
+Inum: 69
+Inum: 70
+Inum: 71
+Inum: 72
+Inum: 73
+Inum: 74
+Inum: 75
+Inum: 76
+Inum: 77
+Inum: 78
+Inum: 79
+Inum: 80
+Inum: 81
+Inum: 82
+Inum: 83
+Inum: 84
+Inum: 85
+Inum: 86
+Inum: 87
+Inum: 88
+Inum: 89
+Inum: 90
+Inum: 91
+Inum: 92
+Inum: 93
+Inum: 94
+Inum: 95
+Inum: 96
+Inum: 97
+Inum: 98
+Inum: 99
+Inum: 100
+Inum: 101
+Inum: 102
+Inum: 103
+Inum: 104
+Inum: 105
+Inum: 106
+Inum: 107
+Inum: 108
+Inum: -1
+Index: 109, value: 109
+server:: waiting...
+server:: read message [size:4148 mtype:6 name:108 inode:1]
+Server Create
+Data PTR: 1
+Inum: 1
+Inum: 0
+Inum: 2
+Inum: 3
+Inum: 4
+Inum: 5
+Inum: 6
+Inum: 7
+Inum: 8
+Inum: 9
+Inum: 10
+Inum: 11
+Inum: 12
+Inum: 13
+Inum: 14
+Inum: 15
+Inum: 16
+Inum: 17
+Inum: 18
+Inum: 19
+Inum: 20
+Inum: 21
+Inum: 22
+Inum: 23
+Inum: 24
+Inum: 25
+Inum: 26
+Inum: 27
+Inum: 28
+Inum: 29
+Inum: 30
+Inum: 31
+Inum: 32
+Inum: 33
+Inum: 34
+Inum: 35
+Inum: 36
+Inum: 37
+Inum: 38
+Inum: 39
+Inum: 40
+Inum: 41
+Inum: 42
+Inum: 43
+Inum: 44
+Inum: 45
+Inum: 46
+Inum: 47
+Inum: 48
+Inum: 49
+Inum: 50
+Inum: 51
+Inum: 52
+Inum: 53
+Inum: 54
+Inum: 55
+Inum: 56
+Inum: 57
+Inum: 58
+Inum: 59
+Inum: 60
+Inum: 61
+Inum: 62
+Inum: 63
+Inum: 64
+Inum: 65
+Inum: 66
+Inum: 67
+Inum: 68
+Inum: 69
+Inum: 70
+Inum: 71
+Inum: 72
+Inum: 73
+Inum: 74
+Inum: 75
+Inum: 76
+Inum: 77
+Inum: 78
+Inum: 79
+Inum: 80
+Inum: 81
+Inum: 82
+Inum: 83
+Inum: 84
+Inum: 85
+Inum: 86
+Inum: 87
+Inum: 88
+Inum: 89
+Inum: 90
+Inum: 91
+Inum: 92
+Inum: 93
+Inum: 94
+Inum: 95
+Inum: 96
+Inum: 97
+Inum: 98
+Inum: 99
+Inum: 100
+Inum: 101
+Inum: 102
+Inum: 103
+Inum: 104
+Inum: 105
+Inum: 106
+Inum: 107
+Inum: 108
+Inum: 109
+Inum: -1
+Index: 110, value: 110
+server:: waiting...
+server:: read message [size:4148 mtype:6 name:109 inode:1]
+Server Create
+Data PTR: 1
+Inum: 1
+Inum: 0
+Inum: 2
+Inum: 3
+Inum: 4
+Inum: 5
+Inum: 6
+Inum: 7
+Inum: 8
+Inum: 9
+Inum: 10
+Inum: 11
+Inum: 12
+Inum: 13
+Inum: 14
+Inum: 15
+Inum: 16
+Inum: 17
+Inum: 18
+Inum: 19
+Inum: 20
+Inum: 21
+Inum: 22
+Inum: 23
+Inum: 24
+Inum: 25
+Inum: 26
+Inum: 27
+Inum: 28
+Inum: 29
+Inum: 30
+Inum: 31
+Inum: 32
+Inum: 33
+Inum: 34
+Inum: 35
+Inum: 36
+Inum: 37
+Inum: 38
+Inum: 39
+Inum: 40
+Inum: 41
+Inum: 42
+Inum: 43
+Inum: 44
+Inum: 45
+Inum: 46
+Inum: 47
+Inum: 48
+Inum: 49
+Inum: 50
+Inum: 51
+Inum: 52
+Inum: 53
+Inum: 54
+Inum: 55
+Inum: 56
+Inum: 57
+Inum: 58
+Inum: 59
+Inum: 60
+Inum: 61
+Inum: 62
+Inum: 63
+Inum: 64
+Inum: 65
+Inum: 66
+Inum: 67
+Inum: 68
+Inum: 69
+Inum: 70
+Inum: 71
+Inum: 72
+Inum: 73
+Inum: 74
+Inum: 75
+Inum: 76
+Inum: 77
+Inum: 78
+Inum: 79
+Inum: 80
+Inum: 81
+Inum: 82
+Inum: EST: rMES type 144, nbytes: 0
+MFS_Create method called: return 0
+sendREQUEST: rMES type 144, nbytes: 0
+MFS_Create method called: return 0
+sendREQUEST: rMES type 144, nbytes: 0
+MFS_Create method called: return 0
+sendREQUEST: rMES type 144, nbytes: 0
+MFS_Create method called: return 0
+sendREQUEST: rMES type 144, nbytes: 0
+MFS_Create method called: return 0
+sendREQUEST: rMES type 144, nbytes: 0
+MFS_Create method called: return 0
+sendREQUEST: rMES type 144, nbytes: 0
+MFS_Create method called: return 0
+sendREQUEST: rMES type 144, nbytes: 0
+MFS_Create method called: return 0
+sendREQUEST: rMES type 144, nbytes: 0
+MFS_Create method called: return 0
+sendREQUEST: rMES type 144, nbytes: 0
+MFS_Create method called: return 0
+sendREQUEST: rMES type 144, nbytes: 0
+MFS_Create method called: return 0
+sendREQUEST: rMES type 144, nbytes: 0
+MFS_Create method called: return 0
+sendREQUEST: rMES type 144, nbytes: 0
+MFS_Create method called: return 0
+sendREQUEST: rMES type 144, nbytes: 0
+MFS_Create method called: return 0
+sendREQUEST: rMES type 144, nbytes: 0
+MFS_Create method called: return 0
+sendREQUEST: rMES type 144, nbytes: 0
+MFS_Create method called: return 0
+sendREQUEST: rMES type 144, nbytes: 0
+MFS_Create method called: return 0
+sendREQUEST: rMES type 144, nbytes: 0
+MFS_Create method called: return 0
+sendREQUEST: rMES type 144, nbytes: 0
+MFS_Create method called: return 0
+sendREQUEST: rMES type 144, nbytes: 0
+MFS_Create method called: return 0
+sendREQUEST: rMES type 144, nbytes: 0
+MFS_Create method called: return 0
+sendREQUEST: rMES type 144, nbytes: 0
+MFS_Create method called: return 0
+sendREQUEST: rMES type 144, nbytes: 0
+MFS_Create method called: return 0
+sendREQUEST: rMES type 144, nbytes: 0
+MFS_Create method called: return 0
+sendREQUEST: rMES type 144, nbytes: 0
+MFS_Create method called: return 0
+sendREQUEST: rMES type 144, nbytes: 0
+MFS_Create method called: return 0
+sendREQUEST: rMES type 144, nbytes: 0
+MFS_Create method called: return 0
+sendREQUEST: rMES type 144, nbytes: 0
+MFS_Create method called: return 0
+sendREQUEST: rMES type 144, nbytes: 0
+MFS_Create method called: return 0
+sendREQUEST: rMES type 144, nbytes: 0
+MFS_Create method called: return 0
+sendREQUEST: rMES type 144, nbytes: 0
+MFS_Create method called: return 0
+sendREQUEST: rMES type 144, nbytes: 0
+MFS_Create method called: return 0
+sendREQUEST: rMES type 144, nbytes: 0
+MFS_Create method called: return 0
+sendREQUEST: rMES type 144, nbytes: 0
+MFS_Create method called: return 0
+sendREQUEST: rMES type 144, nbytes: 0
+MFS_Create method called: return 0
+sendREQUEST: rMES type 144, nbytes: 0
+MFS_Create method called: return 0
+sendREQUEST: rMES type 144, nbytes: 0
+MFS_Create method called: return 0
+sendREQUEST: rMES type 144, nbytes: 0
+MFS_Create method called: return 0
+sendREQUEST: rMES type 144, nbytes: 0
+MFS_Create method called: return 0
+sendREQUEST: rMES type 144, nbytes: 0
+MFS_Create method called: return 0
+sendREQUEST: rMES type 144, nbytes: 0
+MFS_Create method called: return 0
+sendREQUEST: rMES type 144, nbytes: 0
+MFS_Create method called: return 0
+sendREQUEST: rMES type 144, nbytes: 0
+MFS_Create method called: return 0
+sendREQUEST: rMES type 144, nbytes: 0
+MFS_Create method called: return 0
+sendREQUEST: rMES type 144, nbytes: 0
+MFS_Create method called: return 0
+sendREQUEST: rMES type 144, nbytes: 0
+MFS_Create method called: return 0
+sendREQUEST: rMES type 144, nbytes: 0
+MFS_Create method called: return 0
+sendREQUEST: rMES type 144, nbytes: 0
+MFS_Create method called: return 0
+sendREQUEST: rMES type 144, nbytes: 0
+MFS_Create method called: return 0
+sendREQUEST: rMES type 144, nbytes: 0
+MFS_Create method called: return 0
+sendREQUEST: rMES type 144, nbytes: 0
+MFS_Create method called: return 0
+sendREQUEST: rMES type 144, nbytes: 0
+MFS_Create method called: return 0
+sendREQUEST: rMES type 144, nbytes: 0
+MFS_Create method called: return 0
+sendREQUEST: rMES type 144, nbytes: 0
+MFS_Create method called: return 0
+sendREQUEST: rMES type 144, nbytes: 0
+MFS_Create method called: return 0
+sendREQUEST: rMES type 144, nbytes: 0
+MFS_Create method called: return 0
+sendREQUEST: rME83
+Inum: 84
+Inum: 85
+Inum: 86
+Inum: 87
+Inum: 88
+Inum: 89
+Inum: 90
+Inum: 91
+Inum: 92
+Inum: 93
+Inum: 94
+Inum: 95
+Inum: 96
+Inum: 97
+Inum: 98
+Inum: 99
+Inum: 100
+Inum: 101
+Inum: 102
+Inum: 103
+Inum: 104
+Inum: 105
+Inum: 106
+Inum: 107
+Inum: 108
+Inum: 109
+Inum: 110
+Inum: -1
+Index: 111, value: 111
+server:: waiting...
+server:: read message [size:4148 mtype:6 name:110 inode:1]
+Server Create
+Data PTR: 1
+Inum: 1
+Inum: 0
+Inum: 2
+Inum: 3
+Inum: 4
+Inum: 5
+Inum: 6
+Inum: 7
+Inum: 8
+Inum: 9
+Inum: 10
+Inum: 11
+Inum: 12
+Inum: 13
+Inum: 14
+Inum: 15
+Inum: 16
+Inum: 17
+Inum: 18
+Inum: 19
+Inum: 20
+Inum: 21
+Inum: 22
+Inum: 23
+Inum: 24
+Inum: 25
+Inum: 26
+Inum: 27
+Inum: 28
+Inum: 29
+Inum: 30
+Inum: 31
+Inum: 32
+Inum: 33
+Inum: 34
+Inum: 35
+Inum: 36
+Inum: 37
+Inum: 38
+Inum: 39
+Inum: 40
+Inum: 41
+Inum: 42
+Inum: 43
+Inum: 44
+Inum: 45
+Inum: 46
+Inum: 47
+Inum: 48
+Inum: 49
+Inum: 50
+Inum: 51
+Inum: 52
+Inum: 53
+Inum: 54
+Inum: 55
+Inum: 56
+Inum: 57
+Inum: 58
+Inum: 59
+Inum: 60
+Inum: 61
+Inum: 62
+Inum: 63
+Inum: 64
+Inum: 65
+Inum: 66
+Inum: 67
+Inum: 68
+Inum: 69
+Inum: 70
+Inum: 71
+Inum: 72
+Inum: 73
+Inum: 74
+Inum: 75
+Inum: 76
+Inum: 77
+Inum: 78
+Inum: 79
+Inum: 80
+Inum: 81
+Inum: 82
+Inum: 83
+Inum: 84
+Inum: 85
+Inum: 86
+Inum: 87
+Inum: 88
+Inum: 89
+Inum: 90
+Inum: 91
+Inum: 92
+Inum: 93
+Inum: 94
+Inum: 95
+Inum: 96
+Inum: 97
+Inum: 98
+Inum: 99
+Inum: 100
+Inum: 101
+Inum: 102
+Inum: 103
+Inum: 104
+Inum: 105
+Inum: 106
+Inum: 107
+Inum: 108
+Inum: 109
+Inum: 110
+Inum: 111
+Inum: -1
+Index: 112, value: 112
+server:: waiting...
+server:: read message [size:4148 mtype:6 name:111 inode:1]
+Server Create
+Data PTR: 1
+Inum: 1
+Inum: 0
+Inum: 2
+Inum: 3
+Inum: 4
+Inum: 5
+Inum: 6
+Inum: 7
+Inum: 8
+Inum: 9
+Inum: 10
+Inum: 11
+Inum: 12
+Inum: 13
+Inum: 14
+Inum: 15
+Inum: 16
+Inum: 17
+Inum: 18
+Inum: 19
+Inum: 20
+Inum: 21
+Inum: 22
+Inum: 23
+Inum: 24
+Inum: 25
+Inum: 26
+Inum: 27
+Inum: 28
+Inum: 29
+Inum: 30
+Inum: 31
+Inum: 32
+Inum: 33
+Inum: 34
+Inum: 35
+Inum: 36
+Inum: 37
+Inum: 38
+Inum: 39
+Inum: 40
+Inum: 41
+Inum: 42
+Inum: 43
+Inum: 44
+Inum: 45
+Inum: 46
+Inum: 47
+Inum: 48
+Inum: 49
+Inum: 50
+Inum: 51
+Inum: 52
+Inum: 53
+Inum: 54
+Inum: 55
+Inum: 56
+Inum: 57
+Inum: 58
+Inum: 59
+Inum: 60
+Inum: 61
+Inum: 62
+Inum: 63
+Inum: 64
+Inum: 65
+Inum: 66
+Inum: 67
+Inum: 68
+Inum: 69
+Inum: 70
+Inum: 71
+Inum: 72
+Inum: 73
+Inum: 74
+Inum: 75
+Inum: 76
+Inum: 77
+Inum: 78
+Inum: 79
+Inum: 80
+Inum: 81
+Inum: 82
+Inum: 83
+Inum: 84
+Inum: 85
+Inum: 86
+Inum: 87
+Inum: 88
+Inum: 89
+Inum: 90
+Inum: 91
+Inum: 92
+Inum: 93
+Inum: 94
+Inum: 95
+Inum: 96
+Inum: 97
+Inum: 98
+Inum: 99
+Inum: 100
+Inum: 101
+Inum: 102
+Inum: 103
+Inum: 104
+Inum: 105
+Inum: 106
+Inum: 107
+Inum: 108
+Inum: 109
+Inum: 110
+Inum: 111
+Inum: 112
+Inum: -1
+Index: 113, value: 113
+server:: waiting...
+server:: read message [size:4148 mtype:6 name:112 inode:1]
+Server Create
+Data PTR: 1
+Inum: 1
+Inum: 0
+Inum: 2
+Inum: 3
+Inum: 4
+Inum: 5
+Inum: 6
+Inum: 7
+Inum: 8
+Inum: 9
+Inum: 10
+Inum: 11
+Inum: 12
+Inum: 13
+Inum: 14
+Inum: 15
+Inum: 16
+Inum: 17
+Inum: 18
+Inum: 19
+Inum: 20
+Inum: 21
+Inum: 22
+Inum: 23
+Inum: 24
+Inum: 25
+Inum: 26
+Inum: 27
+Inum: 28
+Inum: 29
+Inum: 30
+Inum: 31
+Inum: 32
+Inum: 33
+Inum: 34
+Inum: 35
+Inum: 36
+Inum: 37
+Inum: 38
+Inum: 39
+Inum: 40
+Inum: 41
+Inum: 42
+Inum: 43
+Inum: 44
+Inum: 45
+Inum: 46
+Inum: 47
+Inum: 48
+Inum: 49
+Inum: 50
+Inum: 51
+Inum: 52
+Inum: 53
+Inum: 54
+Inum: 55
+Inum: 56
+Inum: 57
+Inum: 58
+Inum: 59
+Inum: 60
+Inum: 61
+Inum: 62
+Inum: 63
+Inum: 64
+Inum: 65
+Inum: 66
+Inum: 67
+Inum: 68
+Inum: 69
+Inum: 70
+Inum: 71
+Inum: 72
+Inum: 73
+Inum: 74
+Inum: 75
+Inum: 76
+Inum: 77
+Inum: 78
+Inum: 79
+Inum: 80
+Inum: 81
+Inum: 82
+Inum: 83
+Inum: 84
+Inum: 85
+Inum: 86
+Inum: 87
+Inum: 88
+Inum: 89
+Inum: 90
+Inum: 91
+Inum: 92
+Inum: 93
+Inum: 94
+Inum: 95
+Inum: 96
+Inum: 97
+Inum: 98
+Inum: 99
+Inum: 100
+Inum: 101
+Inum: 102
+Inum: 103
+Inum: 104
+Inum: 105
+Inum: 106
+Inum: 107
+Inum: 108
+Inum: 109
+Inum: 110
+Inum: 111
+Inum: 112
+Inum: 113
+Inum: -1
+Index: 114, value: 114
+server:: waiting...
+server:: read message [size:4148 mtype:6 name:113 inode:1]
+Server Create
+Data PTR: 1
+Inum: 1
+Inum: 0
+Inum: 2
+Inum: 3
+Inum: 4
+Inum: 5
+Inum: 6
+Inum: 7
+Inum: 8
+Inum: 9
+Inum: 10
+Inum: 11
+Inum: 12
+Inum: 13
+Inum: 14
+Inum: 15
+Inum: 16
+Inum: 17
+Inum: 18
+Inum: 19
+Inum: 20
+Inum: 21
+Inum: 22
+Inum: 23
+Inum: 24
+Inum: 25
+Inum: 26
+Inum: 27
+Inum: 28
+Inum: 29
+Inum: 30
+Inum: 31
+Inum: 32
+Inum: 33
+Inum: 34
+Inum: 35
+Inum: 36
+Inum: 37
+Inum: 38
+Inum: 39
+Inum: 40
+Inum: 41
+Inum: 42
+Inum: 43
+Inum: 44
+Inum: 45
+Inum: 46
+Inum: 47
+Inum: 48
+Inum: 49
+Inum: 50
+Inum: 51
+Inum: 52
+Inum: 53
+Inum: 54
+Inum: 55
+Inum: 56
+Inum: 57
+Inum: 58
+Inum: 59
+Inum: 60
+Inum: 61
+Inum: 62
+Inum: 63
+Inum: 64
+Inum: 65
+Inum: 66
+Inum: 67
+Inum: 68
+Inum: 69
+Inum: 70
+Inum: 71
+Inum: 72
+Inum: 73
+Inum: 74
+Inum: 75
+Inum: 76
+Inum: 77
+Inum: 78
+Inum: 79
+Inum: 80
+Inum: 81
+Inum: 82
+Inum: 83
+Inum: 84
+Inum: 85
+Inum: 86
+Inum: 87
+Inum: 88
+Inum: 89
+Inum: 90
+Inum: 91
+Inum: 92
+Inum: 93
+Inum: 94
+Inum: 95
+Inum: 96
+Inum: 97
+Inum: 98
+Inum: 99
+Inum: 100
+Inum: 101
+Inum: 102
+Inum: 103
+Inum: 104
+Inum: 105
+Inum: 106
+Inum: 107
+Inum: 108
+Inum: 109
+Inum: 110
+Inum: 111
+Inum: 112
+Inum: 113
+Inum: 114
+Inum: -1
+Index: 115, value: 115
+server:: waiting...
+server:: read message [size:4148 mtype:6 name:114 inode:1]
+Server Create
+Data PTR: 1
+Inum: 1
+Inum: 0
+Inum: 2
+Inum: 3
+Inum: 4
+Inum: 5
+Inum: 6
+Inum: 7
+Inum: 8
+Inum: 9
+Inum: 10
+Inum: 11
+Inum: 12
+Inum: 13
+Inum: 14
+Inum: 15
+Inum: 16
+Inum: 17
+Inum: 18
+Inum: 19
+Inum: 20
+Inum: 21
+Inum: 22
+Inum: 23
+Inum: 24
+Inum: 25
+Inum: 26
+Inum: 27
+Inum: 28
+Inum: 29
+Inum: 30
+Inum: 31
+Inum: 32
+Inum: 33
+Inum: 34
+Inum: 35
+Inum: 36
+Inum: 37
+Inum: 38
+Inum: 39
+Inum: 40
+Inum: 41
+Inum: 42
+Inum: 43
+Inum: 44
+Inum: 45
+Inum: 46
+Inum: 47
+Inum: 48
+Inum: 49
+Inum: 50
+Inum: 51
+Inum: 52
+Inum: 53
+Inum: 54
+Inum: 55
+Inum: 56
+Inum: 57
+Inum: 58
+Inum: 59
+Inum: 60
+Inum: 61
+Inum: 62
+Inum: 63
+Inum: 64
+Inum: 65
+Inum: 66
+Inum: 67
+Inum: 68
+Inum: 69
+Inum: 70
+Inum: 71
+Inum: 72
+Inum: 73
+Inum: 74
+Inum: 75
+Inum: 76
+Inum: 77
+Inum: 78
+Inum: 79
+Inum: 80
+Inum: 81
+Inum: 82
+Inum: 83
+Inum: 84
+Inum: 85
+Inum: 86
+Inum: 87
+Inum: 88
+Inum: 89
+Inum: 90
+Inum: 91
+Inum: 92
+Inum: 93
+Inum: 94
+Inum: 95
+Inum: 96
+Inum: 97
+Inum: 98
+Inum: 99
+Inum: 100
+Inum: 101
+Inum: 102
+Inum: 103
+Inum: 104
+Inum: 105
+Inum: 106
+Inum: 107
+Inum: 108
+Inum: 109
+Inum: 110
+Inum: 111
+Inum: 112
+Inum: 113
+Inum: 114
+Inum: 115
+Inum: -1
+Index: 116, value: 116
+server:: waiting...
+server:: read message [size:4148 mtype:6 name:115 inode:1]
+Server Create
+Data PTR: 1
+Inum: 1
+Inum: 0
+Inum: 2
+Inum: 3
+Inum: 4
+Inum: 5
+Inum: 6
+Inum: 7
+Inum: 8
+Inum: 9
+Inum: 10
+Inum: 11
+Inum: 12
+Inum: 13
+Inum: 14
+Inum: 15
+Inum: 16
+Inum: 17
+Inum: 18
+Inum: 19
+Inum: 20
+Inum: 21
+Inum: 22
+Inum: 23
+Inum: 24
+Inum: 25
+Inum: 26
+Inum: 27
+Inum: 28
+Inum: 29
+Inum: 30
+Inum: 31
+Inum: 32
+Inum: 33
+Inum: 34
+Inum: 35
+Inum: 36
+Inum: 37
+Inum: 38
+Inum: 39
+Inum: 40
+Inum: 41
+Inum: 42
+Inum: 43
+Inum: 44
+Inum: 45
+Inum: 46
+Inum: 47
+Inum: 48
+Inum: 49
+Inum: 50
+Inum: 51
+Inum: 52
+Inum: 53
+Inum: 54
+Inum: 55
+Inum: 56
+Inum: 57
+Inum: 58
+Inum: 59
+Inum: 60
+Inum: 61
+Inum: 62
+Inum: 63
+Inum: 64
+Inum: 65
+Inum: 66
+Inum: 67
+Inum: 68
+Inum: 69
+Inum: 70
+Inum: 71
+Inum: 72
+Inum: 73
+Inum: 74
+Inum: 75
+Inum: 76
+Inum: 77
+Inum: 78
+Inum: 79
+Inum: 80
+Inum: 81
+Inum: 82
+Inum: 83
+Inum: 84
+Inum: 85
+Inum: 86
+Inum: 87
+Inum: 88
+Inum: 89
+Inum: 90
+Inum: 91
+Inum: 92
+Inum: 93
+Inum: 94
+Inum: 95
+Inum: 96
+Inum: 97
+Inum: 98
+Inum: 99
+Inum: 100
+Inum: 101
+Inum: 102
+Inum: 103
+Inum: 104
+Inum: 105
+Inum: 106
+Inum: 107
+Inum: 108
+Inum: 109
+Inum: 110
+Inum: 111
+Inum: 112
+Inum: 113
+Inum: 114
+Inum: 115
+Inum: 116
+Inum: -1
+Index: 117, value: 117
+server:: waiting...
+server:: read message [size:4148 mtype:6 name:116 inode:1]
+Server Create
+Data PTR: 1
+Inum: 1
+Inum: 0
+Inum: 2
+Inum: 3
+Inum: 4
+Inum: 5
+Inum: 6
+Inum: 7
+Inum: 8
+Inum: 9
+Inum: 10
+Inum: 11
+Inum: 12
+Inum: 13
+Inum: 14
+Inum: 15
+Inum: 16
+Inum: 17
+Inum: 18
+Inum: 19
+Inum: 20
+Inum: 21
+Inum: 22
+Inum: 23
+Inum: 24
+Inum: 25
+Inum: 26
+Inum: 27
+Inum: 28
+Inum: 29
+Inum: 30
+Inum: 31
+Inum: 32
+Inum: 33
+Inum: 34
+Inum: 35
+Inum: 36
+Inum: 37
+Inum: 38
+Inum: 39
+Inum: 40
+Inum: 41
+Inum: 42
+Inum: 43
+Inum: 44
+Inum: 45
+Inum: 46
+Inum: 47
+Inum: 48
+Inum: 49
+Inum: 50
+Inum: 51
+Inum: 52
+Inum: 53
+Inum: 54
+Inum: 55
+Inum: 56
+Inum: 57
+Inum: 58
+Inum: 59
+Inum: 60
+Inum: 61
+Inum: 62
+Inum: 63
+Inum: 64
+Inum: 65
+Inum: 66
+Inum: 67
+Inum: 68
+Inum: 69
+Inum: 70
+Inum: 71
+Inum: 72
+Inum: 73
+Inum: 74
+Inum: 75
+Inum: 76
+Inum: 77
+Inum: 78
+Inum: 79
+Inum: 80
+Inum: 81
+Inum: 82
+Inum: 83
+Inum: 84
+Inum: 85
+Inum: 86
+Inum: 87
+Inum: 88
+Inum: 89
+Inum: 90
+Inum: 91
+Inum: 92
+Inum: 93
+Inum: 94
+Inum: 95
+Inum: 96
+Inum: 97
+Inum: 98
+Inum: 99
+Inum: 100
+Inum: 101
+Inum: 102
+Inum: 103
+Inum: 104
+Inum: 105
+Inum: 106
+Inum: 107
+Inum: 108
+Inum: 109
+Inum: 110
+Inum: 111
+Inum: 112
+Inum: 113
+Inum: 114
+Inum: 115
+Inum: 116
+Inum: 117
+Inum: -1
+Index: 118, value: 118
+server:: waiting...
+server:: read message [size:4148 mtype:6 name:117 inode:1]
+Server Create
+Data PTR: 1
+Inum: 1
+Inum: 0
+Inum: 2
+Inum: 3
+Inum: 4
+Inum: 5
+Inum: 6
+Inum: 7
+Inum: 8
+Inum: 9
+Inum: 10
+Inum: 11
+Inum: 12
+Inum: 13
+Inum: 14
+Inum: 15
+Inum: 16
+Inum: 17
+Inum: 18
+Inum: 19
+Inum: 20
+Inum: 21
+Inum: 22
+Inum: 23
+Inum: 24
+Inum: 25
+Inum: 26
+Inum: 27
+Inum: 28
+Inum: 29
+Inum: 30
+Inum: 31
+Inum: 32
+Inum: 33
+Inum: 34
+Inum: 35
+Inum: 36
+Inum: 37
+Inum: 38
+Inum: 39
+Inum: 40
+Inum: 41
+Inum: 42
+Inum: 43
+Inum: 44
+Inum: 45
+Inum: 46
+Inum: 47
+Inum: 48
+Inum: 49
+Inum: 50
+Inum: 51
+Inum: 52
+Inum: 53
+Inum: 54
+Inum: 55
+Inum: 56
+Inum: 57
+Inum: 58
+Inum: 59
+Inum: 60
+Inum: 61
+Inum: 62
+Inum: 63
+Inum: 64
+Inum: 65
+Inum: 66
+Inum: 67
+Inum: 68
+Inum: 69
+Inum: 70
+Inum: 71
+Inum: 72
+Inum: 73
+Inum: 74
+Inum: 75
+Inum: 76
+Inum: 77
+Inum: 78
+Inum: 79
+Inum: 80
+Inum: 81
+Inum: 82
+Inum: 83
+Inum: 84
+Inum: 85
+Inum: 86
+Inum: 87
+Inum: 88
+Inum: 89
+Inum: 90
+Inum: 91
+Inum: 92
+Inum: 93
+Inum: 94
+Inum: 95
+Inum: 96
+Inum: 97
+Inum: 98
+Inum: 99
+Inum: 100
+Inum: 101
+Inum: 102
+Inum: 103
+Inum: 104
+Inum: 105
+Inum: 106
+Inum: 107
+Inum: 108
+Inum: 109
+Inum: 110
+Inum: 111
+Inum: 112
+Inum: 113
+Inum: 114
+Inum: 115
+Inum: 116
+Inum: 117
+Inum: 118
+Inum: -1
+Index: 119, value: 119
+server:: waiting...
+server:: read message [size:4148 mtype:6 name:118 inode:1]
+Server Create
+Data PTR: 1
+Inum: 1
+Inum: 0
+Inum: 2
+Inum: 3
+Inum: 4
+Inum: 5
+Inum: 6
+Inum: 7
+Inum: 8
+Inum: 9
+Inum: 10
+Inum: 11
+Inum: 12
+Inum: 13
+Inum: 14
+Inum: 15
+Inum: 16
+Inum: 17
+Inum: 18
+Inum: 19
+Inum: 20
+Inum: 21
+Inum: 22
+Inum: 23
+Inum: 24
+Inum: 25
+Inum: 26
+Inum: 27
+Inum: 28
+Inum: 29
+Inum: 30
+Inum: 31
+Inum: 32
+Inum: 33
+Inum: 34
+Inum: 35
+Inum: 36
+Inum: 37
+Inum: 38
+Inum: 39
+Inum: 40
+Inum: 41
+Inum: 42
+Inum: 43
+Inum: 44
+Inum: 45
+Inum: 46
+Inum: 47
+Inum: 48
+Inum: 49
+Inum: 50
+Inum: 51
+Inum: 52
+Inum: 53
+Inum: 54
+Inum: 55
+Inum: 56
+Inum: 57
+Inum: 58
+Inum: 59
+Inum: 60
+Inum: 61
+Inum: 62
+Inum: 63
+Inum: 64
+Inum: 65
+Inum: 66
+Inum: 67
+Inum: 68
+Inum: 69
+Inum: 70
+Inum: 71
+Inum: 72
+Inum: 73
+Inum: 74
+Inum: 75
+Inum: 76
+Inum: 77
+Inum: 78
+Inum: 79
+Inum: 80
+Inum: 81
+Inum: 82
+Inum: 83
+Inum: 84
+Inum: 85
+Inum: 86
+Inum: 87
+Inum: 88
+Inum: 89
+Inum: 90
+Inum: 91
+Inum: 92
+Inum: 93
+Inum: 94
+Inum: 95
+Inum: 96
+Inum: 97
+Inum: 98
+Inum: 99
+Inum: 100
+Inum: 101
+Inum: 102
+Inum: 103
+Inum: 104
+Inum: 105
+Inum: 106
+Inum: 107
+Inum: 108
+Inum: 109
+Inum: 110
+Inum: 111
+Inum: 112
+Inum: 113
+Inum: 114
+Inum: 115
+Inum: 116
+Inum: 117
+Inum: 118
+Inum: 119
+Inum: -1
+Index: 120, value: 120
+server:: waiting...
+server:: read message [size:4148 mtype:6 name:119 inode:1]
+Server Create
+Data PTR: 1
+Inum: 1
+Inum: 0
+Inum: 2
+Inum: 3
+Inum: 4
+Inum: 5
+Inum: 6
+Inum: 7
+Inum: 8
+Inum: 9
+Inum: 10
+Inum: 11
+Inum: 12
+Inum: 13
+Inum: 14
+Inum: 15
+Inum: 16
+Inum: 17
+Inum: 18
+Inum: 19
+Inum: 20
+Inum: 21
+Inum: 22
+Inum: 23
+Inum: 24
+Inum: 25
+Inum: 26
+Inum: 27
+Inum: 28
+Inum: 29
+Inum: 30
+Inum: 31
+Inum: 32
+Inum: 33
+Inum: 34
+Inum: 35
+Inum: 36
+Inum: 37
+Inum: 38
+Inum: 39
+Inum: 40
+Inum: 41
+Inum: 42
+Inum: 43
+Inum: 44
+Inum: 45
+Inum: 46
+Inum: 47
+Inum: 48
+Inum: 49
+Inum: 50
+Inum: 51
+Inum: 52
+Inum: 53
+Inum: 54
+Inum: 55
+Inum: 56
+Inum: 57
+Inum: 58
+Inum: 59
+Inum: 60
+Inum: 61
+Inum: 62
+Inum: 63
+Inum: 64
+Inum: 65
+Inum: 66
+Inum: 67
+Inum: 68
+Inum: 69
+Inum: 70
+Inum: 71
+Inum: 72
+Inum: 73
+Inum: 74
+Inum: 75
+Inum: 76
+Inum: 77
+Inum: 78
+Inum: 79
+Inum: 80
+Inum: 81
+Inum: 82
+Inum: 83
+Inum: 84
+Inum: 85
+Inum: 86
+Inum: 87
+Inum: 88
+Inum: 89
+Inum: 90
+Inum: 91
+Inum: 92
+Inum: 93
+Inum: 94
+Inum: 95
+Inum: 96
+Inum: 97
+Inum: 98
+Inum: 99
+Inum: 100
+Inum: 101
+Inum: 102
+Inum: 103
+Inum: 104
+Inum: 105
+Inum: 106
+Inum: 107
+Inum: 108
+Inum: 109
+Inum: 110
+Inum: 111
+Inum: 112
+Inum: 113
+Inum: 114
+Inum: 115
+Inum: 116
+Inum: 117
+Inum: 118
+Inum: 119
+Inum: 120
+Inum: -1
+Index: 121, value: 121
+server:: waiting...
+server:: read message [size:4148 mtype:6 name:120 inode:1]
+Server Create
+Data PTR: 1
+Inum: 1
+Inum: 0
+Inum: 2
+Inum: 3
+Inum: 4
+Inum: 5
+Inum: 6
+Inum: 7
+Inum: 8
+Inum: 9
+Inum: 10
+Inum: 11
+Inum: 12
+Inum: 13
+Inum: 14
+Inum: 15
+Inum: 16
+Inum: 17
+Inum: 18
+Inum: 19
+Inum: 20
+Inum: 21
+Inum: 22
+Inum: 23
+Inum: 24
+Inum: 25
+Inum: 26
+Inum: 27
+Inum: 28
+Inum: 29
+Inum: 30
+Inum: 31
+Inum: 32
+Inum: 33
+Inum: 34
+Inum: 35
+Inum: 36
+Inum: 37
+Inum: 38
+Inum: 39
+Inum: 40
+Inum: 41
+Inum: 42
+Inum: 43
+Inum: 44
+Inum: 45
+Inum: 46
+Inum: 47
+Inum: 48
+Inum: 49
+Inum: 50
+Inum: 51
+Inum: 52
+Inum: 53
+Inum: 54
+Inum: 55
+Inum: 56
+Inum: 57
+Inum: 58
+Inum: 59
+Inum: 60
+Inum: 61
+Inum: 62
+Inum: 63
+Inum: 64
+Inum: 65
+Inum: 66
+Inum: 67
+Inum: 68
+Inum: 69
+Inum: 70
+Inum: 71
+Inum: 72
+Inum: 73
+Inum: 74
+Inum: 75
+Inum: 76
+Inum: 77
+Inum: 78
+Inum: 79
+Inum: 80
+Inum: 81
+Inum: 82
+Inum: 83
+Inum: 84
+Inum: 85
+Inum: 86
+Inum: 87
+Inum: 88
+Inum: 89
+Inum: 90
+Inum: 91
+Inum: 92
+Inum: 93
+Inum: 94
+Inum: 95
+Inum: 96
+Inum: 97
+Inum: 98
+Inum: 99
+Inum: 100
+Inum: 101
+Inum: 102
+Inum: 103
+Inum: 104
+Inum: 105
+Inum: 106
+Inum: 107
+Inum: 108
+Inum: 109
+Inum: 110
+Inum: 111
+Inum: 112
+Inum: 113
+Inum: 114
+Inum: 115
+Inum: 116
+Inum: 117
+Inum: 118
+Inum: 119
+Inum: 120
+Inum: 121
+Inum: -1
+Index: 122, value: 122
+server:: waiting...
+server:: read message [size:4148 mtype:6 name:121 inode:1]
+Server Create
+Data PTR: 1
+Inum: 1
+Inum: 0
+Inum: 2
+Inum: 3
+Inum: 4
+Inum: 5
+Inum: 6
+Inum: 7
+Inum: 8
+Inum: 9
+Inum: 10
+Inum: 11
+Inum: 12
+Inum: 13
+Inum: 14
+Inum: 15
+Inum: 16
+Inum: 17
+Inum: 18
+Inum: 19
+Inum: 20
+Inum: 21
+Inum: 22
+Inum: 23
+Inum: 24
+Inum: 25
+Inum: 26
+Inum: 27
+Inum: 28
+Inum: 29
+Inum: 30
+Inum: 31
+Inum: 32
+Inum: 33
+Inum: 34
+Inum: 35
+Inum: 36
+Inum: 37
+Inum: 38
+Inum: 39
+Inum: 40
+Inum: 41
+Inum: 42
+Inum: 43
+Inum: 44
+Inum: 45
+Inum: 46
+Inum: 47
+Inum: 48
+Inum: 49
+Inum: 50
+Inum: 51
+Inum: 52
+Inum: 53
+Inum: 54
+Inum: 55
+Inum: 56
+Inum: 57
+Inum: 58
+Inum: 59
+Inum: 60
+Inum: 61
+Inum: 62
+Inum: 63
+Inum: 64
+Inum: 65
+Inum: 66
+Inum: 67
+Inum: 68
+Inum: 69
+Inum: 70
+Inum: 71
+Inum: 72
+Inum: 73
+Inum: 74
+Inum: 75
+Inum: 76
+Inum: 77
+Inum: 78
+Inum: 79
+Inum: 80
+Inum: 81
+Inum: 82
+Inum: 83
+Inum: 84
+Inum: 85
+Inum: 86
+Inum: 87
+Inum: 88
+Inum: 89
+Inum: 90
+Inum: 91
+Inum: 92
+Inum: 93
+Inum: 94
+Inum: 95
+Inum: 96
+Inum: 97
+Inum: 98
+Inum: 99
+Inum: 100
+Inum: 101
+Inum: 102
+Inum: 103
+Inum: 104
+Inum: 105
+Inum: 106
+Inum: 107
+Inum: 108
+Inum: 109
+Inum: 110
+Inum: 111
+Inum: 112
+Inum: 113
+Inum: 114
+Inum: 115
+Inum: 116
+Inum: 117
+Inum: 118
+Inum: 119
+Inum: 120
+Inum: 121
+Inum: 122
+Inum: -1
+Index: 123, value: 123
+server:: waiting...
+server:: read message [size:4148 mtype:6 name:122 inode:1]
+Server Create
+Data PTR: 1
+Inum: 1
+Inum: 0
+Inum: 2
+Inum: 3
+Inum: 4
+Inum: 5
+Inum: 6
+Inum: 7
+Inum: 8
+Inum: 9
+Inum: 10
+Inum: 11
+Inum: 12
+Inum: 13
+Inum: 14
+Inum: 15
+Inum: 16
+Inum: 17
+Inum: 18
+Inum: 19
+Inum: 20
+Inum: 21
+Inum: 22
+Inum: 23
+Inum: 24
+Inum: 25
+Inum: 26
+Inum: 27
+Inum: 28
+Inum: 29
+Inum: 30
+Inum: 31
+Inum: 32
+Inum: 33
+Inum: 34
+Inum: 35
+Inum: 36
+Inum: 37
+Inum: 38
+Inum: 39
+Inum: 40
+Inum: 41
+Inum: 42
+Inum: 43
+Inum: 44
+Inum: 45
+Inum: 46
+Inum: 47
+Inum: 48
+Inum: 49
+Inum: 50
+Inum: 51
+Inum: 52
+Inum: 53
+Inum: 54
+Inum: 55
+Inum: 56
+Inum: 57
+Inum: 58
+Inum: 59
+Inum: 60
+Inum: 61
+Inum: 62
+Inum: 63
+Inum: 64
+Inum: 65
+Inum: 66
+Inum: 67
+Inum: 68
+Inum: 69
+Inum: 70
+Inum: 71
+Inum: 72
+Inum: 73
+Inum: 74
+Inum: 75
+Inum: 76
+Inum: 77
+Inum: 78
+Inum: 79
+Inum: 80
+Inum: 81
+Inum: 82
+Inum: 83
+Inum: 84
+Inum: 85
+Inum: 86
+Inum: 87
+Inum: 88
+Inum: 89
+Inum: 90
+Inum: 91
+Inum: 92
+Inum: 93
+Inum: 94
+Inum: 95
+Inum: 96
+Inum: 97
+Inum: 98
+Inum: 99
+Inum: 100
+Inum: 101
+Inum: 102
+Inum: 103
+Inum: 104
+Inum: 105
+Inum: 106
+Inum: 107
+Inum: 108
+Inum: 109
+Inum: 110
+Inum: 111
+Inum: 112
+Inum: 113
+Inum: 114
+Inum: 115
+Inum: 116
+Inum: 117
+Inum: 118
+Inum: 119
+Inum: 120
+Inum: 121
+Inum: 122
+Inum: 123
+Inum: -1
+Index: 124, value: 124
+server:: waiting...
+server:: read message [size:4148 mtype:6 name:123 inode:1]
+Server Create
+Data PTR: 1
+Inum: 1
+Inum: 0
+Inum: 2
+Inum: 3
+Inum: 4
+Inum: 5
+Inum: 6
+Inum: 7
+Inum: 8
+Inum: 9
+Inum: 10
+Inum: 11
+Inum: 12
+Inum: 13
+Inum: 14
+Inum: 15
+Inum: 16
+Inum: 17
+Inum: 18
+Inum: 19
+Inum: 20
+Inum: 21
+Inum: 22
+Inum: 23
+Inum: 24
+Inum: 25
+Inum: 26
+Inum: 27
+Inum: 28
+Inum: 29
+Inum: 30
+Inum: 31
+Inum: 32
+Inum: 33
+Inum: 34
+Inum: 35
+Inum: 36
+Inum: 37
+Inum: 38
+Inum: 39
+Inum: 40
+Inum: 41
+Inum: 42
+Inum: 43
+Inum: 44
+Inum: 45
+Inum: 46
+Inum: 47
+Inum: 48
+Inum: 49
+Inum: 50
+Inum: 51
+Inum: 52
+Inum: 53
+Inum: 54
+Inum: 55
+Inum: 56
+Inum: 57
+Inum: 58
+Inum: 59
+Inum: 60
+Inum: 61
+Inum: 62
+Inum: 63
+Inum: 64
+Inum: 65
+Inum: 66
+Inum: 67
+Inum: 68
+Inum: 69
+Inum: 70
+Inum: 71
+Inum: 72
+Inum: 73
+Inum: 74
+Inum: 75
+Inum: 76
+Inum: 77
+Inum: 78
+Inum: 79
+Inum: 80
+Inum: 81
+Inum: 82
+Inum: 83
+Inum: 84
+Inum: 85
+Inum: 86
+Inum: 87
+Inum: 88
+Inum: 89
+Inum: 90
+Inum: 91
+Inum: 92
+Inum: 93
+Inum: 94
+Inum: 95
+Inum: 96
+Inum: 97
+Inum: 98
+Inum: 99
+Inum: 100
+Inum: 101
+Inum: 102
+Inum: 103
+Inum: 104
+Inum: 105
+Inum: 106
+Inum: 107
+Inum: 108
+Inum: 109
+Inum: 110
+Inum: 111
+Inum: 112
+Inum: 113
+Inum: 114
+Inum: 115
+Inum: 116
+Inum: 117
+Inum: 118
+Inum: 119
+Inum: 120
+Inum: 121
+Inum: 122
+Inum: 123
+Inum: 124
+Inum: -1
+Index: 125, value: 125
+server:: waiting...
+server:: read message [size:4148 mtype:6 name:124 inode:1]
+Server Create
+Data PTR: 1
+Inum: 1
+Inum: 0
+Inum: 2
+Inum: 3
+Inum: 4
+Inum: 5
+Inum: 6
+Inum: 7
+Inum: 8
+Inum: 9
+Inum: 10
+Inum: 11
+Inum: 12
+Inum: 13
+Inum: 14
+Inum: 15
+Inum: 16
+Inum: 17
+Inum: 18
+Inum: 19
+Inum: 20
+Inum: 21
+Inum: 22
+Inum: 23
+Inum: 24
+Inum: 25
+Inum: 26
+Inum: 27
+Inum: 28
+Inum: 29
+Inum: 30
+Inum: 31
+Inum: 32
+Inum: 33
+Inum: 34
+Inum: 35
+Inum: 36
+Inum: 37
+Inum: 38
+Inum: 39
+Inum: 40
+Inum: 41
+Inum: 42
+Inum: 43
+Inum: 44
+Inum: 45
+Inum: 46
+Inum: 47
+Inum: 48
+Inum: 49
+Inum: 50
+Inum: 51
+Inum: 52
+Inum: 53
+Inum: 54
+Inum: 55
+Inum: 56
+Inum: 57
+Inum: 58
+Inum: 59
+Inum: 60
+Inum: 61
+Inum: 62
+Inum: 63
+Inum: 64
+Inum: 65
+Inum: 66
+Inum: 67
+Inum: 68
+Inum: 69
+Inum: 70
+Inum: 71
+Inum: 72
+Inum: 73
+Inum: 74
+Inum: 75
+Inum: 76
+Inum: 77
+Inum: 78
+Inum: 79
+Inum: 80
+Inum: 81
+Inum: 82
+Inum: 83
+Inum: 84
+Inum: 85
+Inum: 86
+Inum: 87
+Inum: 88
+Inum: 89
+Inum: 90
+Inum: 91
+Inum: 92
+Inum: 93
+Inum: 94
+Inum: 95
+Inum: 96
+Inum: 97
+Inum: 98
+Inum: 99
+Inum: 100
+Inum: 101
+Inum: 102
+Inum: 103
+Inum: 104
+Inum: 105
+Inum: 106
+Inum: 107
+Inum: 108
+Inum: 109
+Inum: 110
+Inum: 111
+Inum: 112
+Inum: 113
+Inum: 114
+Inum: 115
+Inum: 116
+Inum: 117
+Inum: 118
+Inum: 119
+Inum: 120
+Inum: 121
+Inum: 122
+Inum: 123
+Inum: 124
+Inum: 125
+Inum: -1
+Index: 126, value: 126
+server:: waiting...
+server:: read message [size:4148 mtype:6 name:125 inode:1]
+Server Create
+Data PTR: 1
+Inum: 1
+Inum: 0
+Inum: 2
+Inum: 3
+Inum: 4
+Inum: 5
+Inum: 6
+Inum: 7
+Inum: 8
+Inum: 9
+Inum: 10
+Inum: 11
+Inum: 12
+Inum: 13
+Inum: 14
+Inum: 15
+Inum: 16
+Inum: 17
+Inum: 18
+Inum: 19
+Inum: 20
+Inum: 21
+Inum: 22
+Inum: 23
+Inum: 24
+Inum: 25
+Inum: 26
+Inum: 27
+Inum: 28
+Inum: 29
+Inum: 30
+Inum: 31
+Inum: 32
+Inum: 33
+Inum: 34
+Inum: 35
+Inum: 36
+Inum: 37
+Inum: 38
+Inum: 39
+Inum: 40
+Inum: 41
+Inum: 42
+Inum: 43
+Inum: 44
+Inum: 45
+Inum: 46
+Inum: 47
+Inum: 48
+Inum: 49
+Inum: 50
+Inum: 51
+Inum: 52
+Inum: 53
+Inum: 54
+Inum: 55
+Inum: 56
+Inum: 57
+Inum: 58
+Inum: 59
+Inum: 60
+Inum: 61
+Inum: 62
+Inum: 63
+Inum: 64
+Inum: 65
+Inum: 66
+Inum: 67
+Inum: 68
+Inum: 69
+Inum: 70
+Inum: 71
+Inum: 72
+Inum: 73
+Inum: 74
+Inum: 75
+Inum: 76
+Inum: 77
+Inum: 78
+Inum: 79
+Inum: 80
+Inum: 81
+Inum: 82
+Inum: 83
+Inum: 84
+Inum: 85
+Inum: 86
+Inum: 87
+Inum: 88
+Inum: 89
+Inum: 90
+Inum: 91
+Inum: 92
+Inum: 93
+Inum: 94
+Inum: 95
+Inum: 96
+Inum: 97
+Inum: 98
+Inum: 99
+Inum: 100
+Inum: 101
+Inum: 102
+Inum: 103
+Inum: 104
+Inum: 105
+Inum: 106
+Inum: 107
+Inum: 108
+Inum: 109
+Inum: 110
+Inum: 111
+Inum: 112
+Inum: 113
+Inum: 114
+Inum: 115
+Inum: 116
+Inum: 117
+Inum: 118
+Inum: 119
+Inum: 120
+Inum: 121
+Inum: 122
+Inum: 123
+Inum: 124
+Inum: 125
+Inum: 126
+Inum: -1
+Index: 127, value: 127
+server:: waiting...
+server:: read message [size:4148 mtype:2 name:0 inode:1]
+server:: waiting...
+server:: read message [size:4148 mtype:2 name:1 inode:1]
+server:: waiting...
+server:: read message [size:4148 mtype:2 name:2 inode:1]
+server:: waiting...
+server:: read message [size:4148 mtype:2 name:3 inode:1]
+server:: waiting...
+server:: read message [size:4148 mtype:2 name:4 inode:1]
+server:: waiting...
+server:: read message [size:4148 mtype:2 name:5 inode:1]
+server:: waiting...
+server:: read message [size:4148 mtype:2 name:6 inode:1]
+server:: waiting...
+server:: read message [size:4148 mtype:2 name:7 inode:1]
+server:: waiting...
+serS type 144, nbytes: 0
+MFS_Create method called: return 0
+sendREQUEST: rMES type 144, nbytes: 0
+MFS_Create method called: return 0
+sendREQUEST: rMES type 144, nbytes: 0
+MFS_Create method called: return 0
+sendREQUEST: rMES type 144, nbytes: 0
+MFS_Create method called: return 0
+sendREQUEST: rMES type 144, nbytes: 0
+MFS_Create method called: return 0
+sendREQUEST: rMES type 144, nbytes: 0
+MFS_Create method called: return 0
+sendREQUEST: rMES type 144, nbytes: 0
+MFS_Create method called: return 0
+sendREQUEST: rMES type 144, nbytes: 0
+MFS_Create method called: return 0
+sendREQUEST: rMES type 144, nbytes: 0
+MFS_Create method called: return 0
+sendREQUEST: rMES type 144, nbytes: 0
+MFS_Create method called: return 0
+sendREQUEST: rMES type 144, nbytes: 0
+MFS_Create method called: return 0
+sendREQUEST: rMES type 144, nbytes: 0
+MFS_Create method called: return 0
+sendREQUEST: rMES type 144, nbytes: 0
+MFS_Create method called: return 0
+sendREQUEST: rMES type 144, nbytes: 0
+MFS_Create method called: return 0
+sendREQUEST: rMES type 144, nbytes: 0
+MFS_Create method called: return 0
+sendREQUEST: rMES type 144, nbytes: 0
+MFS_Create method called: return 0
+sendREQUEST: rMES type 144, nbytes: 0
+MFS_Lookup method called: return 2
+sendREQUEST: rMES type 144, nbytes: 0
+MFS_Lookup method called: return 3
+sendREQUEST: rMES type 144, nbytes: 0
+MFS_Lookup method called: return 4
+sendREQUEST: rMES type 144, nbytes: 0
+MFS_Lookup method called: return 5
+sendREQUEST: rMES type 144, nbytes: 0
+MFS_Lookup method called: return 6
+sendREQUEST: rMES type 144, nbytes: 0
+MFS_Lookup method called: return 7
+sendREQUEST: rMES type 144, nbytes: 0
+MFS_Lookup method called: return 8
+sendREQUEST: rMES type 144, nbytes: 0
+MFS_Lookup method called: return 9
+sendREQUEST: rMES type 144, nbytes: 0
+MFS_Lookup method called: return 10
+sendREQUEST: rMES type 144, nbytes: 0
+MFS_Lookup method called: return 11
+sendREQUEST: rMES type 144, nbytes: 0
+MFS_Lookup method called: return 12
+sendREQUEST: rMES type 144, nbytes: 0
+MFS_Lookup method called: return 13
+sendREQUEST: rMES type 144, nbytes: 0
+MFS_Lookup method called: return 14
+sendREQUEST: rMES type 144, nbytes: 0
+MFS_Lookup method called: return 15
+sendREQUEST: rMES type 144, nbytes: 0
+MFS_Lookup method called: return 16
+sendREQUEST: rMES type 144, nbytes: 0
+MFS_Lookup method called: return 17
+sendREQUEST: rMES type 144, nbytes: 0
+MFS_Lookup method called: return 18
+sendREQUEST: rMES type 144, nbytes: 0
+MFS_Lookup method called: return 19
+sendREQUEST: rMES type 144, nbytes: 0
+MFS_Lookup method called: return 20
+sendREQUEST: rMES type 144, nbytes: 0
+MFS_Lookup method called: return 21
+sendREQUEST: rMES type 144, nbytes: 0
+MFS_Lookup method called: return 22
+sendREQUEST: rMES type 144, nbytes: 0
+MFS_Lookup method called: return 23
+sendREQUEST: rMES type 144, nbytes: 0
+MFS_Lookup method called: return 24
+sendREQUEST: rMES type 144, nbytes: 0
+MFS_Lookup method called: return 25
+sendREQUEST: rMES type 144, nbytes: 0
+MFS_Lookup method called: return 26
+sendREQUEST: rMES type 144, nbytes: 0
+MFS_Lookup method called: return 27
+sendREQUEST: rMES type 144, nbytes: 0
+MFS_Lookup method called: return 28
+sendREQUEST: rMES type 144, nbytes: 0
+MFS_Lookup method called: return 29
+sendREQUEST: rMES type 144, nbytes: 0
+MFS_Lookup method called: return 30
+sendREQUEST: rMES type 144, nbytes: 0
+MFS_Lookup method called: return 31
+sendREQUEST: rMES type 144, nbytes: 0
+MFS_Lookup method called: return 32
+sendREQUEST: rMES type 144, nbytes: 0
+MFS_Lookup method called: return 33
+sendREQUEST: rMES type 144, nbytes: 0
+MFS_Lookup method called: return 34
+sendREQUEST: rMES type 144, nbytes: 0
+MFS_Lookup method called: return 35
+sendREQUEST: rMES type 144, nbytes: 0
+MFS_Lookup method called: return 36
+sendREQUEST: rMES type 144, nbytes: 0
+MFS_Lookup method called: return 37
+sendREQUEST: rMES type 144, nbytes: 0
+MFS_Lookup method called: return 38
+sendREQUEST: rMES type 144, nbytes: 0
+MFS_Lookup method called: return 39
+sendREQUEST: rMES type 144, nbytes: 0
+MFS_Lookup method called: return 40
+sendREQUEST: rMES type 144, nbytes: 0
+MFS_Lookup method called: rever:: read message [size:4148 mtype:2 name:8 inode:1]
+server:: waiting...
+server:: read message [size:4148 mtype:2 name:9 inode:1]
+server:: waiting...
+server:: read message [size:4148 mtype:2 name:10 inode:1]
+server:: waiting...
+server:: read message [size:4148 mtype:2 name:11 inode:1]
+server:: waiting...
+server:: read message [size:4148 mtype:2 name:12 inode:1]
+server:: waiting...
+server:: read message [size:4148 mtype:2 name:13 inode:1]
+server:: waiting...
+server:: read message [size:4148 mtype:2 name:14 inode:1]
+server:: waiting...
+server:: read message [size:4148 mtype:2 name:15 inode:1]
+server:: waiting...
+server:: read message [size:4148 mtype:2 name:16 inode:1]
+server:: waiting...
+server:: read message [size:4148 mtype:2 name:17 inode:1]
+server:: waiting...
+server:: read message [size:4148 mtype:2 name:18 inode:1]
+server:: waiting...
+server:: read message [size:4148 mtype:2 name:19 inode:1]
+server:: waiting...
+server:: read message [size:4148 mtype:2 name:20 inode:1]
+server:: waiting...
+server:: read message [size:4148 mtype:2 name:21 inode:1]
+server:: waiting...
+server:: read message [size:4148 mtype:2 name:22 inode:1]
+server:: waiting...
+server:: read message [size:4148 mtype:2 name:23 inode:1]
+server:: waiting...
+server:: read message [size:4148 mtype:2 name:24 inode:1]
+server:: waiting...
+server:: read message [size:4148 mtype:2 name:25 inode:1]
+server:: waiting...
+server:: read message [size:4148 mtype:2 name:26 inode:1]
+server:: waiting...
+server:: read message [size:4148 mtype:2 name:27 inode:1]
+server:: waiting...
+server:: read message [size:4148 mtype:2 name:28 inode:1]
+server:: waiting...
+server:: read message [size:4148 mtype:2 name:29 inode:1]
+server:: waiting...
+server:: read message [size:4148 mtype:2 name:30 inode:1]
+server:: waiting...
+server:: read message [size:4148 mtype:2 name:31 inode:1]
+server:: waiting...
+server:: read message [size:4148 mtype:2 name:32 inode:1]
+server:: waiting...
+server:: read message [size:4148 mtype:2 name:33 inode:1]
+server:: waiting...
+server:: read message [size:4148 mtype:2 name:34 inode:1]
+server:: waiting...
+server:: read message [size:4148 mtype:2 name:35 inode:1]
+server:: waiting...
+server:: read message [size:4148 mtype:2 name:36 inode:1]
+server:: waiting...
+server:: read message [size:4148 mtype:2 name:37 inode:1]
+server:: waiting...
+server:: read message [size:4148 mtype:2 name:38 inode:1]
+server:: waiting...
+server:: read message [size:4148 mtype:2 name:39 inode:1]
+server:: waiting...
+server:: read message [size:4148 mtype:2 name:40 inode:1]
+server:: waiting...
+server:: read message [size:4148 mtype:2 name:41 inode:1]
+server:: waiting...
+server:: read message [size:4148 mtype:2 name:42 inode:1]
+server:: waiting...
+server:: read message [size:4148 mtype:2 name:43 inode:1]
+server:: waiting...
+server:: read message [size:4148 mtype:2 name:44 inode:1]
+server:: waiting...
+server:: read message [size:4148 mtype:2 name:45 inode:1]
+server:: waiting...
+server:: read message [size:4148 mtype:2 name:46 inode:1]
+server:: waiting...
+server:: read message [size:4148 mtype:2 name:47 inode:1]
+server:: waiting...
+server:: read message [size:4148 mtype:2 name:48 inode:1]
+server:: waiting...
+server:: read message [size:4148 mtype:2 name:49 inode:1]
+server:: waiting...
+server:: read message [size:4148 mtype:2 name:50 inode:1]
+server:: waiting...
+server:: read message [size:4148 mtype:2 name:51 inode:1]
+server:: waiting...
+server:: read message [size:4148 mtype:2 name:52 inode:1]
+server:: waiting...
+server:: read message [size:4148 mtype:2 name:53 inode:1]
+server:: waiting...
+server:: read message [size:4148 mtype:2 name:54 inode:1]
+server:: waiting...
+server:: read message [size:4148 mtype:2 name:55 inode:1]
+server:: waiting...
+server:: read message [size:4148 mtype:2 name:56 inode:1]
+server:: waiting...
+server:: read message [size:4148 mtype:2 name:57 inode:1]
+server:: waiting...
+server:: read message [size:4148 mtype:2 name:58 inode:1]
+server:: waiting...
+server:: read message [size:4148 mtype:2 name:59 inode:1]
+server:: waiting...
+server:: read message [size:4148 mtype:2 nameturn 41
+sendREQUEST: rMES type 144, nbytes: 0
+MFS_Lookup method called: return 42
+sendREQUEST: rMES type 144, nbytes: 0
+MFS_Lookup method called: return 43
+sendREQUEST: rMES type 144, nbytes: 0
+MFS_Lookup method called: return 44
+sendREQUEST: rMES type 144, nbytes: 0
+MFS_Lookup method called: return 45
+sendREQUEST: rMES type 144, nbytes: 0
+MFS_Lookup method called: return 46
+sendREQUEST: rMES type 144, nbytes: 0
+MFS_Lookup method called: return 47
+sendREQUEST: rMES type 144, nbytes: 0
+MFS_Lookup method called: return 48
+sendREQUEST: rMES type 144, nbytes: 0
+MFS_Lookup method called: return 49
+sendREQUEST: rMES type 144, nbytes: 0
+MFS_Lookup method called: return 50
+sendREQUEST: rMES type 144, nbytes: 0
+MFS_Lookup method called: return 51
+sendREQUEST: rMES type 144, nbytes: 0
+MFS_Lookup method called: return 52
+sendREQUEST: rMES type 144, nbytes: 0
+MFS_Lookup method called: return 53
+sendREQUEST: rMES type 144, nbytes: 0
+MFS_Lookup method called: return 54
+sendREQUEST: rMES type 144, nbytes: 0
+MFS_Lookup method called: return 55
+sendREQUEST: rMES type 144, nbytes: 0
+MFS_Lookup method called: return 56
+sendREQUEST: rMES type 144, nbytes: 0
+MFS_Lookup method called: return 57
+sendREQUEST: rMES type 144, nbytes: 0
+MFS_Lookup method called: return 58
+sendREQUEST: rMES type 144, nbytes: 0
+MFS_Lookup method called: return 59
+sendREQUEST: rMES type 144, nbytes: 0
+MFS_Lookup method called: return 60
+sendREQUEST: rMES type 144, nbytes: 0
+MFS_Lookup method called: return 61
+sendREQUEST: rMES type 144, nbytes: 0
+MFS_Lookup method called: return 62
+sendREQUEST: rMES type 144, nbytes: 0
+MFS_Lookup method called: return 63
+sendREQUEST: rMES type 144, nbytes: 0
+MFS_Lookup method called: return 64
+sendREQUEST: rMES type 144, nbytes: 0
+MFS_Lookup method called: return 65
+sendREQUEST: rMES type 144, nbytes: 0
+MFS_Lookup method called: return 66
+sendREQUEST: rMES type 144, nbytes: 0
+MFS_Lookup method called: return 67
+sendREQUEST: rMES type 144, nbytes: 0
+MFS_Lookup method called: return 68
+sendREQUEST: rMES type 144, nbytes: 0
+MFS_Lookup method called: return 69
+sendREQUEST: rMES type 144, nbytes: 0
+MFS_Lookup method called: return 70
+sendREQUEST: rMES type 144, nbytes: 0
+MFS_Lookup method called: return 71
+sendREQUEST: rMES type 144, nbytes: 0
+MFS_Lookup method called: return 72
+sendREQUEST: rMES type 144, nbytes: 0
+MFS_Lookup method called: return 73
+sendREQUEST: rMES type 144, nbytes: 0
+MFS_Lookup method called: return 74
+sendREQUEST: rMES type 144, nbytes: 0
+MFS_Lookup method called: return 75
+sendREQUEST: rMES type 144, nbytes: 0
+MFS_Lookup method called: return 76
+sendREQUEST: rMES type 144, nbytes: 0
+MFS_Lookup method called: return 77
+sendREQUEST: rMES type 144, nbytes: 0
+MFS_Lookup method called: return 78
+sendREQUEST: rMES type 144, nbytes: 0
+MFS_Lookup method called: return 79
+sendREQUEST: rMES type 144, nbytes: 0
+MFS_Lookup method called: return 80
+sendREQUEST: rMES type 144, nbytes: 0
+MFS_Lookup method called: return 81
+sendREQUEST: rMES type 144, nbytes: 0
+MFS_Lookup method called: return 82
+sendREQUEST: rMES type 144, nbytes: 0
+MFS_Lookup method called: return 83
+sendREQUEST: rMES type 144, nbytes: 0
+MFS_Lookup method called: return 84
+sendREQUEST: rMES type 144, nbytes: 0
+MFS_Lookup method called: return 85
+sendREQUEST: rMES type 144, nbytes: 0
+MFS_Lookup method called: return 86
+sendREQUEST: rMES type 144, nbytes: 0
+MFS_Lookup method called: return 87
+sendREQUEST: rMES type 144, nbytes: 0
+MFS_Lookup method called: return 88
+sendREQUEST: rMES type 144, nbytes: 0
+MFS_Lookup method called: return 89
+sendREQUEST: rMES type 144, nbytes: 0
+MFS_Lookup method called: return 90
+sendREQUEST: rMES type 144, nbytes: 0
+MFS_Lookup method called: return 91
+sendREQUEST: rMES type 144, nbytes: 0
+MFS_Lookup method called: return 92
+sendREQUEST: rMES type 144, nbytes: 0
+MFS_Lookup method called: return 93
+sendREQUEST: rMES type 144, nbytes: 0
+MFS_Lookup method called: return 94
+sendREQUEST: rMES type 144, nbytes: 0
+MFS_Lookup method called: return 95
+sendREQUEST: rMES type 144, nbytes: 0
+MFS_Lookup method called: return 96
+sendREQUEST: rMES :60 inode:1]
+server:: waiting...
+server:: read message [size:4148 mtype:2 name:61 inode:1]
+server:: waiting...
+server:: read message [size:4148 mtype:2 name:62 inode:1]
+server:: waiting...
+server:: read message [size:4148 mtype:2 name:63 inode:1]
+server:: waiting...
+server:: read message [size:4148 mtype:2 name:64 inode:1]
+server:: waiting...
+server:: read message [size:4148 mtype:2 name:65 inode:1]
+server:: waiting...
+server:: read message [size:4148 mtype:2 name:66 inode:1]
+server:: waiting...
+server:: read message [size:4148 mtype:2 name:67 inode:1]
+server:: waiting...
+server:: read message [size:4148 mtype:2 name:68 inode:1]
+server:: waiting...
+server:: read message [size:4148 mtype:2 name:69 inode:1]
+server:: waiting...
+server:: read message [size:4148 mtype:2 name:70 inode:1]
+server:: waiting...
+server:: read message [size:4148 mtype:2 name:71 inode:1]
+server:: waiting...
+server:: read message [size:4148 mtype:2 name:72 inode:1]
+server:: waiting...
+server:: read message [size:4148 mtype:2 name:73 inode:1]
+server:: waiting...
+server:: read message [size:4148 mtype:2 name:74 inode:1]
+server:: waiting...
+server:: read message [size:4148 mtype:2 name:75 inode:1]
+server:: waiting...
+server:: read message [size:4148 mtype:2 name:76 inode:1]
+server:: waiting...
+server:: read message [size:4148 mtype:2 name:77 inode:1]
+server:: waiting...
+server:: read message [size:4148 mtype:2 name:78 inode:1]
+server:: waiting...
+server:: read message [size:4148 mtype:2 name:79 inode:1]
+server:: waiting...
+server:: read message [size:4148 mtype:2 name:80 inode:1]
+server:: waiting...
+server:: read message [size:4148 mtype:2 name:81 inode:1]
+server:: waiting...
+server:: read message [size:4148 mtype:2 name:82 inode:1]
+server:: waiting...
+server:: read message [size:4148 mtype:2 name:83 inode:1]
+server:: waiting...
+server:: read message [size:4148 mtype:2 name:84 inode:1]
+server:: waiting...
+server:: read message [size:4148 mtype:2 name:85 inode:1]
+server:: waiting...
+server:: read message [size:4148 mtype:2 name:86 inode:1]
+server:: waiting...
+server:: read message [size:4148 mtype:2 name:87 inode:1]
+server:: waiting...
+server:: read message [size:4148 mtype:2 name:88 inode:1]
+server:: waiting...
+server:: read message [size:4148 mtype:2 name:89 inode:1]
+server:: waiting...
+server:: read message [size:4148 mtype:2 name:90 inode:1]
+server:: waiting...
+server:: read message [size:4148 mtype:2 name:91 inode:1]
+server:: waiting...
+server:: read message [size:4148 mtype:2 name:92 inode:1]
+server:: waiting...
+server:: read message [size:4148 mtype:2 name:93 inode:1]
+server:: waiting...
+server:: read message [size:4148 mtype:2 name:94 inode:1]
+server:: waiting...
+server:: read message [size:4148 mtype:2 name:95 inode:1]
+server:: waiting...
+server:: read message [size:4148 mtype:2 name:96 inode:1]
+server:: waiting...
+server:: read message [size:4148 mtype:2 name:97 inode:1]
+server:: waiting...
+server:: read message [size:4148 mtype:2 name:98 inode:1]
+server:: waiting...
+server:: read message [size:4148 mtype:2 name:99 inode:1]
+server:: waiting...
+server:: read message [size:4148 mtype:2 name:100 inode:1]
+server:: waiting...
+server:: read message [size:4148 mtype:2 name:101 inode:1]
+server:: waiting...
+server:: read message [size:4148 mtype:2 name:102 inode:1]
+server:: waiting...
+server:: read message [size:4148 mtype:2 name:103 inode:1]
+server:: waiting...
+server:: read message [size:4148 mtype:2 name:104 inode:1]
+server:: waiting...
+server:: read message [size:4148 mtype:2 name:105 inode:1]
+server:: waiting...
+server:: read message [size:4148 mtype:2 name:106 inode:1]
+server:: waiting...
+server:: read message [size:4148 mtype:2 name:107 inode:1]
+server:: waiting...
+server:: read message [size:4148 mtype:2 name:108 inode:1]
+server:: waiting...
+server:: read message [size:4148 mtype:2 name:109 inode:1]
+server:: waiting...
+server:: read message [size:4148 mtype:2 name:110 inode:1]
+server:: waiting...
+server:: read message [size:4148 mtype:2 name:111 inode:1]
+server:: waiting...
+server:: read message [size:4148 mtype:2 name:112 inode:1]
+server:: waiting...
+server:: read message [size:4148 mtype:2 name:113 inode:1]
+server:: waiting...
+server:: read message [size:4148 mtype:2 name:114 inode:1]
+server:: waiting...
+server:: read message [size:4148 mtype:2 name:115 inode:1]
+server:: waiting...
+server:: read message [size:4148 mtype:2 name:116 inode:1]
+server:: waiting...
+server:: read message [size:4148 mtype:2 name:117 inode:1]
+server:: waiting...
+server:: read message [size:4148 mtype:2 name:118 inode:1]
+server:: waiting...
+server:: read message [size:4148 mtype:2 name:119 inode:1]
+server:: waiting...
+server:: read message [size:4148 mtype:2 name:120 inode:1]
+server:: waiting...
+server:: read message [size:4148 mtype:2 name:121 inode:1]
+server:: waiting...
+server:: read message [size:4148 mtype:2 name:122 inode:1]
+server:: waiting...
+server:: read message [size:4148 mtype:2 name:123 inode:1]
+server:: waiting...
+server:: read message [size:4148 mtype:2 name:124 inode:1]
+server:: waiting...
+server:: read message [size:4148 mtype:2 name:125 inode:1]
+server:: waiting...
+server:: read message [size:4148 mtype:8 name:Ãp inode:-234605464]
+type 144, nbytes: 0
+MFS_Lookup method called: return 97
+sendREQUEST: rMES type 144, nbytes: 0
+MFS_Lookup method called: return 98
+sendREQUEST: rMES type 144, nbytes: 0
+MFS_Lookup method called: return 99
+sendREQUEST: rMES type 144, nbytes: 0
+MFS_Lookup method called: return 100
+sendREQUEST: rMES type 144, nbytes: 0
+MFS_Lookup method called: return 101
+sendREQUEST: rMES type 144, nbytes: 0
+MFS_Lookup method called: return 102
+sendREQUEST: rMES type 144, nbytes: 0
+MFS_Lookup method called: return 103
+sendREQUEST: rMES type 144, nbytes: 0
+MFS_Lookup method called: return 104
+sendREQUEST: rMES type 144, nbytes: 0
+MFS_Lookup method called: return 105
+sendREQUEST: rMES type 144, nbytes: 0
+MFS_Lookup method called: return 106
+sendREQUEST: rMES type 144, nbytes: 0
+MFS_Lookup method called: return 107
+sendREQUEST: rMES type 144, nbytes: 0
+MFS_Lookup method called: return 108
+sendREQUEST: rMES type 144, nbytes: 0
+MFS_Lookup method called: return 109
+sendREQUEST: rMES type 144, nbytes: 0
+MFS_Lookup method called: return 110
+sendREQUEST: rMES type 144, nbytes: 0
+MFS_Lookup method called: return 111
+sendREQUEST: rMES type 144, nbytes: 0
+MFS_Lookup method called: return 112
+sendREQUEST: rMES type 144, nbytes: 0
+MFS_Lookup method called: return 113
+sendREQUEST: rMES type 144, nbytes: 0
+MFS_Lookup method called: return 114
+sendREQUEST: rMES type 144, nbytes: 0
+MFS_Lookup method called: return 115
+sendREQUEST: rMES type 144, nbytes: 0
+MFS_Lookup method called: return 116
+sendREQUEST: rMES type 144, nbytes: 0
+MFS_Lookup method called: return 117
+sendREQUEST: rMES type 144, nbytes: 0
+MFS_Lookup method called: return 118
+sendREQUEST: rMES type 144, nbytes: 0
+MFS_Lookup method called: return 119
+sendREQUEST: rMES type 144, nbytes: 0
+MFS_Lookup method called: return 120
+sendREQUEST: rMES type 144, nbytes: 0
+MFS_Lookup method called: return 121
+sendREQUEST: rMES type 144, nbytes: 0
+MFS_Lookup method called: return 122
+sendREQUEST: rMES type 144, nbytes: 0
+MFS_Lookup method called: return 123
+sendREQUEST: rMES type 144, nbytes: 0
+MFS_Lookup method called: return 124
+sendREQUEST: rMES type 144, nbytes: 0
+MFS_Lookup method called: return 125
+sendREQUEST: rMES type 144, nbytes: 0
+MFS_Lookup method called: return 126
+sendREQUEST: rMES type 144, nbytes: 0
+MFS_Lookup method called: return 127
+sendREQUEST: rMES type 144, nbytes: 0
+
+
+test bigdir PASSED
+ (create a directory with 126 files)
+
+('starting', 'deep')
+
+**********************************************************************
+
+Test deep
+create many deeply nested directories
+
+**********************************************************************
+total blocks        39
+  inodes            128 [size of each: 128]
+  data blocks       32
+layout details
+  inode bitmap address/len 1 [1]
+  data bitmap address/len  2 [1]
+Starting server on port 9666
+/tmp/tmpIgfH1U/p/server 9666 /home/cha/CS537/p4/temppp/test.img
+server:: waiting...
+server:: read message [size:4148 mtype:6 name:testdir inode:0]
+Server Create
+Data PTR: 0
+Inum: 0
+Inum: 0
+Inum: -1
+Index: 2, value: 1
+server:: waiting...
+server:: read message [size:4148 mtype:2 name:testdir inode:0]
+server:: waiting...
+server:: read message [size:4148 mtype:6 name:0 inode:1]
+Server Create
+Data PTR: 1
+Inum: 1
+Inum: 0
+Inum: -1
+Index: 2, value: 2
+server:: waiting...
+server:: read message [size:4148 mtype:2 name:0 inode:1]
+server:: waiting...
+server:: read message [size:4148 mtype:6 name:1 inode:2]
+Server Create
+Data PTR: 2
+Inum: 2
+Inum: 1
+Inum: -1
+Index: 2, value: 3
+server:: waiting...
+server:: read message [size:4148 mtype:2 name:1 inode:2]
+server:: waiting...
+server:: read message [size:4148 mtype:6 name:2 inode:3]
+Server Create
+Data PTR: 3
+Inum: 3
+Inum: 2
+Inum: -1
+Index: 2, value: 4
+server:: waiting...
+server:: read message [size:4148 mtype:2 name:2 inode:3]
+server:: waiting...
+server:: read message [size:4148 mtype:6 name:3 inode:4]
+Server Create
+Data PTR: 4
+Inum: 4
+Inum: 3
+Inum: -1
+Index: 2, value: 5
+server:: waiting...
+server:: read message [size:4148 mtype:2 name:3 inode:4]
+server:: waiting...
+server:: read message [size:4148 mtype:2 name:testdir inode:0]
+server:: waiting...
+server:: read message [size:4148 mtype:2 name:0 inode:1]
+server:: waiting...
+server:: read message [size:4148 mtype:2 name:1 inode:2]
+server:: waiting...
+server:: read message [size:4148 mtype:2 name:2 inode:3]
+server:: waiting...
+server:: read message [size:4148 mtype:2 name:3 inode:4]
+server:: waiting...
+server:: read message [size:4148 mtype:8 name:Ãp inode:-1220458136]
+sendREQUEST: rMES type 144, nbytes: 0
+MFS_Create method called: return 0
+sendREQUEST: rMES type 144, nbytes: 0
+MFS_Lookup method called: return 1
+sendREQUEST: rMES type 144, nbytes: 0
+MFS_Create method called: return 0
+sendREQUEST: rMES type 144, nbytes: 0
+MFS_Lookup method called: return 2
+sendREQUEST: rMES type 144, nbytes: 0
+MFS_Create method called: return 0
+sendREQUEST: rMES type 144, nbytes: 0
+MFS_Lookup method called: return 3
+sendREQUEST: rMES type 144, nbytes: 0
+MFS_Create method called: return 0
+sendREQUEST: rMES type 144, nbytes: 0
+MFS_Lookup method called: return 4
+sendREQUEST: rMES type 144, nbytes: 0
+MFS_Create method called: return 0
+sendREQUEST: rMES type 144, nbytes: 0
+MFS_Lookup method called: return 5
+sendREQUEST: rMES type 144, nbytes: 0
+MFS_Lookup method called: return 1
+sendREQUEST: rMES type 144, nbytes: 0
+MFS_Lookup method called: return 2
+sendREQUEST: rMES type 144, nbytes: 0
+MFS_Lookup method called: return 3
+sendREQUEST: rMES type 144, nbytes: 0
+MFS_Lookup method called: return 4
+sendREQUEST: rMES type 144, nbytes: 0
+MFS_Lookup method called: return 5
+sendREQUEST: rMES type 144, nbytes: 0
+
+
+test deep PASSED
+ (create many deeply nested directories)
+
+**********************************************************************
+Summary:
+test build PASSED
+ (build project using make)
+
+test shutdown PASSED
+ (init server and client then call shutdown)
+
+test creat PASSED
+ (creat a file and check with lookup)
+
+test write PASSED
+ (write then read one block)
+
+test stat PASSED
+ (stat a regular file)
+
+test overwrite PASSED
+ (overwrite a block)
+
+test maxfile PASSED
+ (write largest possible file)
+
+test maxfile2 PASSED
+ (write more blocks than possible)
+
+test dir1 PASSED
+ (check root for dot entries)
+
+test dir2 PASSED
+ (create a new directory and check it)
+
+test baddir PASSED
+ (try to create a file with a file parent inode)
+
+test baddir2 PASSED
+ (try to lookup a file with a file parent inode)
+
+test unlink PASSED
+ (unlink a file)
+
+test unlink2 PASSED
+ (unlink a directory)
+
+test empty PASSED
+ (unlink a non-empty directory)
+
+test name PASSED
+ (name too long)
+
+test persist FAILED
+ (restart server after creating a file)
+ MFS_Init returned failure
+
+test bigdir PASSED
+ (create a directory with 126 files)
+
+test deep PASSED
+ (create many deeply nested directories)
+
+Passed 18 of 19 tests.
+Overall 18 of 19
